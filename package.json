@@ -1,0 +1,56 @@
+{
+  "name": "ui8px",
+  "version": "0.1.2",
+  "description": "CLI utility for UI8Kit project scaffolding and 8px-grid map validation",
+  "author": "UI8Kit",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "ui8px",
+    "ui8kit",
+    "cli",
+    "npx",
+    "npm",
+    "node",
+    "vite",
+    "react",
+    "scaffolding",
+    "template",
+    "8px",
+    "design-system",
+    "spacing"
+  ],
+  "homepage": "https://github.com/ui8kit/ui8px-cli",
+  "bugs": {
+    "url": "https://github.com/ui8kit/ui8px-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ui8kit/ui8px-cli.git"
+  },
+  "bin": {
+    "ui8px": "./dist/index.js"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "tsc --noEmit -p tsconfig.json && tsc -p tsconfig.build.json",
+    "test": "node --test"
+  },
+  "files": [
+    "README.md",
+    "dist",
+    "template-react",
+    "template-react-resta"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0"
+  }
+}
