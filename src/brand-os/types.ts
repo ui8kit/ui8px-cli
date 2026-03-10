@@ -1,5 +1,4 @@
 export type StringMap = Record<string, string>;
-export type CssDeclarationMap = Record<string, string>;
 
 export interface AliasColorToken {
   light: string;
@@ -8,53 +7,10 @@ export interface AliasColorToken {
   referenceAliases?: string[];
 }
 
-export interface BrandOsUtilityRecipe {
-  className: string;
-  declarations: CssDeclarationMap;
-  pseudoDeclarations?: Record<string, CssDeclarationMap>;
-}
-
-export interface BrandOsAnimationKeyframes {
-  [step: string]: CssDeclarationMap;
-}
-
-export interface BrandOsAnimationUtility {
-  className: string;
-  keyframe: string;
-  animation: string;
-  reducedMotion?: boolean;
-}
-
-export interface BrandOsStaggerUtilities {
-  classPrefix?: string;
-  delays: string[];
-  declarations?: CssDeclarationMap;
-  reducedMotion?: boolean;
-}
-
-export interface BrandOsCategoryUtilityConfig {
-  enabled?: boolean;
-  classPrefix?: string;
-  textColor?: string;
-  includeCanonicalTokenClass?: boolean;
-  aliasFields?: Array<'aliases' | 'referenceAliases'>;
-}
-
-export interface BrandOsThemeEmitConfig {
-  bodyApplyClasses?: string[];
-  bodyFontFamilyKey?: string;
-  headingSelectors?: string[];
-  headingFontFamilyKey?: string;
-  headingLetterSpacing?: string;
-  utilityRecipes?: BrandOsUtilityRecipe[];
-  keyframes?: Record<string, BrandOsAnimationKeyframes>;
-  animationUtilities?: BrandOsAnimationUtility[];
-  staggerUtilities?: BrandOsStaggerUtilities;
-  categoryUtilities?: BrandOsCategoryUtilityConfig;
-  reducedMotion?: {
-    extraSelectors?: string[];
-    resetDeclarations?: CssDeclarationMap;
-  };
+export interface BrandOsCopiedAsset {
+  source: string;
+  output: string;
+  description?: string;
 }
 
 export interface BrandOsDocsEmitConfig {
@@ -66,11 +22,6 @@ export interface BrandOsDocsEmitConfig {
   parserFixtureReference?: string;
 }
 
-export interface BrandOsTailwindEmitConfig {
-  exportName?: string;
-  includeAnimationUtilities?: boolean;
-}
-
 export interface BrandOsCompanionPathsConfig {
   promptPackSuffix?: string;
   parserContractSuffix?: string;
@@ -80,9 +31,8 @@ export interface BrandOsCompanionPathsConfig {
 
 export interface BrandOsEmitConfig {
   companionPaths?: BrandOsCompanionPathsConfig;
-  theme?: BrandOsThemeEmitConfig;
   docs?: BrandOsDocsEmitConfig;
-  tailwind?: BrandOsTailwindEmitConfig;
+  assets?: BrandOsCopiedAsset[];
 }
 
 export interface BrandOsSchema {

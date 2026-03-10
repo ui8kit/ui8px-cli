@@ -1,0 +1,176 @@
+<html><head><base href="https://roseui.tw/components/image-background-promo-section-4-examples/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoseUI - Image Background Promo Sections</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Nunito', 'sans-serif'],
+        pretty: ['Pacifico', 'cursive'],
+      },
+      colors: {
+        rose: {
+          50: '#fff1f2',
+          100: '#ffe4e6',
+          200: '#fecdd3',
+          300: '#fda4af',
+          400: '#fb7185',
+          500: '#f43f5e',
+          600: '#e11d48',
+          700: '#be123c',
+          800: '#9f1239',
+          900: '#881337'
+        },
+        zinc: {
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b'
+        }
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50 transition-colors duration-300">
+
+<header class="bg-transparent absolute top-0 left-0 w-full z-10">
+  <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex-shrink-0 flex items-center">
+      <i data-lucide="utensils" class="h-8 w-8 text-rose-600 dark:text-zinc-300"></i>
+      <span class="ml-2 text-2xl font-bold text-rose-600 dark:text-zinc-300">RoseUI</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-4">
+      <a href="#" class="text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Docs</a>
+      <a href="#" class="text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Components</a>
+      <button class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 dark:text-zinc-900 dark:bg-zinc-300 dark:hover:bg-zinc-200">Get Started</button>
+      <button id="darkModeToggle" class="p-2 rounded-full text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">
+        <i data-lucide="sun" class="h-5 w-5 hidden dark:block"></i>
+        <i data-lucide="moon" class="h-5 w-5 block dark:hidden"></i>
+      </button>
+    </div>
+    <button id="menuToggle" class="md:hidden p-2 rounded-lg text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors duration-300">
+      <i data-lucide="menu" class="h-6 w-6"></i>
+    </button>
+  </nav>
+</header>
+
+<div id="offCanvasMenu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+  <div class="fixed top-0 right-0 w-64 h-full bg-white dark:bg-zinc-800 shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-4">
+      <button id="closeMenu" class="absolute top-4 right-4 p-2 rounded-full text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors duration-300">
+        <i data-lucide="x" class="h-6 w-6"></i>
+      </button>
+      <nav class="mt-8 space-y-4">
+        <a href="#" class="block text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Docs</a>
+        <a href="#" class="block text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Components</a>
+        <button class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 dark:text-zinc-900 dark:bg-zinc-300 dark:hover:bg-zinc-200 mt-4">Get Started</button>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<main class="pt-16">
+  <section class="py-16 bg-zinc-100 dark:bg-zinc-800">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-bold text-center mb-8 text-zinc-800 dark:text-zinc-200">Image Background Promo Sections</h1>
+      <p class="text-xl text-center mb-12 text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto">Explore our collection of visually stunning promo sections with image backgrounds. Perfect for showcasing your products, services, or special offers.</p>
+    </div>
+  </section>
+
+  <!-- Example 1 -->
+  <section class="relative py-24 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl font-bold text-white mb-4">Savor the Flavors</h2>
+        <p class="text-xl text-zinc-200 mb-8">Indulge in our exquisite cuisine, crafted with passion and the finest ingredients.</p>
+        <button class="px-6 py-3 bg-rose-600 text-white font-semibold rounded-md hover:bg-rose-700 transition duration-300">Book a Table</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 2 -->
+  <section class="relative py-24 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')">
+    <div class="absolute inset-0 bg-gradient-to-r from-rose-600 to-rose-800 opacity-75"></div>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <h2 class="text-4xl font-bold text-white mb-4">Elevate Your Dining Experience</h2>
+      <p class="text-xl text-zinc-200 mb-8 max-w-2xl mx-auto">Join us for an unforgettable culinary journey that will tantalize your taste buds and warm your soul.</p>
+      <button class="px-6 py-3 bg-white text-rose-600 font-semibold rounded-md hover:bg-zinc-100 transition duration-300">View Menu</button>
+    </div>
+  </section>
+
+  <!-- Example 3 -->
+  <section class="relative py-24 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')">
+    <div class="absolute inset-0 bg-zinc-900 opacity-75"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-2xl ml-auto">
+        <h2 class="text-4xl font-bold text-white mb-4">Fresh Ingredients, Bold Flavors</h2>
+        <p class="text-xl text-zinc-200 mb-8">Experience the perfect blend of traditional recipes and modern culinary techniques.</p>
+        <button class="px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-zinc-900 transition duration-300">Discover Our Story</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 4 -->
+  <section class="relative py-24 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-900"></div>
+    <div class="container mx-auto px-4 relative z-10 flex flex-col justify-end h-full">
+      <div class="max-w-3xl">
+        <h2 class="text-4xl font-bold text-white mb-4">A Culinary Adventure Awaits</h2>
+        <p class="text-xl text-zinc-200 mb-8">From farm-fresh ingredients to expertly crafted dishes, every bite tells a story of passion and creativity.</p>
+        <div class="flex space-x-4">
+          <button class="px-6 py-3 bg-rose-600 text-white font-semibold rounded-md hover:bg-rose-700 transition duration-300">Reserve Now</button>
+          <button class="px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-zinc-900 transition duration-300">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-zinc-800 text-zinc-300 py-8">
+  <div class="container mx-auto px-4 text-center">
+    <p>© 2023 RoseUI. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+const html = document.documentElement;
+const menuToggle = document.getElementById('menuToggle');
+const offCanvasMenu = document.getElementById('offCanvasMenu');
+const closeMenu = document.getElementById('closeMenu');
+
+darkModeToggle.addEventListener('click', () => {
+  html.classList.toggle('dark');
+});
+
+menuToggle.addEventListener('click', () => {
+  offCanvasMenu.classList.remove('hidden');
+  offCanvasMenu.querySelector('div').classList.remove('translate-x-full');
+});
+
+closeMenu.addEventListener('click', () => {
+  offCanvasMenu.querySelector('div').classList.add('translate-x-full');
+  setTimeout(() => {
+    offCanvasMenu.classList.add('hidden');
+  }, 300);
+});
+</script>
+
+</body></html>

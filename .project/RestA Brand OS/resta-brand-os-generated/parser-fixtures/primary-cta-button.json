@@ -1,0 +1,55 @@
+{
+  "id": "primary-cta-button",
+  "title": "Primary CTA Button",
+  "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Test-Buttons.html",
+  "description": "Canonical solid rose CTA pattern repeated across the reference.",
+  "classes": [
+    "inline-flex",
+    "items-center",
+    "justify-center",
+    "px-4",
+    "py-2",
+    "border",
+    "border-transparent",
+    "text-base",
+    "font-medium",
+    "rounded-md",
+    "shadow-md",
+    "focus:outline-none",
+    "focus:ring-2",
+    "focus:ring-offset-2",
+    "transition",
+    "duration-300",
+    "text-white",
+    "bg-rose-600",
+    "hover:bg-rose-700",
+    "focus:ring-rose-500"
+  ],
+  "expected": {
+    "structural": [
+      "inline-flex",
+      "items-center",
+      "justify-center",
+      "px-4",
+      "py-2",
+      "border"
+    ],
+    "semantic": [
+      "border-transparent",
+      "text-base",
+      "font-medium",
+      "rounded-md",
+      "shadow-md",
+      "focus:outline-none",
+      "focus:ring-2",
+      "focus:ring-offset-2",
+      "transition",
+      "duration-300",
+      "text-white",
+      "bg-rose-600",
+      "hover:bg-rose-700",
+      "focus:ring-rose-500"
+    ],
+    "decorative": []
+  }
+}

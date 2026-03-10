@@ -1,5 +1,5 @@
-import { basename, dirname, join, resolve } from 'node:path';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { basename, dirname, join, relative, resolve } from 'node:path';
+import { copyFileSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { BrandOsCompanionPathsConfig, BrandOsResolvedPaths, BrandOsSchema } from './types.js';
 
 export function fail(message: string): never {
@@ -24,39 +24,12 @@ export function writeTextFile(filePath: string, content: string): void {
   writeFileSync(filePath, content, 'utf8');
 }
 
-export function toKebabCase(value: string): string {
-  return value
-    .trim()
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/[^a-zA-Z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .toLowerCase();
-}
-
 export function toTitleCase(value: string): string {
   return value
     .split(/[-_\s]+/)
     .filter(Boolean)
     .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
     .join(' ');
-}
-
-export function toCamelCase(value: string): string {
-  const parts = value
-    .split(/[-_\s]+/)
-    .filter(Boolean)
-    .map((segment) => segment.replace(/[^a-zA-Z0-9]/g, ''));
-
-  if (parts.length === 0) {
-    return 'brandOs';
-  }
-
-  const [first, ...rest] = parts;
-  const identifier = `${first.charAt(0).toLowerCase()}${first.slice(1)}${rest
-    .map((segment) => `${segment.charAt(0).toUpperCase()}${segment.slice(1)}`)
-    .join('')}`;
-
-  return /^[a-zA-Z_$]/.test(identifier) ? identifier : `brandOs${identifier}`;
 }
 
 export function formatBulletList(items: string[] | undefined): string {
@@ -137,12 +110,25 @@ export function resolveBrandOsPaths(
   };
 }
 
-export function formatCssDeclarations(
-  declarations: Record<string, string> | undefined,
-  indent = '    ',
-): string[] {
-  if (!declarations) {
-    return [];
+export function resolveRelativeToSchemaDir(schemaPath: string, relativePath: string): string {
+  return resolve(dirname(schemaPath), relativePath);
+}
+
+export function getRelativePathFrom(fromDir: string, targetPath: string): string {
+  return relative(fromDir, targetPath).replace(/\\/g, '/');
+}
+
+export function copyPath(sourcePath: string, destinationPath: string): void {
+  const stats = statSync(sourcePath);
+
+  if (stats.isDirectory()) {
+    ensureDir(destinationPath);
+    for (const entry of readdirSync(sourcePath)) {
+      copyPath(join(sourcePath, entry), join(destinationPath, entry));
+    }
+    return;
   }
-  return Object.entries(declarations).map(([property, value]) => `${indent}${property}: ${value};`);
+
+  ensureDir(dirname(destinationPath));
+  copyFileSync(sourcePath, destinationPath);
 }

@@ -1,0 +1,27 @@
+{
+  "id": "hero-media-shell",
+  "title": "Hero Media Shell",
+  "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html",
+  "description": "Restaurant hero section wrapper with viewport height and background image treatment.",
+  "classes": [
+    "relative",
+    "h-[75vh]",
+    "w-full",
+    "bg-cover",
+    "bg-no-repeat"
+  ],
+  "expected": {
+    "structural": [
+      "relative",
+      "h-[75vh]",
+      "w-full",
+      "bg-cover",
+      "bg-no-repeat"
+    ],
+    "semantic": [],
+    "decorative": []
+  },
+  "notes": [
+    "The background-image lives in the style attribute and should be preserved separately."
+  ]
+}

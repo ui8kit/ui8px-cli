@@ -1,0 +1,27 @@
+{
+  "id": "gradient-promo-shell",
+  "title": "Gradient Promo Shell",
+  "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Sections - Promo.html",
+  "description": "Promotional CTA block with a rose-to-pink gradient background.",
+  "classes": [
+    "py-24",
+    "bg-gradient-to-r",
+    "from-rose-500",
+    "to-pink-500",
+    "dark:from-rose-700",
+    "dark:to-pink-700"
+  ],
+  "expected": {
+    "structural": [
+      "py-24"
+    ],
+    "semantic": [],
+    "decorative": [
+      "bg-gradient-to-r",
+      "from-rose-500",
+      "to-pink-500",
+      "dark:from-rose-700",
+      "dark:to-pink-700"
+    ]
+  }
+}

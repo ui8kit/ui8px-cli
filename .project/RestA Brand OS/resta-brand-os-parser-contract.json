@@ -1,0 +1,455 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "resta-brand-os-parser-contract",
+  "brandId": "resta-brand-os",
+  "description": "Classification and normalization contract for converting RoseUI-style and RestA-style HTML/Tailwind prototypes into structural, semantic, decorative, and unknown layers for future normalized AST and UI8Kit conversion.",
+  "purpose": [
+    "Preserve restaurant layout and media intent.",
+    "Classify Tailwind 3 reference classes into reusable brand layers.",
+    "Separate hospitality semantics from gradients and hero/image decoration.",
+    "Generate predictable parser fixtures and migration warnings."
+  ],
+  "normalizationPipeline": [
+    "tokenize class lists",
+    "strip responsive and state prefixes for base classification",
+    "classify class tokens into structural, semantic, decorative, or unknown",
+    "preserve important non-class metadata such as background-image style attributes",
+    "build normalized AST nodes",
+    "map to future UI8Kit primitives, wrappers, or brand layers",
+    "emit audit report and backlog candidates"
+  ],
+  "stateVariantPolicy": {
+    "breakpointPrefixes": [
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "2xl"
+    ],
+    "interactionPrefixes": [
+      "hover",
+      "focus",
+      "focus-visible",
+      "focus-within",
+      "active",
+      "disabled",
+      "dark"
+    ],
+    "rule": "State and breakpoint wrappers do not change the base class category. The parser should classify the unprefixed utility, then preserve the variant wrapper in normalized metadata."
+  },
+  "attributePolicies": {
+    "style.background-image": {
+      "category": "decorative-media-asset",
+      "handling": "Preserve as media asset metadata and never silently drop it.",
+      "notes": [
+        "Common in hero and promo sections in the reference.",
+        "Should later map into media slots or image props rather than utility props."
+      ]
+    },
+    "inline-script.tailwind-config": {
+      "category": "reference-only",
+      "handling": "Ignore as executable runtime logic, but extract palette and font clues during brand analysis if needed."
+    }
+  },
+  "classificationPriority": [
+    "approved-structural-customs",
+    "approved-semantic-customs",
+    "approved-arbitrary-structural",
+    "structural",
+    "semantic",
+    "decorative",
+    "unknown"
+  ],
+  "classes": {
+    "structural": {
+      "description": "Geometry, spacing, layout, media sizing, responsive arrangement, and layout-specific custom utilities.",
+      "prefixes": [
+        "container",
+        "block",
+        "inline",
+        "hidden",
+        "flex",
+        "grid",
+        "grid-cols-",
+        "grid-rows-",
+        "place-",
+        "justify-",
+        "items-",
+        "content-",
+        "self-",
+        "gap-",
+        "space-x-",
+        "space-y-",
+        "w-",
+        "h-",
+        "max-w-",
+        "min-w-",
+        "min-h-",
+        "p-",
+        "px-",
+        "py-",
+        "pt-",
+        "pr-",
+        "pb-",
+        "pl-",
+        "m-",
+        "mx-",
+        "my-",
+        "mt-",
+        "mr-",
+        "mb-",
+        "ml-",
+        "top-",
+        "right-",
+        "bottom-",
+        "left-",
+        "inset-",
+        "z-",
+        "relative",
+        "absolute",
+        "fixed",
+        "sticky",
+        "overflow-",
+        "object-",
+        "aspect-",
+        "column-count-",
+        "break-inside-",
+        "bg-cover",
+        "bg-center",
+        "bg-no-repeat"
+      ],
+      "exactUtilities": [
+        "mx-auto",
+        "place-items-center",
+        "break-inside-avoid",
+        "object-cover",
+        "translate-x-full"
+      ],
+      "approvedArbitraryMatches": [
+        {
+          "class": "h-[75vh]",
+          "mapsTo": "hero.height.viewport-75",
+          "reason": "Reference hero height pattern."
+        }
+      ],
+      "examples": [
+        {
+          "class": "container mx-auto px-4 py-4",
+          "why": "Page shell and navigation layout."
+        },
+        {
+          "class": "relative h-[75vh] w-full bg-cover bg-no-repeat",
+          "why": "Hero media geometry."
+        },
+        {
+          "class": "grid md:grid-cols-2 gap-8",
+          "why": "Promo or card layout."
+        }
+      ]
+    },
+    "semantic": {
+      "description": "Brand tokens, typography, shadows, borders, rounded shapes, and reusable interaction semantics.",
+      "prefixes": [
+        "bg-rose-",
+        "text-rose-",
+        "border-rose-",
+        "focus:ring-rose-",
+        "bg-zinc-",
+        "text-zinc-",
+        "border-zinc-",
+        "focus:border-rose-",
+        "focus:ring-offset-",
+        "font-",
+        "rounded-",
+        "shadow-",
+        "text-white",
+        "text-black",
+        "border-transparent",
+        "transition",
+        "duration-",
+        "ease-",
+        "fill-current",
+        "tracking-",
+        "leading-"
+      ],
+      "exactUtilities": [
+        "font-pretty",
+        "font-sans",
+        "font-bold",
+        "font-semibold",
+        "font-medium",
+        "rounded-md",
+        "rounded-lg",
+        "rounded-full",
+        "shadow-sm",
+        "shadow-md",
+        "shadow-lg",
+        "shadow-xl",
+        "text-white",
+        "text-zinc-300",
+        "text-zinc-600",
+        "text-zinc-800",
+        "text-rose-600",
+        "text-rose-700",
+        "bg-white",
+        "bg-zinc-100",
+        "bg-zinc-800",
+        "bg-zinc-900",
+        "bg-rose-600",
+        "bg-rose-700",
+        "border-dotted",
+        "transition-colors",
+        "transition-transform"
+      ],
+      "notes": [
+        "Treat rose and zinc palette utilities as semantic brand language, not as arbitrary styling.",
+        "Treat script display typography as a semantic signature utility."
+      ],
+      "examples": [
+        {
+          "class": "font-pretty text-rose-600 tracking-tighter",
+          "why": "Signature brand heading treatment."
+        },
+        {
+          "class": "bg-white dark:bg-zinc-800 rounded-lg shadow-md",
+          "why": "Card semantics."
+        },
+        {
+          "class": "bg-rose-600 text-white hover:bg-rose-700",
+          "why": "Primary CTA behavior and color semantics."
+        }
+      ]
+    },
+    "decorative": {
+      "description": "Atmospheric gradients, overlay colors, visual emphasis effects, and image or campaign-only ornament.",
+      "prefixes": [
+        "bg-gradient-",
+        "from-",
+        "via-",
+        "to-",
+        "opacity-",
+        "bg-black/",
+        "bg-gray-900/",
+        "bg-zinc-700/",
+        "hover:from-",
+        "hover:to-"
+      ],
+      "exactUtilities": [
+        "bg-gradient-to-r",
+        "bg-gradient-to-br",
+        "bg-gradient-to-t",
+        "from-rose-50",
+        "to-rose-100",
+        "from-rose-500",
+        "to-pink-500",
+        "from-black/50",
+        "to-transparent",
+        "opacity-50",
+        "opacity-75"
+      ],
+      "rule": "Decorative classes should remain in the brand layer unless explicitly normalized into a named recipe such as `gradient-promo-cta` or `hero-photo-overlay`."
+    },
+    "unknown": {
+      "description": "Classes that are not covered by the contract.",
+      "handling": "Emit a warning. Do not silently discard unknown classes."
+    }
+  },
+  "brandExceptions": {
+    "structuralCustomUtilities": {
+      "break-inside-avoid": {
+        "meaning": "Masonry-safe testimonial block",
+        "target": "TestimonialMasonryItem"
+      }
+    },
+    "semanticCustomUtilities": {
+      "font-pretty": {
+        "meaning": "Signature script display type",
+        "target": "DisplayAccentText"
+      }
+    }
+  },
+  "nodeHeuristics": {
+    "mixedNodeRule": "Nodes often mix layout, semantics, and image decoration. Split by class token rather than categorizing the node as a whole.",
+    "wrapperPromotionRules": [
+      "Promote repeated image + overlay + headline + CTA patterns into a hero or promo wrapper.",
+      "Promote repeated testimonial card structures into `TestimonialCard`.",
+      "Promote repeated dotted separator menu rows into `MenuItemRow`."
+    ],
+    "componentInferenceHints": [
+      {
+        "when": "inline-flex + rose background + white text + rounded-md + shadow-md",
+        "prefer": "PrimaryButton"
+      },
+      {
+        "when": "food image + gradient overlay + bottom text lockup",
+        "prefer": "MenuCard or DishCard"
+      },
+      {
+        "when": "name + price + short description + dotted separator",
+        "prefer": "MenuItemRow"
+      },
+      {
+        "when": "avatar + quote + star row",
+        "prefer": "TestimonialCard"
+      }
+    ]
+  },
+  "mappingTargets": {
+    "structural": [
+      "layout primitives",
+      "future UI8Kit utility props",
+      "container and grid wrappers",
+      "media slots"
+    ],
+    "semantic": [
+      "design tokens",
+      "button variants",
+      "brand wrappers",
+      "typography roles"
+    ],
+    "decorative": [
+      "brand overlay layer",
+      "promo gradient layer",
+      "hero media treatment layer"
+    ]
+  },
+  "examples": [
+    {
+      "input": [
+        "relative",
+        "h-[75vh]",
+        "w-full",
+        "bg-cover",
+        "bg-no-repeat"
+      ],
+      "classification": {
+        "structural": [
+          "relative",
+          "h-[75vh]",
+          "w-full",
+          "bg-cover",
+          "bg-no-repeat"
+        ],
+        "semantic": [],
+        "decorative": []
+      },
+      "result": "Hero media shell"
+    },
+    {
+      "input": [
+        "absolute",
+        "inset-0",
+        "h-full",
+        "w-full",
+        "bg-gray-900/70"
+      ],
+      "classification": {
+        "structural": [
+          "absolute",
+          "inset-0",
+          "h-full",
+          "w-full"
+        ],
+        "semantic": [],
+        "decorative": [
+          "bg-gray-900/70"
+        ]
+      },
+      "result": "Hero overlay layer"
+    },
+    {
+      "input": [
+        "inline-flex",
+        "items-center",
+        "px-4",
+        "py-2",
+        "rounded-md",
+        "shadow-md",
+        "text-white",
+        "bg-rose-600",
+        "hover:bg-rose-700"
+      ],
+      "classification": {
+        "structural": [
+          "inline-flex",
+          "items-center",
+          "px-4",
+          "py-2"
+        ],
+        "semantic": [
+          "rounded-md",
+          "shadow-md",
+          "text-white",
+          "bg-rose-600",
+          "hover:bg-rose-700"
+        ],
+        "decorative": []
+      },
+      "result": "Primary CTA button"
+    },
+    {
+      "input": [
+        "bg-gradient-to-r",
+        "from-rose-500",
+        "to-pink-500",
+        "text-white",
+        "rounded-md"
+      ],
+      "classification": {
+        "structural": [],
+        "semantic": [
+          "text-white",
+          "rounded-md"
+        ],
+        "decorative": [
+          "bg-gradient-to-r",
+          "from-rose-500",
+          "to-pink-500"
+        ]
+      },
+      "result": "Promo CTA brand layer"
+    },
+    {
+      "input": [
+        "w-full",
+        "h-px",
+        "border-t",
+        "border-dotted",
+        "border-zinc-300",
+        "dark:border-zinc-600",
+        "mt-4"
+      ],
+      "classification": {
+        "structural": [
+          "w-full",
+          "h-px",
+          "border-t",
+          "mt-4"
+        ],
+        "semantic": [
+          "border-dotted",
+          "border-zinc-300",
+          "dark:border-zinc-600"
+        ],
+        "decorative": []
+      },
+      "result": "Menu separator row"
+    }
+  ],
+  "reporting": {
+    "requiredWarnings": [
+      "unknown-class",
+      "unknown-arbitrary-value",
+      "inline-style-media-asset",
+      "decorative-class-in-system-layer",
+      "repeated-raw-pattern-should-be-wrapper"
+    ],
+    "requiredMetrics": [
+      "structural-class-count",
+      "semantic-class-count",
+      "decorative-class-count",
+      "unknown-class-count",
+      "wrapper-promotion-candidates"
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+<html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RoseUI Cards</title><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet"><script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Nunito', 'sans-serif'],
+        pretty: ['Pacifico', 'cursive'],
+      },
+      colors: {
+        rose: {
+          50: '#fff1f2',
+          100: '#ffe4e6',
+          200: '#fecdd3',
+          300: '#fda4af',
+          400: '#fb7185',
+          500: '#f43f5e',
+          600: '#e11d48',
+          700: '#be123c',
+          800: '#9f1239',
+          900: '#881337'
+        },
+        zinc: {
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b'
+        }
+      },
+      borderRadius: {
+        'sm': '0.1875rem',
+        DEFAULT: '0.375rem',
+        'md': '0.5625rem',
+        'lg': '0.75rem',
+        'xl': '1.125rem',
+        '2xl': '1.5rem',
+        '3xl': '2.25rem',
+      },
+      boxShadow: {
+        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+        md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+        none: 'none',
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50 transition-colors duration-300">
+
+<header class="bg-white dark:bg-zinc-800 shadow-md">
+  <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex-shrink-0 flex items-center">
+      <i data-lucide="utensils" class="h-8 w-8 text-rose-600 dark:text-rose-400"></i>
+      <span class="ml-2 text-2xl font-bold text-rose-600 dark:text-rose-400">RoseUI</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-4">
+      <a href="#" class="text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Docs</a>
+      <a href="#" class="text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Components</a>
+      <button class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500">Get Started</button>
+      <button id="darkModeToggle" class="p-2 rounded-full text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors duration-300">
+        <i data-lucide="sun" class="h-5 w-5 hidden dark:block"></i>
+        <i data-lucide="moon" class="h-5 w-5 block dark:hidden"></i>
+      </button>
+    </div>
+    <button id="menuToggle" class="md:hidden p-2 rounded-full text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors duration-300">
+      <i data-lucide="menu" class="h-6 w-6"></i>
+    </button>
+  </nav>
+</header>
+
+<div id="offCanvasMenu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+  <div class="fixed top-0 right-0 w-64 h-full bg-white dark:bg-zinc-800 shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-4">
+      <button id="closeMenu" class="absolute top-4 right-4 p-2 rounded-full text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors duration-300">
+        <i data-lucide="x" class="h-6 w-6"></i>
+      </button>
+      <nav class="mt-8 space-y-4">
+        <a href="#" class="block text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Docs</a>
+        <a href="#" class="block text-zinc-600 hover:text-rose-600 dark:text-zinc-300 dark:hover:text-rose-400 transition-colors duration-300">Components</a>
+        <button class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 mt-4">Get Started</button>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="relative overflow-hidden bg-gradient-to-br from-rose-50 to-rose-100 dark:from-rose-900 dark:to-rose-800 py-20">
+    <div class="container mx-auto px-4 relative z-10">
+      <h1 class="text-5xl md:text-6xl font-pretty text-rose-600 dark:text-rose-300 mb-4 tracking-tighter">RoseUI Component</h1>
+      <p class="text-xl text-zinc-700 dark:text-zinc-300 mb-8">Flexible and versatile components for displaying content in various layouts</p>
+      <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500">Explore Components</a>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-rose-500 to-rose-600 dark:from-rose-700 dark:to-rose-800">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-pretty text-white mb-8 text-center">Delicious Promotions</h2>
+      <div class="relative overflow-hidden rounded-lg shadow-lg">
+        <div class="flex transition-transform duration-500 ease-in-out" id="slider">
+          <div class="min-w-full">
+            <img src="https://via.placeholder.com/600x400/FFB6C1/000000?text=Delicious+Dish+1" alt="Delicious Dish 1" class="w-full h-64 object-cover rounded-lg">
+          </div>
+          <div class="min-w-full">
+            <img src="https://via.placeholder.com/600x400/FF69B4/000000?text=Delicious+Dish+2" alt="Delicious Dish 2" class="w-full h-64 object-cover rounded-lg">
+          </div>
+          <div class="min-w-full">
+            <img src="https://via.placeholder.com/600x400/FF1493/000000?text=Delicious+Dish+3" alt="Delicious Dish 3" class="w-full h-64 object-cover rounded-lg">
+          </div>
+        </div>
+        <button class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-rose-600 text-white rounded-full p-2 focus:outline-none hover:bg-rose-700 left-button">
+          <i data-lucide="chevron-left" class="h-6 w-6"></i>
+        </button>
+        <button class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-rose-600 text-white rounded-full p-2 focus:outline-none hover:bg-rose-700 right-button">
+          <i data-lucide="chevron-right" class="h-6 w-6"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('#slider > div');
+    const totalSlides = slides.length;
+  
+    document.querySelector('.left-button').addEventListener('click', () => {
+      currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+      updateSlider();
+    });
+  
+    document.querySelector('.right-button').addEventListener('click', () => {
+      currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+      updateSlider();
+    });
+  
+    function updateSlider() {
+      const offset = -currentIndex * 100;
+      document.getElementById('slider').style.transform = `translateX(${offset}%)`;
+    }
+  </script>
+
+</main>
+
+<footer class="bg-zinc-800 text-zinc-300 py-8">
+  <div class="container mx-auto px-4 text-center">
+    <p>© 2024 RoseUI. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+const html = document.documentElement;
+darkModeToggle.addEventListener('click', () => {
+  html.classList.toggle('dark');
+});
+
+const menuToggle = document.getElementById('menuToggle');
+const closeMenu = document.getElementById('closeMenu');
+const offCanvasMenu = document.getElementById('offCanvasMenu');
+const menuContent = offCanvasMenu.querySelector('div');
+
+function openMenu() {
+  offCanvasMenu.classList.remove('hidden');
+  setTimeout(() => {
+    menuContent.classList.remove('translate-x-full');
+  }, 10);
+}
+
+function closeMenuHandler() {
+  menuContent.classList.add('translate-x-full');
+  setTimeout(() => {
+    offCanvasMenu.classList.add('hidden');
+  }, 300);
+}
+
+menuToggle.addEventListener('click', openMenu);
+closeMenu.addEventListener('click', closeMenuHandler);
+offCanvasMenu.addEventListener('click', (e) => {
+  if (e.target === offCanvasMenu) {
+    closeMenuHandler();
+  }
+});
+</script>
+
+</body></html>

@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "1.0.0",
+  "brandId": "resta-brand-os",
+  "referenceProjectName": "`RestA Brand OS/reference`",
+  "fixtures": [
+    {
+      "id": "hero-media-shell",
+      "title": "Hero Media Shell",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html",
+      "description": "Restaurant hero section wrapper with viewport height and background image treatment.",
+      "classes": [
+        "relative",
+        "h-[75vh]",
+        "w-full",
+        "bg-cover",
+        "bg-no-repeat"
+      ],
+      "expected": {
+        "structural": [
+          "relative",
+          "h-[75vh]",
+          "w-full",
+          "bg-cover",
+          "bg-no-repeat"
+        ],
+        "semantic": [],
+        "decorative": []
+      },
+      "notes": [
+        "The background-image lives in the style attribute and should be preserved separately."
+      ]
+    },
+    {
+      "id": "hero-overlay",
+      "title": "Hero Overlay",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html",
+      "description": "Dark overlay used to make hero copy readable over photography.",
+      "classes": [
+        "absolute",
+        "inset-0",
+        "h-full",
+        "w-full",
+        "bg-gray-900/70"
+      ],
+      "expected": {
+        "structural": [
+          "absolute",
+          "inset-0",
+          "h-full",
+          "w-full"
+        ],
+        "semantic": [],
+        "decorative": [
+          "bg-gray-900/70"
+        ]
+      }
+    },
+    {
+      "id": "script-hero-heading",
+      "title": "Script Hero Heading",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html",
+      "description": "Signature RestA display heading treatment.",
+      "classes": [
+        "block",
+        "font-pretty",
+        "text-white",
+        "dark:text-zinc-300",
+        "text-3xl",
+        "!leading-snug",
+        "md:max-w-full",
+        "lg:max-w-3xl",
+        "lg:text-5xl"
+      ],
+      "expected": {
+        "structural": [
+          "block",
+          "md:max-w-full",
+          "lg:max-w-3xl"
+        ],
+        "semantic": [
+          "font-pretty",
+          "text-white",
+          "dark:text-zinc-300",
+          "text-3xl",
+          "!leading-snug",
+          "lg:text-5xl"
+        ],
+        "decorative": []
+      }
+    },
+    {
+      "id": "primary-cta-button",
+      "title": "Primary CTA Button",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Test-Buttons.html",
+      "description": "Canonical solid rose CTA pattern repeated across the reference.",
+      "classes": [
+        "inline-flex",
+        "items-center",
+        "justify-center",
+        "px-4",
+        "py-2",
+        "border",
+        "border-transparent",
+        "text-base",
+        "font-medium",
+        "rounded-md",
+        "shadow-md",
+        "focus:outline-none",
+        "focus:ring-2",
+        "focus:ring-offset-2",
+        "transition",
+        "duration-300",
+        "text-white",
+        "bg-rose-600",
+        "hover:bg-rose-700",
+        "focus:ring-rose-500"
+      ],
+      "expected": {
+        "structural": [
+          "inline-flex",
+          "items-center",
+          "justify-center",
+          "px-4",
+          "py-2",
+          "border"
+        ],
+        "semantic": [
+          "border-transparent",
+          "text-base",
+          "font-medium",
+          "rounded-md",
+          "shadow-md",
+          "focus:outline-none",
+          "focus:ring-2",
+          "focus:ring-offset-2",
+          "transition",
+          "duration-300",
+          "text-white",
+          "bg-rose-600",
+          "hover:bg-rose-700",
+          "focus:ring-rose-500"
+        ],
+        "decorative": []
+      }
+    },
+    {
+      "id": "gradient-promo-shell",
+      "title": "Gradient Promo Shell",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Sections - Promo.html",
+      "description": "Promotional CTA block with a rose-to-pink gradient background.",
+      "classes": [
+        "py-24",
+        "bg-gradient-to-r",
+        "from-rose-500",
+        "to-pink-500",
+        "dark:from-rose-700",
+        "dark:to-pink-700"
+      ],
+      "expected": {
+        "structural": [
+          "py-24"
+        ],
+        "semantic": [],
+        "decorative": [
+          "bg-gradient-to-r",
+          "from-rose-500",
+          "to-pink-500",
+          "dark:from-rose-700",
+          "dark:to-pink-700"
+        ]
+      }
+    },
+    {
+      "id": "menu-separator",
+      "title": "Menu Separator",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Menu-Shief-Single.html",
+      "description": "Dotted separator line used between menu item rows.",
+      "classes": [
+        "w-full",
+        "h-px",
+        "border-t",
+        "border-dotted",
+        "border-zinc-300",
+        "dark:border-zinc-600",
+        "mt-4"
+      ],
+      "expected": {
+        "structural": [
+          "w-full",
+          "h-px",
+          "border-t",
+          "mt-4"
+        ],
+        "semantic": [
+          "border-dotted",
+          "border-zinc-300",
+          "dark:border-zinc-600"
+        ],
+        "decorative": []
+      }
+    },
+    {
+      "id": "testimonial-card",
+      "title": "Testimonial Card",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Customer-Testimonials.html",
+      "description": "Standard testimonial card shell with white surface, soft radius, and shadow.",
+      "classes": [
+        "bg-white",
+        "dark:bg-zinc-800",
+        "p-6",
+        "rounded-lg",
+        "shadow-md"
+      ],
+      "expected": {
+        "structural": [
+          "p-6"
+        ],
+        "semantic": [
+          "bg-white",
+          "dark:bg-zinc-800",
+          "rounded-lg",
+          "shadow-md"
+        ],
+        "decorative": []
+      }
+    },
+    {
+      "id": "masonry-break-avoid",
+      "title": "Masonry Break Avoid",
+      "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Customer-Testimonials-Masonry.html",
+      "description": "Reference-specific structural utility for masonry-safe testimonial items.",
+      "classes": [
+        "break-inside-avoid"
+      ],
+      "expected": {
+        "structural": [
+          "break-inside-avoid"
+        ],
+        "semantic": [],
+        "decorative": []
+      },
+      "notes": [
+        "This is defined in a custom style block in the reference and should be preserved as an approved structural custom utility."
+      ]
+    }
+  ]
+}

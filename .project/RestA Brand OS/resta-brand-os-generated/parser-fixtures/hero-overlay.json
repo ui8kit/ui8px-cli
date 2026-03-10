@@ -1,0 +1,25 @@
+{
+  "id": "hero-overlay",
+  "title": "Hero Overlay",
+  "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html",
+  "description": "Dark overlay used to make hero copy readable over photography.",
+  "classes": [
+    "absolute",
+    "inset-0",
+    "h-full",
+    "w-full",
+    "bg-gray-900/70"
+  ],
+  "expected": {
+    "structural": [
+      "absolute",
+      "inset-0",
+      "h-full",
+      "w-full"
+    ],
+    "semantic": [],
+    "decorative": [
+      "bg-gray-900/70"
+    ]
+  }
+}

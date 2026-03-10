@@ -28,10 +28,9 @@ export async function runBrandOs(args: BrandOsCliArgs): Promise<void> {
   const result = emitBrandOsArtifacts(paths, schema, promptPack, parserContract, fixtureSource);
 
   console.log(`Brand OS emitted to: ${paths.emitDir}`);
-  console.log(`- theme.css`);
-  console.log(`- tailwind.extend.ts`);
   console.log(`- prompts/${result.promptCount} surface prompt(s)`);
   console.log(`- parser-fixtures/${result.fixtureCount} fixture(s)`);
+  console.log(`- copied adapter asset(s): ${result.copiedAssetCount}`);
   if (args.verbose) {
     console.log(`Schema: ${paths.schemaPath}`);
     console.log(`Prompt pack: ${paths.promptPackPath}`);

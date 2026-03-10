@@ -1,0 +1,33 @@
+{
+  "id": "script-hero-heading",
+  "title": "Script Hero Heading",
+  "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html",
+  "description": "Signature RestA display heading treatment.",
+  "classes": [
+    "block",
+    "font-pretty",
+    "text-white",
+    "dark:text-zinc-300",
+    "text-3xl",
+    "!leading-snug",
+    "md:max-w-full",
+    "lg:max-w-3xl",
+    "lg:text-5xl"
+  ],
+  "expected": {
+    "structural": [
+      "block",
+      "md:max-w-full",
+      "lg:max-w-3xl"
+    ],
+    "semantic": [
+      "font-pretty",
+      "text-white",
+      "dark:text-zinc-300",
+      "text-3xl",
+      "!leading-snug",
+      "lg:text-5xl"
+    ],
+    "decorative": []
+  }
+}

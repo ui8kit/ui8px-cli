@@ -1,0 +1,25 @@
+{
+  "id": "testimonial-card",
+  "title": "Testimonial Card",
+  "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Customer-Testimonials.html",
+  "description": "Standard testimonial card shell with white surface, soft radius, and shadow.",
+  "classes": [
+    "bg-white",
+    "dark:bg-zinc-800",
+    "p-6",
+    "rounded-lg",
+    "shadow-md"
+  ],
+  "expected": {
+    "structural": [
+      "p-6"
+    ],
+    "semantic": [
+      "bg-white",
+      "dark:bg-zinc-800",
+      "rounded-lg",
+      "shadow-md"
+    ],
+    "decorative": []
+  }
+}

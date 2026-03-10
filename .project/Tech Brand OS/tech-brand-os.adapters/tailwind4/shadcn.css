@@ -1,0 +1,67 @@
+@import "../shared/tokens.css";
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
+  --color-promo: hsl(var(--promo));
+  --color-promo-foreground: hsl(var(--promo-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-surface-elevated: hsl(var(--surface-elevated));
+  --color-surface-subtle: hsl(var(--surface-subtle));
+  --color-surface-strong: hsl(var(--surface-strong));
+  --color-cream: hsl(var(--cream));
+  --color-cream-foreground: hsl(var(--cream-foreground));
+  --color-category-1: hsl(var(--category-1));
+  --color-category-2: hsl(var(--category-2));
+  --color-category-3: hsl(var(--category-3));
+  --color-category-4: hsl(var(--category-4));
+  --color-category-5: hsl(var(--category-5));
+  --color-category-6: hsl(var(--category-6));
+  --color-category-7: hsl(var(--category-7));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --font-display: var(--font-display);
+  --font-ui: var(--font-ui);
+  --font-mono: var(--font-mono);
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-display);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-media: var(--radius-media);
+  --radius-shell: var(--radius-shell);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-none: var(--shadow-none);
+  --shadow-soft: var(--shadow-soft-token);
+  --shadow-elevated: var(--shadow-elevated);
+  --shadow-floating: var(--shadow-floating);
+}

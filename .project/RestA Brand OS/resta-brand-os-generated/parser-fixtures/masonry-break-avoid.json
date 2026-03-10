@@ -1,0 +1,19 @@
+{
+  "id": "masonry-break-avoid",
+  "title": "Masonry Break Avoid",
+  "sourceFile": ".project/RestA Brand OS/reference/RoseUI-Customer-Testimonials-Masonry.html",
+  "description": "Reference-specific structural utility for masonry-safe testimonial items.",
+  "classes": [
+    "break-inside-avoid"
+  ],
+  "expected": {
+    "structural": [
+      "break-inside-avoid"
+    ],
+    "semantic": [],
+    "decorative": []
+  },
+  "notes": [
+    "This is defined in a custom style block in the reference and should be preserved as an approved structural custom utility."
+  ]
+}

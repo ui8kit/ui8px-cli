@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "resta-brand-os-prompt-pack",
+  "brandId": "resta-brand-os",
+  "language": "en",
+  "description": "A reusable prompt pack for generating landing, blog, cms, dashboard, and docs surfaces in the unified RestA Brand OS style.",
+  "sharedContext": {
+    "brandSummary": "RestA Brand OS is a warm, polished, hospitality-first restaurant brand. It combines rose-led emotional emphasis, soft zinc-based neutrals, appetizing photography, approachable premium dining cues, and clear guest actions such as reservation, menu exploration, and event discovery.",
+    "styleKeywords": [
+      "hospitality-first",
+      "warm premium dining",
+      "rose and zinc palette",
+      "food-forward storytelling",
+      "soft polished restaurant UI",
+      "approachable celebratory elegance"
+    ],
+    "negativeStyleKeywords": [
+      "cold enterprise",
+      "generic fast-food",
+      "cyberpunk neon",
+      "clinical minimalism",
+      "over-ornate luxury",
+      "tech product styling"
+    ],
+    "crossSurfaceRules": [
+      "Design for hospitality and appetite before decorative novelty.",
+      "Keep one clear primary guest action on guest-facing surfaces.",
+      "Use the script display family selectively for charm and brand identity, not for dense content.",
+      "Let photography and menu storytelling do more brand work than excessive ornament.",
+      "Use rose as the emotional accent and zinc as the stabilizing neutral system.",
+      "Keep operational surfaces calmer and more structured while still feeling like the same brand.",
+      "Use gradients for promotions and campaigns with restraint.",
+      "Preserve clear reservation, menu, and contact pathways.",
+      "The result should feel consistent from public site to restaurant back office to docs."
+    ],
+    "implementationBias": {
+      "preferredStack": "Tailwind 4 + shadcn-compatible tokens or parser-friendly Tailwind HTML, with eventual UI8Kit compatibility in mind",
+      "systemLayer": [
+        "Button",
+        "Input",
+        "Textarea",
+        "Select",
+        "Dialog",
+        "Sheet",
+        "Accordion",
+        "Tabs",
+        "Toast"
+      ],
+      "brandLayer": [
+        "Restaurant hero wrappers",
+        "Menu list shells",
+        "Image promo sections",
+        "Testimonial cards and masonry layouts",
+        "Reservation CTAs",
+        "Contact split cards"
+      ]
+    },
+    "motionBias": {
+      "defaultLevel": "subtle transitions only",
+      "allowedEscalation": [
+        "gentle hero reveal",
+        "hover emphasis",
+        "simple mobile menu slide",
+        "soft promo transitions"
+      ],
+      "forbiddenWithoutJustification": [
+        "complex animated storytelling",
+        "heavy parallax",
+        "fast flashing promo motion",
+        "movement that competes with food imagery"
+      ]
+    }
+  },
+  "promptAssembly": {
+    "variableNotation": "{{variable}}",
+    "modes": [
+      "strategy",
+      "design-grammar",
+      "component-plan",
+      "ui-implementation",
+      "parser-friendly-tailwind-prototype",
+      "audit"
+    ],
+    "defaultPhaseOrder": [
+      "strategy",
+      "design-grammar",
+      "component-plan",
+      "implementation",
+      "audit"
+    ]
+  },
+  "surfaces": {
+    "landing": {
+      "goal": "Convert first-time visitors into diners by showcasing atmosphere, menu quality, trust, and one primary action.",
+      "requiredInputs": [
+        "restaurantName",
+        "cuisineType",
+        "audience",
+        "primaryGoal",
+        "primaryCTA",
+        "signaturePositioning",
+        "proofSignals"
+      ],
+      "optionalInputs": [
+        "secondaryCTA",
+        "locationContext",
+        "heroImageType",
+        "promotionFocus",
+        "serviceModes"
+      ],
+      "sectionExpectations": [
+        "hero-photo-overlay",
+        "story or promise intro",
+        "featured dishes or chef specials",
+        "promo or event section",
+        "testimonials or review proof",
+        "reservation cta",
+        "contact or location block"
+      ],
+      "surfaceOverrides": [
+        "Prioritize appetite, atmosphere, and trust over generic SaaS hierarchy.",
+        "Use food or dining imagery as the central emotional driver.",
+        "Let the primary CTA be reservation, menu view, or booking depending on the restaurant goal."
+      ],
+      "deliverables": [
+        "section architecture",
+        "visual grammar",
+        "brand/system split",
+        "final implementation or prototype"
+      ],
+      "promptTemplate": [
+        "Design a restaurant landing page for {{restaurantName}} in the RestA Brand OS style.",
+        "Cuisine type: {{cuisineType}}.",
+        "Audience: {{audience}}.",
+        "Primary goal: {{primaryGoal}}.",
+        "Primary CTA: {{primaryCTA}}.",
+        "Signature positioning: {{signaturePositioning}}.",
+        "Proof signals: {{proofSignals}}.",
+        "Use food-first imagery, warm hospitality tone, rose-led emphasis, and polished but approachable dining design.",
+        "Keep the page conversion-focused without feeling pushy or generic.",
+        "Deliver in order: strategy, section architecture, visual grammar, component plan, final implementation."
+      ],
+      "auditChecklist": [
+        "Does the hero create desire and clarity immediately?",
+        "Is the primary action obvious and credible?",
+        "Would the landing still work if the rose accent were reduced and only the composition remained?"
+      ]
+    },
+    "blog": {
+      "goal": "Create a branded editorial system for recipes, chef stories, seasonal updates, promotions, and restaurant culture.",
+      "requiredInputs": [
+        "publicationName",
+        "editorialFocus",
+        "readerAudience",
+        "contentPillars",
+        "primaryEngagementGoal"
+      ],
+      "optionalInputs": [
+        "newsletterCTA",
+        "contentTone",
+        "seasonalFocus",
+        "chefVoice"
+      ],
+      "sectionExpectations": [
+        "blog hero",
+        "intro statement",
+        "content card grid",
+        "seasonal or promo feature",
+        "chef story or cultural section",
+        "newsletter or reservation cta"
+      ],
+      "surfaceOverrides": [
+        "Keep the tone warm and story-driven rather than technical.",
+        "Use signature display moments selectively to add charm.",
+        "Recipes, ingredients, chefs, and dining moments should feel like the real protagonists."
+      ],
+      "deliverables": [
+        "editorial system strategy",
+        "page archetypes",
+        "content card and story patterns",
+        "final implementation or prototype"
+      ],
+      "promptTemplate": [
+        "Design a restaurant editorial or blog experience for {{publicationName}} in the RestA Brand OS style.",
+        "Editorial focus: {{editorialFocus}}.",
+        "Reader audience: {{readerAudience}}.",
+        "Content pillars: {{contentPillars}}.",
+        "Primary engagement goal: {{primaryEngagementGoal}}.",
+        "Use story-led layouts, ingredient and chef culture cues, and polished hospitality warmth.",
+        "Keep typography and imagery appetite-driven while preserving readability."
+      ],
+      "auditChecklist": [
+        "Do stories feel like part of the same dining brand as the landing?",
+        "Are content cards warm and recognizable rather than generic blog tiles?",
+        "Does the blog support both promotion and cultural storytelling?"
+      ]
+    },
+    "cms": {
+      "goal": "Support restaurant staff in managing menus, reservations, promotions, events, testimonials, and site content.",
+      "requiredInputs": [
+        "restaurantName",
+        "contentTypes",
+        "userRoles",
+        "primaryTasks"
+      ],
+      "optionalInputs": [
+        "approvalWorkflow",
+        "reservationFlow",
+        "menuTaxonomy",
+        "locationCount"
+      ],
+      "sectionExpectations": [
+        "app shell",
+        "menu or content list",
+        "detail editor",
+        "status and publishing controls",
+        "reservation or event context panel"
+      ],
+      "surfaceOverrides": [
+        "Use the same palette and warmth, but reduce promotional flourish significantly.",
+        "Favor structured forms, statuses, and safe editing over decorative storytelling.",
+        "Keep the CMS hospitality-aware without turning it into a marketing page."
+      ],
+      "deliverables": [
+        "workflow model",
+        "screen architecture",
+        "component strategy",
+        "state model",
+        "final implementation or prototype"
+      ],
+      "promptTemplate": [
+        "Design a restaurant CMS for {{restaurantName}} in the RestA Brand OS style.",
+        "Content types: {{contentTypes}}.",
+        "User roles: {{userRoles}}.",
+        "Primary tasks: {{primaryTasks}}.",
+        "Keep the interface operationally safe, but still visibly part of the RestA family."
+      ],
+      "auditChecklist": [
+        "Can staff confidently understand publish, edit, reserve, and promo states?",
+        "Is the CMS branded without being over-decorated?",
+        "Do forms and content lists feel calmer than guest-facing landing surfaces?"
+      ]
+    },
+    "dashboard": {
+      "goal": "Help restaurant operators scan reservations, occupancy, guest feedback, promotions, and menu performance quickly.",
+      "requiredInputs": [
+        "restaurantName",
+        "dashboardAudience",
+        "primaryMetrics",
+        "decisionsSupported"
+      ],
+      "optionalInputs": [
+        "timeFilters",
+        "locationScope",
+        "alertingModel",
+        "reviewSignals"
+      ],
+      "sectionExpectations": [
+        "dashboard header",
+        "metric summary grid",
+        "reservation and occupancy panels",
+        "reviews or promotion panels",
+        "table or queue views"
+      ],
+      "surfaceOverrides": [
+        "Use operational clarity first and hospitality warmth second.",
+        "Preserve rose as an accent, not as a flood color for every metric.",
+        "Use data and review signals in a way that still feels connected to the guest experience."
+      ],
+      "deliverables": [
+        "information hierarchy",
+        "panel system",
+        "metric and list patterns",
+        "final implementation or prototype"
+      ],
+      "promptTemplate": [
+        "Design a restaurant operations dashboard for {{restaurantName}} in the RestA Brand OS style.",
+        "Audience: {{dashboardAudience}}.",
+        "Primary metrics: {{primaryMetrics}}.",
+        "Decisions supported: {{decisionsSupported}}.",
+        "The dashboard should feel disciplined and readable while still inheriting the brand's hospitality DNA."
+      ],
+      "auditChecklist": [
+        "Can a manager scan what matters in seconds?",
+        "Do review, occupancy, and promotion signals feel clearly differentiated?",
+        "Does the dashboard avoid generic enterprise coldness?"
+      ]
+    },
+    "docs": {
+      "goal": "Document brand usage, restaurant content patterns, operational workflows, and implementation rules clearly.",
+      "requiredInputs": [
+        "documentationName",
+        "docAudience",
+        "docTypes",
+        "navigationDepth"
+      ],
+      "optionalInputs": [
+        "codeLanguageBias",
+        "policySections",
+        "integrationTargets"
+      ],
+      "sectionExpectations": [
+        "docs intro",
+        "sidebar or grouped navigation",
+        "article shell",
+        "checklists and callouts",
+        "tables and examples"
+      ],
+      "surfaceOverrides": [
+        "Keep docs clear and practical, but let the brand still feel warm and human.",
+        "Use script display minimally or not at all in dense technical documentation.",
+        "Favor readability and policy clarity over promotion."
+      ],
+      "deliverables": [
+        "docs information architecture",
+        "navigation model",
+        "article shell and callout patterns",
+        "final implementation or prototype"
+      ],
+      "promptTemplate": [
+        "Design documentation for {{documentationName}} in the RestA Brand OS style.",
+        "Audience: {{docAudience}}.",
+        "Doc types: {{docTypes}}.",
+        "Navigation depth: {{navigationDepth}}.",
+        "The result should feel operationally clear while preserving the warm and polished RestA brand character."
+      ],
+      "auditChecklist": [
+        "Do docs remain readable and restrained?",
+        "Does the warm brand layer survive without turning docs into marketing pages?",
+        "Can the same docs patterns scale to internal ops and implementation guidance?"
+      ]
+    }
+  },
+  "auditPromptAddendum": [
+    "Identify any area that feels like generic restaurant template output rather than a coherent RestA system.",
+    "Identify any place where decorative rose styling is doing too much work instead of layout or content.",
+    "List what should stay system-level, what should be wrapped, and what should remain campaign-only.",
+    "List missing tokens, variants, or section recipes required for long-term compatibility with Tailwind 4 templates and future UI8Kit conversion."
+  ]
+}

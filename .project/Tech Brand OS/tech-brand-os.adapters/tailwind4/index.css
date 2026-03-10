@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@import "./shadcn.css";
+
+/* Add project-specific @source directives here when integrating with UI8Kit maps or local content sources. */

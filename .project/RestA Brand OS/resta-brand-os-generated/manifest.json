@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-03-10T20:03:27.717Z",
+  "brandName": "RestA Brand OS",
+  "outputDir": "E:\\_@Bun\\@ui8kit-8px-cli\\.project\\RestA Brand OS\\resta-brand-os-generated",
+  "files": {
+    "promptCount": 5,
+    "prompts": [
+      "prompts/landing.md",
+      "prompts/blog.md",
+      "prompts/cms.md",
+      "prompts/dashboard.md",
+      "prompts/docs.md"
+    ],
+    "fixtureCount": 8,
+    "fixtureIndex": "parser-fixtures/index.json",
+    "copiedAssets": [
+      "adapters/shared/tokens.css",
+      "adapters/tailwind3/theme.css",
+      "adapters/tailwind3/tailwind.extend.ts",
+      "adapters/tailwind4/index.css",
+      "adapters/tailwind4/shadcn.css"
+    ]
+  }
+}

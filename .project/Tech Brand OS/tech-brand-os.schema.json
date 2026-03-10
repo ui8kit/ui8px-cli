@@ -1,0 +1,919 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tech-brand-os",
+  "kind": "brand-operating-system",
+  "meta": {
+    "name": "Tech Brand OS",
+    "slug": "tech-brand-os",
+    "status": "draft",
+    "language": "en",
+    "description": "A machine-readable brand operating system for a calm, intelligent, human-centered technology brand that extends a shadcn-compatible core with a stronger semantic, editorial, and multi-surface design language.",
+    "sourceReference": {
+      "project": "tech-blog-rounded-main",
+      "signalsPreserved": [
+        "warm neutral palette",
+        "dark charcoal foreground",
+        "soft sage accent",
+        "large rounded shells",
+        "pill navigation and CTA language",
+        "serif display + sans body pairing",
+        "image-led editorial cards",
+        "restrained reveal motion"
+      ],
+      "signalsStrengthened": [
+        "cross-surface consistency for landing/blog/cms/dashboard/docs",
+        "semantic token taxonomy",
+        "brand recipes",
+        "illustration and poster outputs",
+        "promptability for LLM systems",
+        "parser-aware conversion rules"
+      ]
+    },
+    "intendedSurfaces": [
+      "landing",
+      "blog-index",
+      "article",
+      "cms",
+      "dashboard",
+      "docs",
+      "open-graph",
+      "poster",
+      "video-cover",
+      "illustration"
+    ]
+  },
+  "emit": {
+    "docs": {
+      "generatedKitTitle": "Tech Brand OS Generated Kit",
+      "promptTitlePrefix": "Tech Brand OS",
+      "parserFixtureTitle": "Tech Brand OS Parser Fixtures",
+      "parserFixtureReference": "`tech-blog-rounded-main`"
+    },
+    "assets": [
+      {
+        "source": "tech-brand-os.adapters/shared/tokens.css",
+        "output": "adapters/shared/tokens.css",
+        "description": "Shared brand tokens and plain CSS utilities."
+      },
+      {
+        "source": "tech-brand-os.adapters/tailwind3/theme.css",
+        "output": "adapters/tailwind3/theme.css",
+        "description": "Tailwind 3 CSS entrypoint for this brand."
+      },
+      {
+        "source": "tech-brand-os.adapters/tailwind3/tailwind.extend.ts",
+        "output": "adapters/tailwind3/tailwind.extend.ts",
+        "description": "Tailwind 3 theme extension adapter."
+      },
+      {
+        "source": "tech-brand-os.adapters/tailwind4/index.css",
+        "output": "adapters/tailwind4/index.css",
+        "description": "Tailwind 4 CSS entrypoint for this brand."
+      },
+      {
+        "source": "tech-brand-os.adapters/tailwind4/shadcn.css",
+        "output": "adapters/tailwind4/shadcn.css",
+        "description": "Tailwind 4 shadcn-style theme adapter."
+      }
+    ]
+  },
+  "brandThesis": {
+    "summary": "Thoughtful technology should feel precise without becoming cold and modern without losing warmth.",
+    "promise": "Turn technical complexity into clear, trusted, and human-centered experiences.",
+    "positioning": "A premium but approachable technology brand system that blends editorial calm with product clarity.",
+    "personality": [
+      "warm",
+      "intelligent",
+      "calm",
+      "precise",
+      "human",
+      "editorial",
+      "tactile"
+    ],
+    "antiPersonality": [
+      "generic-saas",
+      "neon-cyberpunk",
+      "cold-enterprise",
+      "playful-chaotic",
+      "glassmorphism-heavy",
+      "over-animated"
+    ],
+    "emotionalOutcomes": [
+      "trust",
+      "clarity",
+      "curiosity",
+      "focus",
+      "confidence"
+    ],
+    "voice": {
+      "tone": [
+        "clear",
+        "thoughtful",
+        "measured",
+        "confident",
+        "non-hype"
+      ],
+      "avoid": [
+        "buzzword stacks",
+        "aggressive urgency",
+        "clickbait",
+        "snark",
+        "forced futurism"
+      ]
+    },
+    "audienceProfiles": {
+      "landing": "Decision-makers and practitioners evaluating a product or platform for trust, clarity, and differentiation.",
+      "blog": "Readers looking for insight, perspective, product thinking, and thoughtful editorial content.",
+      "cms": "Operators and content managers who need safe, predictable editing workflows.",
+      "dashboard": "Teams that need fast scanning, confident decisions, and low-noise information density.",
+      "docs": "Developers and technical users who need navigable, readable, and trustworthy documentation."
+    }
+  },
+  "operatingPrinciples": [
+    {
+      "id": "meaning-first",
+      "rule": "Design for comprehension before decoration."
+    },
+    {
+      "id": "brand-through-grammar",
+      "rule": "Distinctiveness comes from typography, spacing, surfaces, and composition before one-off effects."
+    },
+    {
+      "id": "system-before-campaign",
+      "rule": "Preserve a stable system layer and isolate campaign or decorative styling."
+    },
+    {
+      "id": "calm-technology",
+      "rule": "Use restraint, confidence, and tactile warmth instead of flashy futurism."
+    },
+    {
+      "id": "promptable-design",
+      "rule": "All important brand signals should be expressible in human and machine-readable form."
+    }
+  ],
+  "tokens": {
+    "color": {
+      "model": "hsl",
+      "light": {
+        "background": "36 44% 96%",
+        "foreground": "0 0% 18%",
+        "card": "33 40% 94%",
+        "card-foreground": "0 0% 18%",
+        "popover": "36 44% 96%",
+        "popover-foreground": "0 0% 18%",
+        "primary": "0 0% 18%",
+        "primary-foreground": "36 44% 96%",
+        "secondary": "25 30% 70%",
+        "secondary-foreground": "0 0% 18%",
+        "muted": "33 30% 88%",
+        "muted-foreground": "0 0% 40%",
+        "accent": "140 20% 50%",
+        "accent-foreground": "36 44% 96%",
+        "destructive": "0 84% 60%",
+        "destructive-foreground": "36 44% 96%",
+        "border": "33 25% 85%",
+        "input": "33 25% 85%",
+        "ring": "0 0% 18%",
+        "success": "148 28% 44%",
+        "success-foreground": "36 44% 96%",
+        "warning": "38 82% 56%",
+        "warning-foreground": "0 0% 18%",
+        "info": "210 52% 58%",
+        "info-foreground": "36 44% 96%",
+        "promo": "282 28% 58%",
+        "promo-foreground": "36 44% 96%",
+        "surface-elevated": "36 44% 98%",
+        "surface-subtle": "34 28% 92%",
+        "surface-strong": "32 22% 82%",
+        "cream": "40 40% 90%",
+        "cream-foreground": "0 0% 18%",
+        "overlay-soft": "0 0% 18% / 0.18",
+        "overlay-strong": "0 0% 10% / 0.72",
+        "shadow-soft": "0 0% 0%"
+      },
+      "dark": {
+        "background": "0 0% 10%",
+        "foreground": "36 44% 96%",
+        "card": "0 0% 14%",
+        "card-foreground": "36 44% 96%",
+        "popover": "0 0% 10%",
+        "popover-foreground": "36 44% 96%",
+        "primary": "36 44% 96%",
+        "primary-foreground": "0 0% 18%",
+        "secondary": "25 15% 30%",
+        "secondary-foreground": "36 44% 96%",
+        "muted": "0 0% 20%",
+        "muted-foreground": "0 0% 60%",
+        "accent": "140 20% 45%",
+        "accent-foreground": "36 44% 96%",
+        "destructive": "0 62% 50%",
+        "destructive-foreground": "36 44% 96%",
+        "border": "0 0% 20%",
+        "input": "0 0% 20%",
+        "ring": "36 44% 96%",
+        "success": "148 24% 48%",
+        "success-foreground": "36 44% 96%",
+        "warning": "38 74% 58%",
+        "warning-foreground": "0 0% 18%",
+        "info": "210 44% 55%",
+        "info-foreground": "36 44% 96%",
+        "promo": "282 24% 60%",
+        "promo-foreground": "36 44% 96%",
+        "surface-elevated": "0 0% 16%",
+        "surface-subtle": "0 0% 18%",
+        "surface-strong": "0 0% 24%",
+        "cream": "40 20% 25%",
+        "cream-foreground": "36 44% 96%",
+        "overlay-soft": "36 44% 96% / 0.08",
+        "overlay-strong": "0 0% 0% / 0.72",
+        "shadow-soft": "0 0% 0%"
+      },
+      "categories": {
+        "category-1": {
+          "light": "210 50% 75%",
+          "dark": "210 40% 45%",
+          "referenceAliases": [
+            "financing"
+          ],
+          "aliases": [
+            "platform",
+            "infrastructure"
+          ]
+        },
+        "category-2": {
+          "light": "140 20% 70%",
+          "dark": "140 20% 40%",
+          "referenceAliases": [
+            "lifestyle"
+          ],
+          "aliases": [
+            "product",
+            "ux"
+          ]
+        },
+        "category-3": {
+          "light": "25 35% 60%",
+          "dark": "25 30% 40%",
+          "referenceAliases": [
+            "community"
+          ],
+          "aliases": [
+            "operations",
+            "governance"
+          ]
+        },
+        "category-4": {
+          "light": "280 30% 75%",
+          "dark": "280 25% 45%",
+          "referenceAliases": [
+            "wellness"
+          ],
+          "aliases": [
+            "ai",
+            "research"
+          ]
+        },
+        "category-5": {
+          "light": "195 50% 70%",
+          "dark": "195 40% 45%",
+          "referenceAliases": [
+            "travel"
+          ],
+          "aliases": [
+            "data",
+            "analytics"
+          ]
+        },
+        "category-6": {
+          "light": "330 40% 75%",
+          "dark": "330 35% 45%",
+          "referenceAliases": [
+            "creativity"
+          ],
+          "aliases": [
+            "design",
+            "brand"
+          ]
+        },
+        "category-7": {
+          "light": "50 45% 70%",
+          "dark": "50 40% 45%",
+          "referenceAliases": [
+            "growth"
+          ],
+          "aliases": [
+            "growth",
+            "business"
+          ]
+        }
+      },
+      "charts": {
+        "1": "148 28% 44%",
+        "2": "0 0% 18%",
+        "3": "38 82% 56%",
+        "4": "210 52% 58%",
+        "5": "282 28% 58%"
+      }
+    },
+    "typography": {
+      "families": {
+        "display": "Merriweather, Georgia, serif",
+        "ui": "Inter, system-ui, sans-serif",
+        "mono": "JetBrains Mono, ui-monospace, SFMono-Regular, monospace"
+      },
+      "weights": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      },
+      "sizes": {
+        "display-hero": "4.5rem",
+        "display-xl": "3.75rem",
+        "display-lg": "3rem",
+        "heading-xl": "2.25rem",
+        "heading-lg": "1.875rem",
+        "heading-md": "1.5rem",
+        "body-lg": "1.125rem",
+        "body": "1rem",
+        "body-sm": "0.875rem",
+        "caption": "0.75rem",
+        "code": "0.875rem"
+      },
+      "lineHeights": {
+        "display": 1.1,
+        "heading": 1.2,
+        "body": 1.65,
+        "dense": 1.45,
+        "code": 1.6
+      },
+      "tracking": {
+        "display": "-0.02em",
+        "heading": "-0.015em",
+        "body": "0em",
+        "meta": "0.02em",
+        "eyebrow": "0.08em"
+      },
+      "surfaceOverrides": {
+        "landing": {
+          "displayFamily": "display",
+          "headingFamily": "display",
+          "bodyFamily": "ui"
+        },
+        "blog": {
+          "displayFamily": "display",
+          "headingFamily": "display",
+          "bodyFamily": "ui"
+        },
+        "cms": {
+          "displayFamily": "ui",
+          "headingFamily": "ui",
+          "bodyFamily": "ui"
+        },
+        "dashboard": {
+          "displayFamily": "ui",
+          "headingFamily": "ui",
+          "bodyFamily": "ui"
+        },
+        "docs": {
+          "displayFamily": "ui",
+          "headingFamily": "ui",
+          "bodyFamily": "ui"
+        }
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "scale": {
+        "0": "0rem",
+        "1": "0.25rem",
+        "2": "0.5rem",
+        "3": "0.75rem",
+        "4": "1rem",
+        "6": "1.5rem",
+        "8": "2rem",
+        "10": "2.5rem",
+        "12": "3rem",
+        "16": "4rem",
+        "20": "5rem",
+        "24": "6rem"
+      },
+      "sectionRhythm": {
+        "compact": "3rem",
+        "default": "5rem",
+        "spacious": "7rem"
+      },
+      "container": {
+        "content": "68ch",
+        "reading": "72ch",
+        "page": "80rem",
+        "dashboard": "90rem",
+        "docs": "88rem"
+      }
+    },
+    "radius": {
+      "sm": "0.5rem",
+      "md": "0.75rem",
+      "lg": "1rem",
+      "xl": "1.5rem",
+      "media": "2rem",
+      "shell": "2.5rem",
+      "pill": "9999px"
+    },
+    "shadow": {
+      "none": "none",
+      "soft": "0 4px 20px -4px hsl(var(--shadow-soft) / 0.10)",
+      "elevated": "0 20px 40px -10px hsl(var(--shadow-soft) / 0.15)",
+      "floating": "0 4px 12px -2px hsl(var(--shadow-soft) / 0.15)"
+    },
+    "motion": {
+      "durations": {
+        "instant": "0ms",
+        "fast": "160ms",
+        "base": "240ms",
+        "slow": "400ms",
+        "reveal": "600ms"
+      },
+      "easings": {
+        "standard": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "decelerate": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "reveal": "ease-out"
+      },
+      "presets": {
+        "fade-in": {
+          "duration": "0.5s",
+          "easing": "ease-out"
+        },
+        "slide-up": {
+          "duration": "0.6s",
+          "easing": "ease-out",
+          "translateY": "20px"
+        },
+        "slide-down": {
+          "duration": "0.6s",
+          "easing": "ease-out",
+          "translateY": "-20px"
+        },
+        "scale-in": {
+          "duration": "0.5s",
+          "easing": "ease-out",
+          "fromScale": 0.95
+        },
+        "card-hover": {
+          "duration": "500ms",
+          "hoverScale": 1.02
+        },
+        "cta-hover": {
+          "duration": "240ms",
+          "hoverScale": 1.05
+        }
+      },
+      "reducedMotion": {
+        "disableEntranceAnimations": true,
+        "disableTransformScale": true,
+        "keepColorAndOpacityTransitions": true
+      }
+    },
+    "illustration": {
+      "style": "editorial-tech-soft",
+      "corners": "rounded",
+      "strokes": {
+        "weight": 2,
+        "style": "clean-rounded"
+      },
+      "fills": {
+        "mode": "flat-with-soft-depth",
+        "allowGradients": "limited",
+        "gradientUsage": "hero backgrounds, poster backdrops, subtle surface accents"
+      },
+      "iconography": {
+        "style": "rounded line icons",
+        "density": "medium",
+        "avoid": [
+          "over-detailed 3D icons",
+          "hard cyberpunk glyphs"
+        ]
+      },
+      "shapeFamilies": [
+        "rounded-rectangle",
+        "soft-circle",
+        "pill",
+        "gentle-arch"
+      ],
+      "backgroundTreatment": {
+        "base": "soft neutral canvas",
+        "overlays": "subtle radial or directional washes",
+        "avoid": [
+          "noisy textures",
+          "heavy chrome effects",
+          "high-contrast tech grids"
+        ]
+      }
+    },
+    "mediaPresets": {
+      "open-graph": {
+        "size": "1200x630",
+        "safePadding": "48px",
+        "titleMaxLines": 3
+      },
+      "linkedin-post": {
+        "size": "1200x1200",
+        "safePadding": "72px",
+        "titleMaxLines": 5
+      },
+      "instagram-portrait": {
+        "size": "1080x1350",
+        "safePadding": "72px",
+        "titleMaxLines": 6
+      },
+      "story-vertical": {
+        "size": "1080x1920",
+        "safePadding": "96px",
+        "titleMaxLines": 7
+      },
+      "video-cover": {
+        "size": "1920x1080",
+        "safePadding": "96px",
+        "titleMaxLines": 4
+      }
+    }
+  },
+  "semanticRoles": {
+    "surfaces": {
+      "canvas": "background",
+      "card": "card",
+      "panel": "muted",
+      "elevated": "surface-elevated",
+      "highlight": "cream",
+      "strong": "surface-strong"
+    },
+    "content": {
+      "heading": "foreground",
+      "body": "foreground",
+      "muted": "muted-foreground",
+      "inverse": "primary-foreground",
+      "link": "accent"
+    },
+    "actions": {
+      "primary": "primary",
+      "secondary": "secondary",
+      "ghost": "muted",
+      "promo": "promo"
+    },
+    "states": {
+      "success": "success",
+      "warning": "warning",
+      "info": "info",
+      "destructive": "destructive"
+    },
+    "editorialTags": {
+      "tag-1": "category-1",
+      "tag-2": "category-2",
+      "tag-3": "category-3",
+      "tag-4": "category-4",
+      "tag-5": "category-5",
+      "tag-6": "category-6",
+      "tag-7": "category-7"
+    },
+    "charts": {
+      "series-1": "1",
+      "series-2": "2",
+      "series-3": "3",
+      "series-4": "4",
+      "series-5": "5"
+    }
+  },
+  "designGrammar": {
+    "densityModes": {
+      "landing": "airy",
+      "blog": "balanced",
+      "cms": "balanced-compact",
+      "dashboard": "compact",
+      "docs": "balanced"
+    },
+    "shapeLanguage": {
+      "core": "Rounded, soft, tactile, and intentional rather than playful.",
+      "heroShell": "radius.shell",
+      "mediaFrame": "radius.media",
+      "interactiveChrome": "radius.pill",
+      "avoid": [
+        "sharp glass panels",
+        "aggressive skewed shapes",
+        "ornamental blobs without content purpose"
+      ]
+    },
+    "surfaceLanguage": {
+      "base": "Soft neutral background with slightly warmer cards and restrained elevation.",
+      "depthRule": "Use at most 3 obvious surface levels on a single screen.",
+      "accentRule": "Accent is supportive, not dominant.",
+      "contrastRule": "Use charcoal foreground for authority and legibility."
+    },
+    "imageTreatment": {
+      "style": "Editorial product framing with calm contrast and generous crop discipline.",
+      "preferred": [
+        "product screenshots inside soft frames",
+        "editorial photos with controlled overlays",
+        "diagrammatic illustrations using brand shapes"
+      ],
+      "avoid": [
+        "synthetic neon renders",
+        "over-sharpened screenshots",
+        "stock imagery with generic startup tropes"
+      ]
+    },
+    "contentVoice": {
+      "adjectives": [
+        "thoughtful",
+        "credible",
+        "measured",
+        "human",
+        "technical-but-readable"
+      ],
+      "avoid": [
+        "salesy",
+        "breathless",
+        "clickbait",
+        "self-congratulatory"
+      ]
+    }
+  },
+  "recipes": {
+    "pageArchetypes": {
+      "landing": {
+        "purpose": "Position a product, establish trust, and drive one primary CTA.",
+        "requiredSections": [
+          "hero-editorial-tech",
+          "proof-strip",
+          "feature-narrative",
+          "feature-grid",
+          "final-cta"
+        ]
+      },
+      "blog-index": {
+        "purpose": "Present the editorial voice, featured stories, categories, and subscription path.",
+        "requiredSections": [
+          "hero-editorial-tech",
+          "intro-statement",
+          "article-card-grid",
+          "newsletter-cta"
+        ]
+      },
+      "article": {
+        "purpose": "Maximize readability, author trust, and related-content continuation.",
+        "requiredSections": [
+          "article-hero",
+          "article-body",
+          "tag-strip",
+          "related-content-grid"
+        ]
+      },
+      "cms": {
+        "purpose": "Support safe creation, editing, moderation, and publishing workflows.",
+        "requiredSections": [
+          "cms-topbar",
+          "cms-list-panel",
+          "cms-detail-editor",
+          "activity-or-help-panel"
+        ]
+      },
+      "dashboard": {
+        "purpose": "Enable fast scanning, anomaly detection, and confident decision-making.",
+        "requiredSections": [
+          "dashboard-header",
+          "metric-summary-grid",
+          "chart-panel-row",
+          "table-panel"
+        ]
+      },
+      "docs": {
+        "purpose": "Make technical information navigable, readable, and trustworthy.",
+        "requiredSections": [
+          "docs-hero",
+          "docs-sidebar-layout",
+          "docs-article-shell",
+          "callout-and-code-patterns"
+        ]
+      }
+    },
+    "sectionArchetypes": {
+      "hero-editorial-tech": {
+        "purpose": "Combine product or editorial authority with warmth and immediate comprehension.",
+        "requiredSlots": [
+          "eyebrow",
+          "headline",
+          "supporting-copy",
+          "primary-cta",
+          "secondary-action",
+          "visual-frame"
+        ],
+        "fixedTraits": [
+          "large rounded shell",
+          "display heading",
+          "clear single primary action",
+          "strong but quiet focal image or product frame"
+        ]
+      },
+      "proof-strip": {
+        "purpose": "Reduce trust friction with logos, usage proof, metrics, or publication signals.",
+        "requiredSlots": [
+          "proof-items"
+        ],
+        "fixedTraits": [
+          "low-noise presentation",
+          "secondary emphasis only"
+        ]
+      },
+      "feature-grid": {
+        "purpose": "Summarize capabilities with consistent cards or tiles.",
+        "requiredSlots": [
+          "section-heading",
+          "cards"
+        ],
+        "fixedTraits": [
+          "shared card grammar",
+          "balanced density",
+          "clear icon/image hierarchy"
+        ]
+      },
+      "feature-narrative": {
+        "purpose": "Explain a core product idea or workflow with text + visual pairing.",
+        "requiredSlots": [
+          "section-heading",
+          "body",
+          "support-points",
+          "visual"
+        ],
+        "fixedTraits": [
+          "editorial cadence",
+          "one dominant message",
+          "calm asymmetry allowed"
+        ]
+      },
+      "article-card-grid": {
+        "purpose": "Present stories or resources in a signature branded card pattern.",
+        "requiredSlots": [
+          "cards"
+        ],
+        "fixedTraits": [
+          "image-led cards",
+          "tag + meta shell",
+          "overlay-controlled readability",
+          "floating action affordance optional"
+        ]
+      },
+      "newsletter-cta": {
+        "purpose": "Invite subscription without breaking brand calm.",
+        "requiredSlots": [
+          "headline",
+          "copy",
+          "input",
+          "submit"
+        ],
+        "fixedTraits": [
+          "single input row on desktop",
+          "rounded CTA shell",
+          "trustworthy, not pushy"
+        ]
+      },
+      "metric-summary-grid": {
+        "purpose": "Surface the most important numbers first in dashboard contexts.",
+        "requiredSlots": [
+          "metric-cards"
+        ],
+        "fixedTraits": [
+          "low-noise cards",
+          "clear hierarchy of number > label > delta",
+          "semantic status colors only when necessary"
+        ]
+      },
+      "docs-article-shell": {
+        "purpose": "Support long-form technical reading, copyable code, and navigable headings.",
+        "requiredSlots": [
+          "title",
+          "meta",
+          "body",
+          "code",
+          "callouts"
+        ],
+        "fixedTraits": [
+          "sans headings",
+          "mono for code",
+          "calm line length",
+          "strong anchor navigation"
+        ]
+      }
+    }
+  },
+  "componentPolicy": {
+    "keepStandard": [
+      "Button",
+      "Input",
+      "Textarea",
+      "Select",
+      "Tabs",
+      "Accordion",
+      "Dialog",
+      "Sheet",
+      "Tooltip",
+      "Toast",
+      "Badge"
+    ],
+    "wrapEarly": [
+      "Section",
+      "SectionHeader",
+      "HeroShell",
+      "NewsletterForm",
+      "CategoryBadge",
+      "MetricCard",
+      "SocialIconButton",
+      "ProofStrip",
+      "FeatureCard",
+      "DocsCallout"
+    ],
+    "customBlocks": [
+      "LandingHero",
+      "BlogHero",
+      "ArticleCard",
+      "EditorialCTA",
+      "DashboardSummaryGrid",
+      "CMSListDetailShell",
+      "DocsPageShell"
+    ],
+    "rawHtmlAllowedFor": [
+      "semantic article content",
+      "markdown-rendered prose",
+      "simple content wrappers inside named brand blocks"
+    ],
+    "avoid": [
+      "rebuilding shadcn primitives for uniqueness alone",
+      "page-specific component variants",
+      "using generic cards for every section"
+    ]
+  },
+  "outputs": {
+    "web": [
+      "theme.css",
+      "tailwind.extend.ts",
+      "component-variants.ts",
+      "brand-wrappers.tsx"
+    ],
+    "design": [
+      "figma.tokens.json",
+      "palette.swatches.json",
+      "recipe-reference.md"
+    ],
+    "media": [
+      "poster.presets.json",
+      "og-card.presets.json",
+      "remotion.theme.json"
+    ],
+    "ai": [
+      "prompt-pack.json",
+      "negative-prompts.json",
+      "reference-style-board.md"
+    ]
+  },
+  "qualityGates": {
+    "consistency": [
+      "No more than one visual grammar per screen.",
+      "Repeated patterns must be named or wrapped.",
+      "Accent usage must remain selective."
+    ],
+    "accessibility": [
+      "Body copy must preserve readable contrast in both modes.",
+      "Motion must respect reduced-motion settings.",
+      "CTA hierarchy must remain visible without color alone."
+    ],
+    "motion": [
+      "If the page works better with motion removed, motion is optional.",
+      "If the page works worse without motion, motion must justify its role."
+    ],
+    "parser": [
+      "Token-backed classes are semantic, not decorative.",
+      "Unknown arbitrary values must produce warnings.",
+      "Decorative styling must be separable into a brand layer."
+    ]
+  },
+  "evolutionRules": {
+    "addTokenWhen": [
+      "The meaning is stable across at least two surfaces.",
+      "The role exists in light and dark mode.",
+      "The token is not tied to a single campaign."
+    ],
+    "addVariantWhen": [
+      "The behavior is stable for a component.",
+      "The meaning repeats in multiple contexts.",
+      "The variant is semantic rather than cosmetic."
+    ],
+    "createRecipeWhen": [
+      "A section pattern appears on more than one page.",
+      "The design review can describe the pattern by name.",
+      "The block expresses brand identity or workflow meaning."
+    ],
+    "keepDecorativeWhen": [
+      "The style is campaign-only.",
+      "The effect does not carry stable meaning.",
+      "The effect would pollute the token core if generalized."
+    ]
+  }
+}
