@@ -6,27 +6,8 @@ export const techBrandTailwindExtend = {
     "mono": ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
   },
   colors: {
-    "border": "hsl(var(--border))",
-    "input": "hsl(var(--input))",
-    "ring": "hsl(var(--ring))",
     "background": "hsl(var(--background))",
     "foreground": "hsl(var(--foreground))",
-    "primary": {
-      DEFAULT: "hsl(var(--primary))",
-      foreground: "hsl(var(--primary-foreground))",
-    },
-    "secondary": {
-      DEFAULT: "hsl(var(--secondary))",
-      foreground: "hsl(var(--secondary-foreground))",
-    },
-    "accent": {
-      DEFAULT: "hsl(var(--accent))",
-      foreground: "hsl(var(--accent-foreground))",
-    },
-    "muted": {
-      DEFAULT: "hsl(var(--muted))",
-      foreground: "hsl(var(--muted-foreground))",
-    },
     "card": {
       DEFAULT: "hsl(var(--card))",
       foreground: "hsl(var(--card-foreground))",
@@ -35,10 +16,29 @@ export const techBrandTailwindExtend = {
       DEFAULT: "hsl(var(--popover))",
       foreground: "hsl(var(--popover-foreground))",
     },
+    "primary": {
+      DEFAULT: "hsl(var(--primary))",
+      foreground: "hsl(var(--primary-foreground))",
+    },
+    "secondary": {
+      DEFAULT: "hsl(var(--secondary))",
+      foreground: "hsl(var(--secondary-foreground))",
+    },
+    "muted": {
+      DEFAULT: "hsl(var(--muted))",
+      foreground: "hsl(var(--muted-foreground))",
+    },
+    "accent": {
+      DEFAULT: "hsl(var(--accent))",
+      foreground: "hsl(var(--accent-foreground))",
+    },
     "destructive": {
       DEFAULT: "hsl(var(--destructive))",
       foreground: "hsl(var(--destructive-foreground))",
     },
+    "border": "hsl(var(--border))",
+    "input": "hsl(var(--input))",
+    "ring": "hsl(var(--ring))",
     "success": {
       DEFAULT: "hsl(var(--success))",
       foreground: "hsl(var(--success-foreground))",
@@ -55,6 +55,16 @@ export const techBrandTailwindExtend = {
       DEFAULT: "hsl(var(--promo))",
       foreground: "hsl(var(--promo-foreground))",
     },
+    "surface-elevated": "hsl(var(--surface-elevated))",
+    "surface-subtle": "hsl(var(--surface-subtle))",
+    "surface-strong": "hsl(var(--surface-strong))",
+    "cream": {
+      DEFAULT: "hsl(var(--cream))",
+      foreground: "hsl(var(--cream-foreground))",
+    },
+    "overlay-soft": "hsl(var(--overlay-soft))",
+    "overlay-strong": "hsl(var(--overlay-strong))",
+    "shadow-soft": "hsl(var(--shadow-soft))",
     "category-1": "hsl(var(--category-1))",
     "category-2": "hsl(var(--category-2))",
     "category-3": "hsl(var(--category-3))",

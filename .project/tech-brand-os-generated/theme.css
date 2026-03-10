@@ -163,7 +163,7 @@
     color: hsl(var(--cream-foreground));
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 12px -2px hsl(var(--shadow-soft) / 0.15);
-    transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.6s, background-color cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .floating-button:hover {
@@ -172,8 +172,12 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes slideUp {
@@ -214,19 +218,38 @@
   .animate-slide-down { animation: slideDown 0.6s ease-out; }
   .animate-scale-in { animation: scaleIn 0.5s ease-out; }
 
-  .stagger-1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; }
-  .stagger-2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
-  .stagger-3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
-  .stagger-4 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
-  .stagger-5 { animation-delay: 0.5s; opacity: 0; animation-fill-mode: forwards; }
-  .stagger-6 { animation-delay: 0.6s; opacity: 0; animation-fill-mode: forwards; }
-
-  .tag-category-1 {
-    background-color: hsl(var(--category-1));
-    color: hsl(var(--primary));
+  .stagger-1 {
+    animation-delay: 0.1s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .stagger-2 {
+    animation-delay: 0.2s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .stagger-3 {
+    animation-delay: 0.3s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .stagger-4 {
+    animation-delay: 0.4s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .stagger-5 {
+    animation-delay: 0.5s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .stagger-6 {
+    animation-delay: 0.6s;
+    opacity: 0;
+    animation-fill-mode: forwards;
   }
 
-  .tag-financing {
+  .tag-category-1 {
     background-color: hsl(var(--category-1));
     color: hsl(var(--primary));
   }
@@ -241,12 +264,12 @@
     color: hsl(var(--primary));
   }
 
-  .tag-category-2 {
-    background-color: hsl(var(--category-2));
+  .tag-financing {
+    background-color: hsl(var(--category-1));
     color: hsl(var(--primary));
   }
 
-  .tag-lifestyle {
+  .tag-category-2 {
     background-color: hsl(var(--category-2));
     color: hsl(var(--primary));
   }
@@ -261,12 +284,12 @@
     color: hsl(var(--primary));
   }
 
-  .tag-category-3 {
-    background-color: hsl(var(--category-3));
+  .tag-lifestyle {
+    background-color: hsl(var(--category-2));
     color: hsl(var(--primary));
   }
 
-  .tag-community {
+  .tag-category-3 {
     background-color: hsl(var(--category-3));
     color: hsl(var(--primary));
   }
@@ -281,12 +304,12 @@
     color: hsl(var(--primary));
   }
 
-  .tag-category-4 {
-    background-color: hsl(var(--category-4));
+  .tag-community {
+    background-color: hsl(var(--category-3));
     color: hsl(var(--primary));
   }
 
-  .tag-wellness {
+  .tag-category-4 {
     background-color: hsl(var(--category-4));
     color: hsl(var(--primary));
   }
@@ -301,12 +324,12 @@
     color: hsl(var(--primary));
   }
 
-  .tag-category-5 {
-    background-color: hsl(var(--category-5));
+  .tag-wellness {
+    background-color: hsl(var(--category-4));
     color: hsl(var(--primary));
   }
 
-  .tag-travel {
+  .tag-category-5 {
     background-color: hsl(var(--category-5));
     color: hsl(var(--primary));
   }
@@ -321,12 +344,12 @@
     color: hsl(var(--primary));
   }
 
-  .tag-category-6 {
-    background-color: hsl(var(--category-6));
+  .tag-travel {
+    background-color: hsl(var(--category-5));
     color: hsl(var(--primary));
   }
 
-  .tag-creativity {
+  .tag-category-6 {
     background-color: hsl(var(--category-6));
     color: hsl(var(--primary));
   }
@@ -341,12 +364,12 @@
     color: hsl(var(--primary));
   }
 
-  .tag-category-7 {
-    background-color: hsl(var(--category-7));
+  .tag-creativity {
+    background-color: hsl(var(--category-6));
     color: hsl(var(--primary));
   }
 
-  .tag-growth {
+  .tag-category-7 {
     background-color: hsl(var(--category-7));
     color: hsl(var(--primary));
   }
@@ -372,14 +395,11 @@
   .stagger-3,
   .stagger-4,
   .stagger-5,
-  .stagger-6 {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
+  .stagger-6,
   .card-hover:hover,
   .floating-button:hover {
+    animation: none !important;
+    opacity: 1 !important;
     transform: none !important;
   }
 }

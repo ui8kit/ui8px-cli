@@ -4,7 +4,7 @@ Use this file as the isolated surface prompt when you want to start building dir
 
 ## Attach
 - `tech-brand-os.schema.json`
-- Optionally attach `theme.css` and `tailwind.extend.ts` if the implementation target needs concrete adapters.
+- Optionally attach generated adapters such as `theme.css` and `tailwind.extend.ts` if the implementation target needs them.
 
 ## Required Inputs
 - productName: {{productName}}
@@ -164,8 +164,8 @@ Now follow this working sequence:
 1. Read the audience and product goal.
 2. Define the information architecture and section order.
 3. Define the visual grammar: typography, spacing, surfaces, shape language, and motion stance.
-4. Decide what stays standard shadcn, what should be wrapped, and what should become a custom block.
-5. Generate the requested implementation in a coherent Tech Brand OS style.
+4. Decide what stays standard in the system layer, what should be wrapped, and what should become a custom block.
+5. Generate the requested implementation in a coherent brand system style.
 
 Reference prompt instructions:
 - Design a dashboard for {{productName}} using Tech Brand OS.

@@ -1,6 +1,6 @@
 # Tech Brand OS Prompt Index
 
-These files are isolated prompts for starting surface-specific application work with the Tech Brand OS attached as the source-of-truth brand contract.
+These files are isolated prompts for starting surface-specific application work with the brand schema attached as the source-of-truth contract.
 
 - `landing.md` — Explain the product, establish trust, and drive a single primary CTA.
 - `blog.md` — Create an editorial content system that feels branded, readable, and reusable across home, category, and article views.

@@ -4,6 +4,7 @@
   "kind": "brand-operating-system",
   "meta": {
     "name": "Tech Brand OS",
+    "slug": "tech-brand-os",
     "status": "draft",
     "language": "en",
     "description": "A machine-readable brand operating system for a calm, intelligent, human-centered technology brand that extends a shadcn-compatible core with a stronger semantic, editorial, and multi-surface design language.",
@@ -40,6 +41,179 @@
       "video-cover",
       "illustration"
     ]
+  },
+  "emit": {
+    "docs": {
+      "generatedKitTitle": "Tech Brand OS Generated Kit",
+      "promptTitlePrefix": "Tech Brand OS",
+      "parserFixtureTitle": "Tech Brand OS Parser Fixtures",
+      "parserFixtureReference": "`tech-blog-rounded-main`"
+    },
+    "tailwind": {
+      "exportName": "techBrandTailwindExtend"
+    },
+    "theme": {
+      "bodyApplyClasses": [
+        "bg-background",
+        "text-foreground",
+        "antialiased"
+      ],
+      "bodyFontFamilyKey": "ui",
+      "headingSelectors": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "headingFontFamilyKey": "display",
+      "headingLetterSpacing": "-0.02em",
+      "utilityRecipes": [
+        {
+          "className": "pill-nav",
+          "declarations": {
+            "border-radius": "var(--radius-pill)",
+            "background-color": "hsl(var(--surface-elevated))",
+            "border": "1px solid hsl(var(--border) / 0.5)",
+            "backdrop-filter": "blur(16px)"
+          }
+        },
+        {
+          "className": "card-hover",
+          "declarations": {
+            "transition": "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+            "box-shadow": "0 4px 20px -4px hsl(var(--shadow-soft) / 0.10)"
+          },
+          "pseudoDeclarations": {
+            "hover": {
+              "transform": "scale(1.02)",
+              "box-shadow": "0 20px 40px -10px hsl(var(--shadow-soft) / 0.15)"
+            }
+          }
+        },
+        {
+          "className": "floating-button",
+          "declarations": {
+            "width": "3rem",
+            "height": "3rem",
+            "border-radius": "var(--radius-pill)",
+            "display": "inline-flex",
+            "align-items": "center",
+            "justify-content": "center",
+            "background-color": "hsl(var(--cream) / 0.90)",
+            "color": "hsl(var(--cream-foreground))",
+            "backdrop-filter": "blur(8px)",
+            "box-shadow": "0 4px 12px -2px hsl(var(--shadow-soft) / 0.15)",
+            "transition": "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "pseudoDeclarations": {
+            "hover": {
+              "transform": "scale(1.10)",
+              "background-color": "hsl(var(--cream))"
+            }
+          }
+        }
+      ],
+      "keyframes": {
+        "fadeIn": {
+          "from": {
+            "opacity": "0"
+          },
+          "to": {
+            "opacity": "1"
+          }
+        },
+        "slideUp": {
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(20px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
+        },
+        "slideDown": {
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(-20px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
+        },
+        "scaleIn": {
+          "from": {
+            "opacity": "0",
+            "transform": "scale(0.95)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "scale(1)"
+          }
+        }
+      },
+      "animationUtilities": [
+        {
+          "className": "animate-fade-in",
+          "keyframe": "fadeIn",
+          "animation": "fadeIn 0.5s ease-out"
+        },
+        {
+          "className": "animate-slide-up",
+          "keyframe": "slideUp",
+          "animation": "slideUp 0.6s ease-out"
+        },
+        {
+          "className": "animate-slide-down",
+          "keyframe": "slideDown",
+          "animation": "slideDown 0.6s ease-out"
+        },
+        {
+          "className": "animate-scale-in",
+          "keyframe": "scaleIn",
+          "animation": "scaleIn 0.5s ease-out"
+        }
+      ],
+      "staggerUtilities": {
+        "classPrefix": "stagger",
+        "delays": [
+          "0.1s",
+          "0.2s",
+          "0.3s",
+          "0.4s",
+          "0.5s",
+          "0.6s"
+        ],
+        "declarations": {
+          "opacity": "0",
+          "animation-fill-mode": "forwards"
+        }
+      },
+      "categoryUtilities": {
+        "enabled": true,
+        "classPrefix": "tag",
+        "textColor": "hsl(var(--primary))",
+        "includeCanonicalTokenClass": true,
+        "aliasFields": [
+          "aliases",
+          "referenceAliases"
+        ]
+      },
+      "reducedMotion": {
+        "extraSelectors": [
+          ".card-hover:hover",
+          ".floating-button:hover"
+        ],
+        "resetDeclarations": {
+          "animation": "none !important",
+          "opacity": "1 !important",
+          "transform": "none !important"
+        }
+      }
+    }
   },
   "brandThesis": {
     "summary": "Thoughtful technology should feel precise without becoming cold and modern without losing warmth.",
@@ -199,7 +373,7 @@
           "referenceAliases": [
             "financing"
           ],
-          "suggestedTechAliases": [
+          "aliases": [
             "platform",
             "infrastructure"
           ]
@@ -210,7 +384,7 @@
           "referenceAliases": [
             "lifestyle"
           ],
-          "suggestedTechAliases": [
+          "aliases": [
             "product",
             "ux"
           ]
@@ -221,7 +395,7 @@
           "referenceAliases": [
             "community"
           ],
-          "suggestedTechAliases": [
+          "aliases": [
             "operations",
             "governance"
           ]
@@ -232,7 +406,7 @@
           "referenceAliases": [
             "wellness"
           ],
-          "suggestedTechAliases": [
+          "aliases": [
             "ai",
             "research"
           ]
@@ -243,7 +417,7 @@
           "referenceAliases": [
             "travel"
           ],
-          "suggestedTechAliases": [
+          "aliases": [
             "data",
             "analytics"
           ]
@@ -254,7 +428,7 @@
           "referenceAliases": [
             "creativity"
           ],
-          "suggestedTechAliases": [
+          "aliases": [
             "design",
             "brand"
           ]
@@ -265,7 +439,7 @@
           "referenceAliases": [
             "growth"
           ],
-          "suggestedTechAliases": [
+          "aliases": [
             "growth",
             "business"
           ]

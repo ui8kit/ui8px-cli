@@ -1,6 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "brandId": "tech-brand-os",
+  "referenceProjectName": "`tech-blog-rounded-main`",
   "fixtures": [
     {
       "id": "index-main-shell",
