@@ -8,6 +8,7 @@
  */
 
 import { CliArgs, parseArgs } from './cli/parse-args.js';
+import { printAstParserUsage, runAstParser } from './commands/ast-parser.js';
 import { printBrandOsUsage, runBrandOs } from './commands/brand-os.js';
 import { printScaffoldUsage, runScaffold } from './commands/scaffold.js';
 import { printValidateUsage, runValidateGrid } from './commands/validate-grid.js';
@@ -21,6 +22,8 @@ function printUsage(): void {
   console.log(printScaffoldUsage());
   console.log('');
   console.log(printValidateUsage());
+  console.log('');
+  console.log(printAstParserUsage());
   console.log('');
   console.log(printBrandOsUsage());
 }
@@ -41,6 +44,12 @@ async function main(): Promise<void> {
   }
 
   try {
+    if (args.mode === 'ast-parser') {
+      const exitCode = await runAstParser(args);
+      process.exit(exitCode);
+      return;
+    }
+
     if (args.mode === 'brand-os') {
       await runBrandOs(args);
       process.exit(0);
