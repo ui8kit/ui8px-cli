@@ -1,0 +1,397 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tech-brand-os-prompt-pack",
+  "brandId": "tech-brand-os",
+  "language": "en",
+  "description": "A reusable prompt pack for generating landing, blog, cms, dashboard, and docs surfaces in the unified Tech Brand OS style.",
+  "sharedContext": {
+    "brandSummary": "Tech Brand OS is a calm, intelligent, human-centered technology brand. It combines editorial warmth with product clarity, using soft warm neutrals, dark charcoal text, restrained sage and muted promo accents, large rounded shells, pill interactions, and low-noise depth.",
+    "styleKeywords": [
+      "calm technology",
+      "editorial-tech",
+      "warm minimalism",
+      "tactile precision",
+      "premium but approachable",
+      "low-noise product design"
+    ],
+    "negativeStyleKeywords": [
+      "generic saas",
+      "neon cyberpunk",
+      "cold enterprise",
+      "glassmorphism heavy",
+      "startup cliché gradients",
+      "over-gamified dashboard"
+    ],
+    "crossSurfaceRules": [
+      "Prioritize information hierarchy over decorative effects.",
+      "Keep one clear primary action per screen or surface.",
+      "Use brand identity through typography, spacing, surfaces, and composition before one-off effects.",
+      "Prefer soft neutral canvases, charcoal text, and restrained accent usage.",
+      "Use large rounded shells and pill controls as signature shape language.",
+      "Use serif display type mainly for landing and editorial surfaces; keep app, dashboard, and docs headings predominantly sans.",
+      "Use motion only when it improves comprehension or brand calm; never use motion as camouflage for weak composition.",
+      "Avoid over-customizing basic shadcn primitives; use wrappers and branded sections for distinctiveness.",
+      "Do not use arbitrary values unless they map to approved brand tokens or parser-safe exceptions.",
+      "The result should feel like one brand across website, apps, docs, and media."
+    ],
+    "implementationBias": {
+      "preferredStack": "Next.js + shadcn/ui + Tailwind CSS",
+      "systemLayer": [
+        "Button",
+        "Input",
+        "Textarea",
+        "Select",
+        "Tabs",
+        "Accordion",
+        "Dialog",
+        "Sheet",
+        "Tooltip",
+        "Toast"
+      ],
+      "brandLayer": [
+        "Section wrappers",
+        "Hero shells",
+        "Editorial cards",
+        "Proof strips",
+        "Newsletter CTA blocks",
+        "Metric cards",
+        "Docs callouts"
+      ]
+    },
+    "motionBias": {
+      "defaultLevel": "css-only",
+      "allowedEscalation": [
+        "subtle reveal motion",
+        "hover emphasis",
+        "narrative motion only when product understanding depends on it"
+      ],
+      "forbiddenWithoutJustification": [
+        "framer-motion everywhere",
+        "multi-layer parallax",
+        "long animated delays",
+        "competing hero animations"
+      ]
+    }
+  },
+  "promptAssembly": {
+    "variableNotation": "{{variable}}",
+    "modes": [
+      "strategy",
+      "design-grammar",
+      "component-plan",
+      "nextjs-shadcn-implementation",
+      "parser-friendly-tailwind-prototype",
+      "audit"
+    ],
+    "defaultPhaseOrder": [
+      "strategy",
+      "design-grammar",
+      "component-plan",
+      "implementation",
+      "audit"
+    ]
+  },
+  "surfaces": {
+    "landing": {
+      "goal": "Explain the product, establish trust, and drive a single primary CTA.",
+      "requiredInputs": [
+        "productName",
+        "productCategory",
+        "audience",
+        "primaryGoal",
+        "primaryCTA",
+        "valueProposition",
+        "proofSignals"
+      ],
+      "optionalInputs": [
+        "secondaryCTA",
+        "brandAdjectives",
+        "competitiveAngle",
+        "heroAssetType",
+        "pricingModel"
+      ],
+      "sectionExpectations": [
+        "hero",
+        "proof-strip",
+        "value narrative",
+        "feature grid or benefit sequence",
+        "product frame or screenshot section",
+        "faq or objection handling",
+        "final cta"
+      ],
+      "surfaceOverrides": [
+        "Use serif display for the main hero heading if it supports the product tone.",
+        "Make the hero feel premium and calm rather than loud or novelty-driven.",
+        "Use one signature composition move, not six competing ones."
+      ],
+      "deliverables": [
+        "section architecture",
+        "visual grammar",
+        "system mapping: standard shadcn vs wrappers vs custom sections",
+        "final implementation or prototype"
+      ],
+      "promptTemplate": [
+        "Design a landing page for {{productName}} in the Tech Brand OS style.",
+        "Product category: {{productCategory}}.",
+        "Audience: {{audience}}.",
+        "Primary goal: {{primaryGoal}}.",
+        "Primary CTA: {{primaryCTA}}.",
+        "Value proposition: {{valueProposition}}.",
+        "Proof signals: {{proofSignals}}.",
+        "Optional brand adjectives: {{brandAdjectives}}.",
+        "Use Next.js + shadcn/ui + Tailwind as the implementation target unless another mode is requested.",
+        "Keep shadcn as the system layer and create branded section wrappers for identity.",
+        "Use a calm, intelligent, warm technology aesthetic with soft neutral surfaces, charcoal text, restrained accent usage, large rounded shells, and pill CTA language.",
+        "Avoid generic startup gradients, neon colors, and excessive glass effects.",
+        "Deliver in this order:",
+        "1. Product and audience reading.",
+        "2. Section architecture with reason for each section.",
+        "3. Visual grammar for type, spacing, surfaces, and motion.",
+        "4. Component and wrapper plan.",
+        "5. Final implementation or parser-friendly Tailwind prototype."
+      ],
+      "auditChecklist": [
+        "Does the hero communicate one core idea in under 5 seconds?",
+        "Is there only one dominant CTA?",
+        "Would the page still feel premium without animation?",
+        "Does the page feel like Tech Brand OS rather than generic SaaS?"
+      ]
+    },
+    "blog": {
+      "goal": "Create an editorial content system that feels branded, readable, and reusable across home, category, and article views.",
+      "requiredInputs": [
+        "publicationName",
+        "editorialFocus",
+        "readerAudience",
+        "contentPillars",
+        "primaryEngagementGoal"
+      ],
+      "optionalInputs": [
+        "newsletterCTA",
+        "featuredArticleFormat",
+        "categorySystem",
+        "authorStrategy"
+      ],
+      "sectionExpectations": [
+        "blog home hero",
+        "intro statement",
+        "featured article grid",
+        "category/archive pattern",
+        "article detail layout",
+        "newsletter cta",
+        "author or credibility section"
+      ],
+      "surfaceOverrides": [
+        "Lean harder into editorial warmth and reading comfort.",
+        "Use serif display type for hero and article headings.",
+        "Use signature article cards rather than default generic cards."
+      ],
+      "deliverables": [
+        "content information architecture",
+        "category and tag strategy",
+        "blog home layout",
+        "article page layout",
+        "component pattern list",
+        "implementation plan"
+      ],
+      "promptTemplate": [
+        "Design a blog or media experience for {{publicationName}} in the Tech Brand OS style.",
+        "Editorial focus: {{editorialFocus}}.",
+        "Reader audience: {{readerAudience}}.",
+        "Content pillars: {{contentPillars}}.",
+        "Primary engagement goal: {{primaryEngagementGoal}}.",
+        "Optional newsletter CTA: {{newsletterCTA}}.",
+        "Build a coherent system for blog home, category/archive views, and article detail pages.",
+        "Keep the brand feeling calm, credible, and human, with strong readability and a recognizable editorial card pattern.",
+        "Use warm neutral surfaces, charcoal type, restrained accent, large rounded shells, and low-noise motion.",
+        "Deliver:",
+        "1. Editorial system strategy.",
+        "2. Page archetypes and content slots.",
+        "3. Signature components and tag strategy.",
+        "4. Final implementation or parser-friendly Tailwind prototype."
+      ],
+      "auditChecklist": [
+        "Are article cards distinctive and reusable?",
+        "Does the article page privilege reading comfort over decoration?",
+        "Do category colors or tags feel systematic rather than arbitrary?",
+        "Does the blog feel like the same brand as the landing and app?"
+      ]
+    },
+    "cms": {
+      "goal": "Support safe content operations with a branded but practical interface.",
+      "requiredInputs": [
+        "productName",
+        "contentTypes",
+        "userRoles",
+        "primaryTasks"
+      ],
+      "optionalInputs": [
+        "approvalWorkflow",
+        "localizationNeeds",
+        "mediaManagementNeeds",
+        "statusModel"
+      ],
+      "sectionExpectations": [
+        "top navigation or app shell",
+        "resource list view",
+        "filters/search",
+        "detail or editor panel",
+        "status and publishing controls",
+        "activity/help side panel"
+      ],
+      "surfaceOverrides": [
+        "Switch from serif display to sans headings for operational clarity.",
+        "Reduce decorative expressiveness and increase workflow predictability.",
+        "Preserve brand warmth in surfaces and spacing, not in unnecessary ornament."
+      ],
+      "deliverables": [
+        "workflow model",
+        "screen architecture",
+        "component strategy",
+        "state model",
+        "implementation plan"
+      ],
+      "promptTemplate": [
+        "Design a CMS or content operations interface for {{productName}} using Tech Brand OS.",
+        "Content types: {{contentTypes}}.",
+        "User roles: {{userRoles}}.",
+        "Primary tasks: {{primaryTasks}}.",
+        "Optional approval workflow: {{approvalWorkflow}}.",
+        "Use the Tech Brand OS to make the CMS feel calm, trustworthy, and precise rather than bland or corporate.",
+        "Keep shadcn primitives standard where possible and use branded wrappers for layout shells, status panels, and editorial previews.",
+        "Favor safe CRUD patterns, explicit status feedback, and restrained depth.",
+        "Deliver:",
+        "1. Workflow and IA.",
+        "2. Screen zones and editing patterns.",
+        "3. Component mapping.",
+        "4. Final implementation or parser-friendly prototype."
+      ],
+      "auditChecklist": [
+        "Can users safely understand edit, save, publish, and destructive actions?",
+        "Does the CMS feel branded without sacrificing operational clarity?",
+        "Are forms and tables more important than decoration?",
+        "Do status colors remain semantic and restrained?"
+      ]
+    },
+    "dashboard": {
+      "goal": "Make data, anomalies, and actions easy to scan without losing brand coherence.",
+      "requiredInputs": [
+        "productName",
+        "dashboardAudience",
+        "primaryMetrics",
+        "decisionsSupported"
+      ],
+      "optionalInputs": [
+        "chartTypes",
+        "alertingModel",
+        "dataDensityPreference",
+        "timeFilters"
+      ],
+      "sectionExpectations": [
+        "dashboard header",
+        "filters/date controls",
+        "metric summary cards",
+        "charts or trend panels",
+        "table or list view",
+        "alerts or insight panel",
+        "quick actions"
+      ],
+      "surfaceOverrides": [
+        "Use sans headings and more compact density.",
+        "Keep brand warmth in tone, spacing, and surfaces, not in editorial flourishes.",
+        "Use category or chart accents with discipline."
+      ],
+      "deliverables": [
+        "information priority map",
+        "dashboard panel architecture",
+        "metric hierarchy",
+        "component and chart strategy",
+        "implementation plan"
+      ],
+      "promptTemplate": [
+        "Design a dashboard for {{productName}} using Tech Brand OS.",
+        "Audience: {{dashboardAudience}}.",
+        "Primary metrics: {{primaryMetrics}}.",
+        "Decisions supported: {{decisionsSupported}}.",
+        "Optional chart types: {{chartTypes}}.",
+        "The result should feel like the same brand as the landing and blog, but optimized for scanability, control, and decision-making.",
+        "Use low-noise cards, restrained accents, strong number hierarchy, and compact but breathable spacing.",
+        "Do not over-style charts or introduce generic glassmorphism.",
+        "Deliver:",
+        "1. information hierarchy",
+        "2. panel and grid layout",
+        "3. metric, chart, and table patterns",
+        "4. final implementation or parser-friendly prototype"
+      ],
+      "auditChecklist": [
+        "Can the user spot anomalies quickly?",
+        "Is the number hierarchy stronger than the surface styling?",
+        "Do charts use semantic color roles rather than random hues?",
+        "Does the dashboard still belong to the same brand family?"
+      ]
+    },
+    "docs": {
+      "goal": "Present technical documentation with clarity, navigability, and trustworthy brand tone.",
+      "requiredInputs": [
+        "productName",
+        "docAudience",
+        "docTypes",
+        "navigationDepth"
+      ],
+      "optionalInputs": [
+        "apiReferenceStyle",
+        "codeLanguageBias",
+        "searchModel",
+        "calloutTypes"
+      ],
+      "sectionExpectations": [
+        "docs home or intro hero",
+        "sidebar or section nav",
+        "article shell",
+        "code blocks and copy interactions",
+        "callouts",
+        "toc or anchors",
+        "related links or next steps"
+      ],
+      "surfaceOverrides": [
+        "Use sans headings, body sans, and mono for code.",
+        "Favor reading comfort and navigation over expressive marketing flourishes.",
+        "Keep the warm neutral palette and rounded shells, but reduce editorial drama."
+      ],
+      "deliverables": [
+        "docs information architecture",
+        "navigation model",
+        "article shell and code treatment",
+        "component strategy",
+        "implementation plan"
+      ],
+      "promptTemplate": [
+        "Design a documentation experience for {{productName}} using Tech Brand OS.",
+        "Audience: {{docAudience}}.",
+        "Doc types: {{docTypes}}.",
+        "Navigation depth: {{navigationDepth}}.",
+        "Optional API reference style: {{apiReferenceStyle}}.",
+        "Make the documentation feel technical, calm, and trustworthy, using Tech Brand OS tokens, surfaces, and spacing while simplifying typography toward sans + mono.",
+        "Prioritize navigation, article readability, code clarity, and copyable patterns.",
+        "Deliver:",
+        "1. docs IA and navigation model",
+        "2. page shell and article grammar",
+        "3. component patterns for code, callouts, tables, and links",
+        "4. final implementation or parser-friendly prototype"
+      ],
+      "auditChecklist": [
+        "Can developers scan the docs quickly?",
+        "Are code blocks and callouts clearer than the surrounding decoration?",
+        "Does the docs surface still inherit the same brand DNA?",
+        "Would the layout work for long-form and reference pages equally well?"
+      ]
+    }
+  },
+  "auditPromptAddendum": [
+    "Identify any areas that still look generic or template-like.",
+    "Identify any places where the brand layer is too heavy for the surface.",
+    "List what should remain standard shadcn, what should be wrapped, and what should be a custom block.",
+    "List any missing tokens, variants, or section recipes needed to keep the implementation coherent.",
+    "If motion is used, explain why it is necessary and what happens under reduced motion."
+  ]
+}
