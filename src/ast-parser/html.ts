@@ -1,5 +1,6 @@
 import { parse as parseHtml, type HTMLElement, type Node, NodeType } from 'node-html-parser';
 import { classifyClassToken } from './classifier.js';
+import { normalizeAstNodes } from './normalize.js';
 import { AstParseReport, ParsedAstNode, ParsedStyleAttribute, ParserContract } from './types.js';
 
 function parseStyleAttribute(
@@ -39,7 +40,7 @@ function parseStyleAttribute(
   return parsed;
 }
 
-function convertNode(node: Node, contract: ParserContract): ParsedAstNode | null {
+function convertNode(node: Node, contract: ParserContract, path: string): ParsedAstNode | null {
   if (node.nodeType === NodeType.TEXT_NODE) {
     const text = node.rawText;
     if (!text.trim()) {
@@ -47,6 +48,7 @@ function convertNode(node: Node, contract: ParserContract): ParsedAstNode | null
     }
     return {
       type: 'text',
+      path,
       text,
     };
   }
@@ -63,6 +65,7 @@ function convertNode(node: Node, contract: ParserContract): ParsedAstNode | null
 
   const parsedNode: ParsedAstNode = {
     type: 'element',
+    path,
     tagName: element.tagName.toLowerCase(),
     attributes: { ...element.attributes },
     styles: parseStyleAttribute(element.getAttribute('style') ?? undefined, contract),
@@ -72,7 +75,7 @@ function convertNode(node: Node, contract: ParserContract): ParsedAstNode | null
   };
 
   parsedNode.children = element.childNodes
-    .map((child) => convertNode(child, contract))
+    .map((child, index) => convertNode(child, contract, `${path}.${index}`))
     .filter((child): child is ParsedAstNode => child !== null);
 
   return parsedNode;
@@ -86,11 +89,21 @@ function summarizeNodes(nodes: ParsedAstNode[]): AstParseReport['summary'] {
   let decorativeCount = 0;
   let unknownCount = 0;
   let styleAttributeCount = 0;
+  let normalizedNodeCount = 0;
+  let normalizedMatchCount = 0;
+  const matchedKinds: Record<string, number> = {};
 
   const visit = (node: ParsedAstNode) => {
     nodeCount += 1;
     classCount += node.classifiedClasses?.length ?? 0;
     styleAttributeCount += node.styles?.length ?? 0;
+    if ((node.normalized?.length ?? 0) > 0) {
+      normalizedNodeCount += 1;
+      normalizedMatchCount += node.normalized?.length ?? 0;
+      for (const match of node.normalized ?? []) {
+        matchedKinds[match.kind] = (matchedKinds[match.kind] ?? 0) + 1;
+      }
+    }
 
     for (const classified of node.classifiedClasses ?? []) {
       if (classified.bucket === 'structural') structuralCount += 1;
@@ -114,6 +127,9 @@ function summarizeNodes(nodes: ParsedAstNode[]): AstParseReport['summary'] {
     decorativeCount,
     unknownCount,
     styleAttributeCount,
+    normalizedNodeCount,
+    normalizedMatchCount,
+    matchedKinds,
   };
 }
 
@@ -123,12 +139,15 @@ export function buildAstParseReport(sourcePath: string, contractPath: string, ht
   });
 
   const nodes = root.childNodes
-    .map((child) => convertNode(child, contract))
+    .map((child, index) => convertNode(child, contract, `${index}`))
     .filter((child): child is ParsedAstNode => child !== null);
+
+  normalizeAstNodes(nodes, contract);
 
   return {
     sourcePath,
     contractPath,
+    brandId: contract.brandId,
     nodes,
     summary: summarizeNodes(nodes),
   };

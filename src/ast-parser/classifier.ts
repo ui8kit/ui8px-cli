@@ -1,6 +1,6 @@
 import { ClassifiedClassToken, ParserContract, ParserContractClassBucket } from './types.js';
 
-const FALLBACK_STRUCTURAL_EXACT = new Set(['border', 'border-t', 'border-b', 'border-l', 'border-r', 'border-x', 'border-y', 'transform']);
+const FALLBACK_STRUCTURAL_EXACT = new Set(['border', 'border-0', 'border-2', 'border-4', 'border-t', 'border-b', 'border-l', 'border-r', 'border-x', 'border-y', 'transform']);
 const FALLBACK_SEMANTIC_EXACT = new Set(['outline-none', 'transition', 'transition-all', 'transition-colors', 'transition-transform', 'antialiased', 'bg-transparent']);
 const FALLBACK_SEMANTIC_PREFIXES = ['ring-', 'ring-offset-', 'outline-', 'duration-', 'ease-', 'font-', 'text-', 'rounded-', 'shadow-'];
 const FALLBACK_DECORATIVE_EXACT = new Set(['bg-black']);

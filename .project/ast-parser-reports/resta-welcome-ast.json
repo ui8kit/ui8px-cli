@@ -1,9 +1,11 @@
 {
   "sourcePath": "E:\\_@Bun\\@ui8kit-8px-cli\\.project\\RestA Brand OS\\reference\\RoseUI-Welcome-Restaurant.html",
   "contractPath": "E:\\_@Bun\\@ui8kit-8px-cli\\.project\\RestA Brand OS\\resta-brand-os-parser-contract.json",
+  "brandId": "resta-brand-os",
   "nodes": [
     {
       "type": "element",
+      "path": "0",
       "tagName": "html",
       "attributes": {},
       "styles": [],
@@ -12,6 +14,7 @@
       "children": [
         {
           "type": "element",
+          "path": "0.0",
           "tagName": "head",
           "attributes": {},
           "styles": [],
@@ -20,6 +23,7 @@
           "children": [
             {
               "type": "element",
+              "path": "0.0.0",
               "tagName": "base",
               "attributes": {
                 "href": "https://roseui.tw/components/intro/"
@@ -31,6 +35,7 @@
             },
             {
               "type": "element",
+              "path": "0.0.2",
               "tagName": "meta",
               "attributes": {
                 "charset": "UTF-8"
@@ -42,6 +47,7 @@
             },
             {
               "type": "element",
+              "path": "0.0.3",
               "tagName": "meta",
               "attributes": {
                 "name": "viewport",
@@ -54,6 +60,7 @@
             },
             {
               "type": "element",
+              "path": "0.0.4",
               "tagName": "title",
               "attributes": {},
               "styles": [],
@@ -62,12 +69,14 @@
               "children": [
                 {
                   "type": "text",
+                  "path": "0.0.4.0",
                   "text": "RoseUI Intro Components"
                 }
               ]
             },
             {
               "type": "element",
+              "path": "0.0.5",
               "tagName": "script",
               "attributes": {
                 "src": "https://cdn.tailwindcss.com"
@@ -79,6 +88,7 @@
             },
             {
               "type": "element",
+              "path": "0.0.6",
               "tagName": "script",
               "attributes": {
                 "src": "https://unpkg.com/lucide@latest"
@@ -90,6 +100,7 @@
             },
             {
               "type": "element",
+              "path": "0.0.7",
               "tagName": "link",
               "attributes": {
                 "href": "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&display=swap",
@@ -102,6 +113,7 @@
             },
             {
               "type": "element",
+              "path": "0.0.8",
               "tagName": "script",
               "attributes": {},
               "styles": [],
@@ -110,12 +122,14 @@
               "children": [
                 {
                   "type": "text",
+                  "path": "0.0.8.0",
                   "text": "\ntailwind.config = {\n  darkMode: 'class',\n  theme: {\n    extend: {\n      fontFamily: {\n        sans: ['Nunito', 'sans-serif'],\n        pretty: ['Pacifico', 'cursive'],\n      },\n      colors: {\n        rose: {\n          50: '#fff1f2',\n          100: '#ffe4e6',\n          200: '#fecdd3',\n          300: '#fda4af',\n          400: '#fb7185',\n          500: '#f43f5e',\n          600: '#e11d48',\n          700: '#be123c',\n          800: '#9f1239',\n          900: '#881337'\n        },\n        zinc: {\n          50: '#fafafa',\n          100: '#f4f4f5',\n          200: '#e4e4e7',\n          300: '#d4d4d8',\n          400: '#a1a1aa',\n          500: '#71717a',\n          600: '#52525b',\n          700: '#3f3f46',\n          800: '#27272a',\n          900: '#18181b'\n        }\n      },\n      borderRadius: {\n        'sm': '0.1875rem',\n        DEFAULT: '0.375rem',\n        'md': '0.5625rem',\n        'lg': '0.75rem',\n        'xl': '1.125rem',\n        '2xl': '1.5rem',\n        '3xl': '2.25rem',\n      },\n      boxShadow: {\n        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',\n        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',\n        md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',\n        lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',\n        xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',\n        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',\n        inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',\n        none: 'none',\n      }\n    }\n  }\n}\n"
                 }
               ]
             },
             {
               "type": "element",
+              "path": "0.0.9",
               "tagName": "script",
               "attributes": {
                 "src": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
@@ -127,6 +141,7 @@
             },
             {
               "type": "element",
+              "path": "0.0.10",
               "tagName": "link",
               "attributes": {
                 "rel": "stylesheet",
@@ -141,6 +156,7 @@
         },
         {
           "type": "element",
+          "path": "0.1",
           "tagName": "body",
           "attributes": {
             "class": "bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50 transition-colors duration-300"
@@ -217,6 +233,7 @@
           "children": [
             {
               "type": "element",
+              "path": "0.1.1",
               "tagName": "header",
               "attributes": {
                 "class": "bg-transparent absolute top-0 left-0 w-full z-10"
@@ -289,6 +306,7 @@
               "children": [
                 {
                   "type": "element",
+                  "path": "0.1.1.1",
                   "tagName": "nav",
                   "attributes": {
                     "class": "container mx-auto px-4 py-4 flex items-center justify-between"
@@ -371,6 +389,7 @@
                   "children": [
                     {
                       "type": "element",
+                      "path": "0.1.1.1.1",
                       "tagName": "div",
                       "attributes": {
                         "class": "flex-shrink-0 flex items-center"
@@ -413,6 +432,7 @@
                       "children": [
                         {
                           "type": "element",
+                          "path": "0.1.1.1.1.1",
                           "tagName": "i",
                           "attributes": {
                             "data-lucide": "utensils",
@@ -469,6 +489,7 @@
                         },
                         {
                           "type": "element",
+                          "path": "0.1.1.1.1.3",
                           "tagName": "span",
                           "attributes": {
                             "class": "ml-2 text-2xl font-bold text-rose-600 dark:text-zinc-300"
@@ -533,6 +554,7 @@
                           "children": [
                             {
                               "type": "text",
+                              "path": "0.1.1.1.1.3.0",
                               "text": "RoseUI"
                             }
                           ]
@@ -541,6 +563,7 @@
                     },
                     {
                       "type": "element",
+                      "path": "0.1.1.1.3",
                       "tagName": "div",
                       "attributes": {
                         "class": "hidden md:flex items-center space-x-4"
@@ -595,6 +618,7 @@
                       "children": [
                         {
                           "type": "element",
+                          "path": "0.1.1.1.3.1",
                           "tagName": "a",
                           "attributes": {
                             "href": "#",
@@ -675,12 +699,14 @@
                           "children": [
                             {
                               "type": "text",
+                              "path": "0.1.1.1.3.1.0",
                               "text": "Docs"
                             }
                           ]
                         },
                         {
                           "type": "element",
+                          "path": "0.1.1.1.3.3",
                           "tagName": "a",
                           "attributes": {
                             "href": "#",
@@ -761,12 +787,14 @@
                           "children": [
                             {
                               "type": "text",
+                              "path": "0.1.1.1.3.3.0",
                               "text": "Components"
                             }
                           ]
                         },
                         {
                           "type": "element",
+                          "path": "0.1.1.1.3.5",
                           "tagName": "button",
                           "attributes": {
                             "class": "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 dark:text-zinc-900 dark:bg-zinc-300 dark:hover:bg-zinc-200"
@@ -1016,12 +1044,35 @@
                           "children": [
                             {
                               "type": "text",
+                              "path": "0.1.1.1.3.5.0",
                               "text": "Get Started"
+                            }
+                          ],
+                          "normalized": [
+                            {
+                              "kind": "primary-cta-button",
+                              "brandId": "resta-brand-os",
+                              "matchedBy": "resta-primary-cta-button",
+                              "confidence": "high",
+                              "ui8kitCandidates": [
+                                {
+                                  "component": "Button",
+                                  "role": "primary-cta",
+                                  "props": {
+                                    "variant": "primary",
+                                    "size": "md"
+                                  },
+                                  "notes": [
+                                    "Derive size from spacing and text scale if needed during UI8Kit mapping."
+                                  ]
+                                }
+                              ]
                             }
                           ]
                         },
                         {
                           "type": "element",
+                          "path": "0.1.1.1.3.7",
                           "tagName": "button",
                           "attributes": {
                             "id": "darkModeToggle",
@@ -1122,6 +1173,7 @@
                           "children": [
                             {
                               "type": "element",
+                              "path": "0.1.1.1.3.7.1",
                               "tagName": "i",
                               "attributes": {
                                 "data-lucide": "sun",
@@ -1178,6 +1230,7 @@
                             },
                             {
                               "type": "element",
+                              "path": "0.1.1.1.3.7.3",
                               "tagName": "i",
                               "attributes": {
                                 "data-lucide": "moon",
@@ -1238,6 +1291,7 @@
                     },
                     {
                       "type": "element",
+                      "path": "0.1.1.1.5",
                       "tagName": "button",
                       "attributes": {
                         "id": "menuToggle",
@@ -1382,6 +1436,7 @@
                       "children": [
                         {
                           "type": "element",
+                          "path": "0.1.1.1.5.1",
                           "tagName": "i",
                           "attributes": {
                             "data-lucide": "menu",
@@ -1422,6 +1477,7 @@
             },
             {
               "type": "element",
+              "path": "0.1.3",
               "tagName": "section",
               "attributes": {
                 "class": "relative h-[75vh] w-full bg-cover bg-no-repeat",
@@ -1492,6 +1548,7 @@
               "children": [
                 {
                   "type": "element",
+                  "path": "0.1.3.1",
                   "tagName": "div",
                   "attributes": {
                     "class": "absolute inset-0 h-full w-full bg-gray-900/70"
@@ -1555,6 +1612,7 @@
                 },
                 {
                   "type": "element",
+                  "path": "0.1.3.3",
                   "tagName": "div",
                   "attributes": {
                     "class": "grid h-full px-8"
@@ -1597,6 +1655,7 @@
                   "children": [
                     {
                       "type": "element",
+                      "path": "0.1.3.3.1",
                       "tagName": "div",
                       "attributes": {
                         "class": "container relative my-auto mx-auto grid place-items-center text-center"
@@ -1679,6 +1738,7 @@
                       "children": [
                         {
                           "type": "element",
+                          "path": "0.1.3.3.1.1",
                           "tagName": "h1",
                           "attributes": {
                             "class": "block font-pretty text-white dark:text-zinc-300 text-3xl !leading-snug md:max-w-full lg:max-w-3xl lg:text-5xl"
@@ -1789,12 +1849,14 @@
                           "children": [
                             {
                               "type": "text",
+                              "path": "0.1.3.3.1.1.0",
                               "text": "Welcome to Our Restaurant"
                             }
                           ]
                         },
                         {
                           "type": "element",
+                          "path": "0.1.3.3.1.3",
                           "tagName": "p",
                           "attributes": {
                             "class": "block antialiased font-sans text-xl font-normal leading-relaxed text-white dark:text-zinc-300 mt-2 mb-14 w-full max-w-3xl lg:mb-10"
@@ -1941,12 +2003,14 @@
                           "children": [
                             {
                               "type": "text",
+                              "path": "0.1.3.3.1.3.0",
                               "text": "Experience the finest dining in a cozy and elegant atmosphere."
                             }
                           ]
                         },
                         {
                           "type": "element",
+                          "path": "0.1.3.3.1.5",
                           "tagName": "div",
                           "attributes": {},
                           "styles": [],
@@ -1955,6 +2019,7 @@
                           "children": [
                             {
                               "type": "element",
+                              "path": "0.1.3.3.1.5.1",
                               "tagName": "button",
                               "attributes": {
                                 "class": "inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 dark:text-zinc-900 dark:bg-zinc-300 dark:hover:bg-zinc-200",
@@ -2205,7 +2270,29 @@
                               "children": [
                                 {
                                   "type": "text",
+                                  "path": "0.1.3.3.1.5.1.0",
                                   "text": "Contact us"
+                                }
+                              ],
+                              "normalized": [
+                                {
+                                  "kind": "primary-cta-button",
+                                  "brandId": "resta-brand-os",
+                                  "matchedBy": "resta-primary-cta-button",
+                                  "confidence": "high",
+                                  "ui8kitCandidates": [
+                                    {
+                                      "component": "Button",
+                                      "role": "primary-cta",
+                                      "props": {
+                                        "variant": "primary",
+                                        "size": "md"
+                                      },
+                                      "notes": [
+                                        "Derive size from spacing and text scale if needed during UI8Kit mapping."
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -2215,10 +2302,67 @@
                     }
                   ]
                 }
+              ],
+              "normalized": [
+                {
+                  "kind": "hero-photo-overlay",
+                  "brandId": "resta-brand-os",
+                  "matchedBy": "resta-hero-photo-overlay",
+                  "confidence": "high",
+                  "ui8kitCandidates": [
+                    {
+                      "component": "Block",
+                      "role": "hero-shell",
+                      "props": {
+                        "component": "section",
+                        "relative": true,
+                        "dataClass": "hero-section"
+                      }
+                    },
+                    {
+                      "component": "Box",
+                      "role": "hero-overlay",
+                      "props": {
+                        "absolute": true,
+                        "inset": "0",
+                        "dataClass": "hero-overlay"
+                      }
+                    },
+                    {
+                      "component": "Container",
+                      "role": "hero-content",
+                      "props": {
+                        "max": "w-7xl",
+                        "dataClass": "hero-content"
+                      }
+                    },
+                    {
+                      "component": "Title",
+                      "role": "hero-title",
+                      "props": {
+                        "order": 1,
+                        "fontFamily": "display",
+                        "textColor": "primary-foreground"
+                      }
+                    },
+                    {
+                      "component": "Button",
+                      "role": "hero-primary-cta",
+                      "props": {
+                        "variant": "primary",
+                        "size": "lg"
+                      }
+                    }
+                  ],
+                  "notes": [
+                    "Background image should be preserved as media metadata or mapped into a hero image slot."
+                  ]
+                }
               ]
             },
             {
               "type": "element",
+              "path": "0.1.5",
               "tagName": "section",
               "attributes": {
                 "class": "py-16 bg-zinc-100 dark:bg-zinc-800"
@@ -2263,6 +2407,7 @@
               "children": [
                 {
                   "type": "element",
+                  "path": "0.1.5.1",
                   "tagName": "div",
                   "attributes": {
                     "class": "container mx-auto px-4 max-w-5xl"
@@ -2315,6 +2460,7 @@
                   "children": [
                     {
                       "type": "element",
+                      "path": "0.1.5.1.1",
                       "tagName": "div",
                       "attributes": {
                         "class": "grid md:grid-cols-2 gap-16"
@@ -2359,6 +2505,7 @@
                       "children": [
                         {
                           "type": "element",
+                          "path": "0.1.5.1.1.1",
                           "tagName": "div",
                           "attributes": {},
                           "styles": [],
@@ -2367,6 +2514,7 @@
                           "children": [
                             {
                               "type": "element",
+                              "path": "0.1.5.1.1.1.1",
                               "tagName": "h2",
                               "attributes": {
                                 "class": "text-3xl font-bold mb-4 text-zinc-800 dark:text-zinc-200"
@@ -2431,12 +2579,14 @@
                               "children": [
                                 {
                                   "type": "text",
+                                  "path": "0.1.5.1.1.1.1.0",
                                   "text": "Discover Our Culinary Haven"
                                 }
                               ]
                             },
                             {
                               "type": "element",
+                              "path": "0.1.5.1.1.1.3",
                               "tagName": "p",
                               "attributes": {
                                 "class": "text-xl mb-8 text-zinc-600 dark:text-zinc-400"
@@ -2491,12 +2641,14 @@
                               "children": [
                                 {
                                   "type": "text",
+                                  "path": "0.1.5.1.1.1.3.0",
                                   "text": "We invite you to plunge into the unique atmosphere of coziness, and a sense of celebration every day"
                                 }
                               ]
                             },
                             {
                               "type": "element",
+                              "path": "0.1.5.1.1.1.5",
                               "tagName": "div",
                               "attributes": {
                                 "class": "space-y-8"
@@ -2519,6 +2671,7 @@
                               "children": [
                                 {
                                   "type": "element",
+                                  "path": "0.1.5.1.1.1.5.1",
                                   "tagName": "div",
                                   "attributes": {},
                                   "styles": [],
@@ -2527,6 +2680,7 @@
                                   "children": [
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.1.5.1.1",
                                       "tagName": "img",
                                       "attributes": {
                                         "src": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -2582,6 +2736,7 @@
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.1.5.1.3",
                                       "tagName": "h3",
                                       "attributes": {
                                         "class": "text-xl font-semibold mb-2 text-zinc-700 dark:text-zinc-300"
@@ -2646,12 +2801,14 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.1.5.1.3.0",
                                           "text": "Elegant Ambiance"
                                         }
                                       ]
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.1.5.1.5",
                                       "tagName": "p",
                                       "attributes": {
                                         "class": "text-zinc-600 dark:text-zinc-400"
@@ -2686,6 +2843,7 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.1.5.1.5.0",
                                           "text": "Step into a world of refined elegance, where every detail is crafted to enhance your dining experience. Our restaurant's ambiance combines modern sophistication with warm, inviting touches, creating the perfect backdrop for memorable meals and special occasions."
                                         }
                                       ]
@@ -2694,6 +2852,7 @@
                                 },
                                 {
                                   "type": "element",
+                                  "path": "0.1.5.1.1.1.5.3",
                                   "tagName": "div",
                                   "attributes": {},
                                   "styles": [],
@@ -2702,6 +2861,7 @@
                                   "children": [
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.1.5.3.1",
                                       "tagName": "img",
                                       "attributes": {
                                         "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -2767,6 +2927,7 @@
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.1.5.3.3",
                                       "tagName": "h3",
                                       "attributes": {
                                         "class": "text-xl font-semibold mb-2 text-zinc-700 dark:text-zinc-300"
@@ -2831,12 +2992,14 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.1.5.3.3.0",
                                           "text": "Culinary Artistry"
                                         }
                                       ]
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.1.5.3.5",
                                       "tagName": "p",
                                       "attributes": {
                                         "class": "text-zinc-600 dark:text-zinc-400"
@@ -2871,6 +3034,7 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.1.5.3.5.0",
                                           "text": "Our talented chefs blend creativity with tradition, presenting dishes that are as visually stunning as they are delicious. Each plate is a canvas, showcasing the finest ingredients and innovative techniques that will delight your palate and inspire your senses."
                                         }
                                       ]
@@ -2883,6 +3047,7 @@
                         },
                         {
                           "type": "element",
+                          "path": "0.1.5.1.1.3",
                           "tagName": "div",
                           "attributes": {},
                           "styles": [],
@@ -2891,6 +3056,7 @@
                           "children": [
                             {
                               "type": "element",
+                              "path": "0.1.5.1.1.3.1",
                               "tagName": "div",
                               "attributes": {
                                 "class": "space-y-8"
@@ -2913,6 +3079,7 @@
                               "children": [
                                 {
                                   "type": "element",
+                                  "path": "0.1.5.1.1.3.1.1",
                                   "tagName": "div",
                                   "attributes": {},
                                   "styles": [],
@@ -2921,6 +3088,7 @@
                                   "children": [
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.3.1.1.1",
                                       "tagName": "img",
                                       "attributes": {
                                         "src": "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -2986,6 +3154,7 @@
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.3.1.1.3",
                                       "tagName": "h3",
                                       "attributes": {
                                         "class": "text-xl font-semibold mb-2 text-zinc-700 dark:text-zinc-300"
@@ -3050,12 +3219,14 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.3.1.1.3.0",
                                           "text": "Farm-to-Table Excellence"
                                         }
                                       ]
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.3.1.1.5",
                                       "tagName": "p",
                                       "attributes": {
                                         "class": "text-zinc-600 dark:text-zinc-400"
@@ -3090,6 +3261,7 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.3.1.1.5.0",
                                           "text": "We take pride in sourcing the freshest, locally-grown ingredients to create our seasonal menus. Our commitment to sustainability and supporting local farmers ensures that every bite is not only delicious but also environmentally conscious and community-focused."
                                         }
                                       ]
@@ -3098,6 +3270,7 @@
                                 },
                                 {
                                   "type": "element",
+                                  "path": "0.1.5.1.1.3.1.3",
                                   "tagName": "div",
                                   "attributes": {},
                                   "styles": [],
@@ -3106,6 +3279,7 @@
                                   "children": [
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.3.1.3.1",
                                       "tagName": "img",
                                       "attributes": {
                                         "src": "https://images.unsplash.com/photo-1529604278261-8bfcdb00a7b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -3161,6 +3335,7 @@
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.3.1.3.3",
                                       "tagName": "h3",
                                       "attributes": {
                                         "class": "text-xl font-semibold mb-2 text-zinc-700 dark:text-zinc-300"
@@ -3225,12 +3400,14 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.3.1.3.3.0",
                                           "text": "Exquisite Wine Pairings"
                                         }
                                       ]
                                     },
                                     {
                                       "type": "element",
+                                      "path": "0.1.5.1.1.3.1.3.5",
                                       "tagName": "p",
                                       "attributes": {
                                         "class": "text-zinc-600 dark:text-zinc-400"
@@ -3265,6 +3442,7 @@
                                       "children": [
                                         {
                                           "type": "text",
+                                          "path": "0.1.5.1.1.3.1.3.5.0",
                                           "text": "Complement your meal with selections from our extensive wine cellar. Our sommeliers have curated a diverse collection of vintages from around the world, ensuring the perfect pairing to elevate your dining experience and tantalize your taste buds."
                                         }
                                       ]
@@ -3283,6 +3461,7 @@
             },
             {
               "type": "element",
+              "path": "0.1.7",
               "tagName": "div",
               "attributes": {
                 "id": "offCanvasMenu",
@@ -3356,6 +3535,7 @@
               "children": [
                 {
                   "type": "element",
+                  "path": "0.1.7.1",
                   "tagName": "div",
                   "attributes": {
                     "class": "fixed top-0 right-0 w-64 h-full bg-white dark:bg-zinc-800 shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out"
@@ -3500,6 +3680,7 @@
                   "children": [
                     {
                       "type": "element",
+                      "path": "0.1.7.1.1",
                       "tagName": "div",
                       "attributes": {
                         "class": "p-4"
@@ -3522,6 +3703,7 @@
                       "children": [
                         {
                           "type": "element",
+                          "path": "0.1.7.1.1.1",
                           "tagName": "button",
                           "attributes": {
                             "id": "closeMenu",
@@ -3652,6 +3834,7 @@
                           "children": [
                             {
                               "type": "element",
+                              "path": "0.1.7.1.1.1.1",
                               "tagName": "i",
                               "attributes": {
                                 "data-lucide": "x",
@@ -3688,6 +3871,7 @@
                         },
                         {
                           "type": "element",
+                          "path": "0.1.7.1.1.3",
                           "tagName": "nav",
                           "attributes": {
                             "class": "mt-8 space-y-4"
@@ -3720,6 +3904,7 @@
                           "children": [
                             {
                               "type": "element",
+                              "path": "0.1.7.1.1.3.1",
                               "tagName": "a",
                               "attributes": {
                                 "href": "#",
@@ -3810,12 +3995,14 @@
                               "children": [
                                 {
                                   "type": "text",
+                                  "path": "0.1.7.1.1.3.1.0",
                                   "text": "Docs"
                                 }
                               ]
                             },
                             {
                               "type": "element",
+                              "path": "0.1.7.1.1.3.3",
                               "tagName": "a",
                               "attributes": {
                                 "href": "#",
@@ -3906,12 +4093,14 @@
                               "children": [
                                 {
                                   "type": "text",
+                                  "path": "0.1.7.1.1.3.3.0",
                                   "text": "Components"
                                 }
                               ]
                             },
                             {
                               "type": "element",
+                              "path": "0.1.7.1.1.3.5",
                               "tagName": "button",
                               "attributes": {
                                 "class": "w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 dark:text-zinc-900 dark:bg-zinc-300 dark:hover:bg-zinc-200 mt-4"
@@ -4191,7 +4380,29 @@
                               "children": [
                                 {
                                   "type": "text",
+                                  "path": "0.1.7.1.1.3.5.0",
                                   "text": "Get Started"
+                                }
+                              ],
+                              "normalized": [
+                                {
+                                  "kind": "primary-cta-button",
+                                  "brandId": "resta-brand-os",
+                                  "matchedBy": "resta-primary-cta-button",
+                                  "confidence": "high",
+                                  "ui8kitCandidates": [
+                                    {
+                                      "component": "Button",
+                                      "role": "primary-cta",
+                                      "props": {
+                                        "variant": "primary",
+                                        "size": "md"
+                                      },
+                                      "notes": [
+                                        "Derive size from spacing and text scale if needed during UI8Kit mapping."
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -4205,6 +4416,7 @@
             },
             {
               "type": "element",
+              "path": "0.1.9",
               "tagName": "footer",
               "attributes": {
                 "class": "bg-zinc-800 text-zinc-300 py-8"
@@ -4247,6 +4459,7 @@
               "children": [
                 {
                   "type": "element",
+                  "path": "0.1.9.1",
                   "tagName": "div",
                   "attributes": {
                     "class": "container mx-auto px-4 text-center"
@@ -4299,6 +4512,7 @@
                   "children": [
                     {
                       "type": "element",
+                      "path": "0.1.9.1.1",
                       "tagName": "p",
                       "attributes": {},
                       "styles": [],
@@ -4307,6 +4521,7 @@
                       "children": [
                         {
                           "type": "text",
+                          "path": "0.1.9.1.1.0",
                           "text": "© 2023 RoseUI. All rights reserved."
                         }
                       ]
@@ -4317,6 +4532,7 @@
             },
             {
               "type": "element",
+              "path": "0.1.11",
               "tagName": "script",
               "attributes": {},
               "styles": [],
@@ -4325,6 +4541,7 @@
               "children": [
                 {
                   "type": "text",
+                  "path": "0.1.11.0",
                   "text": "\nlucide.createIcons();\n\nconst darkModeToggle = document.getElementById('darkModeToggle');\nconst html = document.documentElement;\ndarkModeToggle.addEventListener('click', () => {\n  html.classList.toggle('dark');\n});\n\nhljs.highlightAll();\n\nconst menuToggle = document.getElementById('menuToggle');\nconst closeMenu = document.getElementById('closeMenu');\nconst offCanvasMenu = document.getElementById('offCanvasMenu');\nconst menuContent = offCanvasMenu.querySelector('div');\n\nfunction openMenu() {\n  offCanvasMenu.classList.remove('hidden');\n  setTimeout(() => {\n    menuContent.classList.remove('translate-x-full');\n  }, 10);\n}\n\nfunction closeMenuHandler() {\n  menuContent.classList.add('translate-x-full');\n  setTimeout(() => {\n    offCanvasMenu.classList.add('hidden');\n  }, 300);\n}\n\nmenuToggle.addEventListener('click', openMenu);\ncloseMenu.addEventListener('click', closeMenuHandler);\noffCanvasMenu.addEventListener('click', (e) => {\n  if (e.target === offCanvasMenu) {\n    closeMenuHandler();\n  }\n});\n"
                 }
               ]
@@ -4341,6 +4558,12 @@
     "semanticCount": 169,
     "decorativeCount": 3,
     "unknownCount": 0,
-    "styleAttributeCount": 1
+    "styleAttributeCount": 1,
+    "normalizedNodeCount": 4,
+    "normalizedMatchCount": 4,
+    "matchedKinds": {
+      "primary-cta-button": 3,
+      "hero-photo-overlay": 1
+    }
   }
 }

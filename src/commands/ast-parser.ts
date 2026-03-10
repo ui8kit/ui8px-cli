@@ -120,6 +120,11 @@ export async function runAstParser(args: AstParserCliArgs): Promise<number> {
     console.log(`- decorative: ${report.summary.decorativeCount}`);
     console.log(`- unknown: ${report.summary.unknownCount}`);
     console.log(`- style attributes: ${report.summary.styleAttributeCount}`);
+    console.log(`- normalized nodes: ${report.summary.normalizedNodeCount}`);
+    console.log(`- normalized matches: ${report.summary.normalizedMatchCount}`);
+    if (args.verbose) {
+      console.log(`- matched kinds: ${JSON.stringify(report.summary.matchedKinds)}`);
+    }
 
     return report.summary.unknownCount > 0 ? 1 : 0;
   }

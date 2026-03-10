@@ -55,20 +55,41 @@ export interface ClassifiedClassToken {
   matchedRule?: string;
 }
 
+export type Ui8KitCandidatePropValue = string | number | boolean | Array<string | number | boolean>;
+
+export interface Ui8KitCandidate {
+  component: string;
+  role?: string;
+  props?: Record<string, Ui8KitCandidatePropValue>;
+  notes?: string[];
+}
+
+export interface NormalizedNodeMatch {
+  kind: string;
+  brandId?: string;
+  confidence: 'low' | 'medium' | 'high';
+  matchedBy: string;
+  notes?: string[];
+  ui8kitCandidates?: Ui8KitCandidate[];
+}
+
 export interface ParsedAstNode {
   type: 'element' | 'text';
+  path: string;
   tagName?: string;
   text?: string;
   attributes?: Record<string, string>;
   styles?: ParsedStyleAttribute[];
   classes?: string[];
   classifiedClasses?: ClassifiedClassToken[];
+  normalized?: NormalizedNodeMatch[];
   children?: ParsedAstNode[];
 }
 
 export interface AstParseReport {
   sourcePath: string;
   contractPath: string;
+  brandId?: string;
   nodes: ParsedAstNode[];
   summary: {
     nodeCount: number;
@@ -78,6 +99,9 @@ export interface AstParseReport {
     decorativeCount: number;
     unknownCount: number;
     styleAttributeCount: number;
+    normalizedNodeCount: number;
+    normalizedMatchCount: number;
+    matchedKinds: Record<string, number>;
   };
 }
 
