@@ -1,0 +1,36 @@
+{
+  "extends": "./tsconfig.node.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@": ["./src"],
+      "@/components/*": ["./src/components/*"],
+      "@/components": ["./src/components"],
+      "@/ui/*": ["./src/components/ui/*"],
+      "@/ui": ["./src/components/ui"],
+      "@/layouts/*": ["./src/layouts/*"],
+      "@/layouts": ["./src/layouts"],
+      "@/blocks/*": ["./src/blocks/*"],
+      "@/blocks": ["./src/blocks"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/lib": ["./src/lib"],
+      "@/variants/*": ["./src/variants/*"],
+      "@/variants": ["./src/variants"]
+    },
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowJs": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"]
+}

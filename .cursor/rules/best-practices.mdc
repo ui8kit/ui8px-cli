@@ -1,0 +1,497 @@
+---
+alwaysApply: true
+---
+# UI8Kit Development Best Practices (Standalone App)
+
+## Code Standards
+
+### English Only
+All comments, variable names, and documentation must be in English.
+
+### Component Naming
+```tsx
+// ✅ Correct
+export function HeroBlock() { }
+export function FeatureCard() { }
+export function ButtonGroup() { }
+
+// ❌ Wrong
+export function hero() { }
+export function feature_card() { }
+export function BtnGrp() { }
+```
+
+### Props Pattern
+```tsx
+// ✅ Correct - semantic props
+<Block component="section" data-class="hero-section">
+  <Stack gap="6" items="center" py="16">
+    <Title fontSize="4xl" fontWeight="bold">Title</Title>
+  </Stack>
+</Block>
+
+// ❌ Wrong - inline styles, hardcoded classes
+<div className="flex flex-col gap-6">
+  <h1 style={{ fontSize: "48px" }}>Title</h1>
+</div>
+```
+
+### Semantic HTML5 (W3C Valid)
+
+Use semantic tags for valid HTML5 output. `Block` and `Stack` support `component` prop:
+
+```tsx
+// Page sections
+<Block component="section" data-class="hero-section">
+
+// Self-contained cards (testimonial, pricing plan, feature)
+<Stack component="article" data-class="feature-card">
+
+// Layout roles
+<Block component="header">  // site header
+<Block component="nav">     // navigation only (inside header)
+<Block component="main">    // primary content only (not wrapping aside)
+<Block component="footer">  // site footer
+<Block component="aside">   // sidebar
+```
+
+**Header structure**: `<header>` wraps the whole bar; `<nav>` wraps only links. `main` must not wrap `aside`.
+
+### Minimize div nesting
+
+Merge Container + Group/Stack when they serve the same layout layer. Use `component="span"` for inline wrappers inside links.
+
+```tsx
+// ✅ Fewer divs: Container with flex props
+<Container max="w-6xl" flex="" justify="between" items="center" gap="8">
+
+// ✅ Inline wrapper: Group component="span" inside <a>
+<Group component="span" gap="2" items="center">
+
+// ❌ Unnecessary nesting
+<Container><Group justify="between">...</Group></Container>
+```
+
+### data-class Convention
+Every semantic element must have `data-class` for styling:
+```tsx
+// ✅ Correct
+<Block component="section" data-class="hero-section">
+<Stack data-class="hero-content">
+<Title data-class="hero-title">
+<Button data-class="hero-cta">
+
+// ❌ Wrong
+<Block component="section">
+<Stack>
+<Title>
+<Button>
+```
+
+### Data-class Naming Pattern
+```
+[block-name]-[element-type]
+[block-name]-[element-type]-[state]
+
+Examples:
+- hero-section
+- hero-title
+- hero-subtitle
+- hero-content
+- hero-actions
+- hero-cta-primary (button with role)
+- feature-card
+- feature-card-image
+- feature-card-title
+- feature-card-actions
+```
+
+## Props Best Practices
+
+### Spacing
+```tsx
+// ✅ Correct
+<Stack gap="6" p="4" py="16" px="8">
+
+// ❌ Wrong
+<Stack className="gap-6 p-4 py-16 px-8">
+<Stack style={{ gap: "24px", padding: "16px" }}>
+```
+
+### Responsive Design
+```tsx
+// ✅ Correct - use Grid or Stack with adjustments
+<Grid grid="cols-1" gap="4" data-class="card-grid">
+  {/* Grid system handles responsive */}
+</Grid>
+
+// ❌ Wrong - no responsive modifiers in props
+<Stack gap="4 md:gap-6" p="2 md:p-4">
+```
+
+### Typography
+```tsx
+// ✅ Correct - use semantic variants
+<Title fontSize="3xl" fontWeight="bold" textAlign="center" textColor="foreground">
+  Heading
+</Title>
+<Text fontSize="lg" textColor="muted-foreground" lineHeight="relaxed">
+  Paragraph text
+</Text>
+
+// ❌ Wrong - no direct tailwind props for text
+<div className="text-3xl font-bold text-center">
+  Heading
+</div>
+```
+
+### Colors
+```tsx
+// ✅ Correct - semantic tokens
+<Block bg="primary" data-class="hero">
+<Button variant="primary">
+<Badge variant="outline">
+<Text textColor="muted-foreground">
+
+// ❌ Wrong - hardcoded colors
+<Block bg="blue-500">
+<Button className="bg-[#3b82f6]">
+<Text className="text-gray-400">
+```
+
+### Button Variants
+```tsx
+// ✅ Correct - use semantic variants
+<Button variant="primary" size="lg">Primary</Button>
+<Button variant="outline" size="lg">Outline</Button>
+<Button variant="secondary" size="md">Secondary</Button>
+<Button variant="ghost" size="sm">Ghost</Button>
+<Button variant="destructive" size="lg">Delete</Button>
+
+// ❌ Wrong
+<Button className="bg-blue-500">
+<Button className="border border-gray-200">
+```
+
+## Component Architecture
+
+### Prefer Existing Components
+
+Before building custom layouts with `Stack`, `Group`, or primitives, check `src/components/` for existing composite components. Use them instead of reimplementing the same UI.
+
+```tsx
+// ✅ Correct — use Card when you need a card container
+import { Card, CardHeader, CardTitle, CardContent } from '@ui8kit/core';
+<Card data-class="examples-card">
+  <CardHeader>
+    <CardTitle order={4}><Var name="examples.button.title" value={examples?.button?.title} /></CardTitle>
+  </CardHeader>
+  <CardContent gap="2" flex="row" items="center">
+    <Button size="sm">...</Button>
+  </CardContent>
+</Card>
+
+// ❌ Wrong — Stack mimicking Card when Card already exists
+<Stack gap="4" p="4" rounded="lg" bg="card" border="" data-class="examples-card">
+  <Text fontSize="sm" fontWeight="semibold">...</Text>
+  <Group gap="2" items="center">...</Group>
+</Stack>
+```
+
+**Rule:** If a component exists in `src/components/` (e.g. `Card`, `Accordion`, `Sheet`), use it instead of composing `Stack`/`Group` with the same layout. Import via `@ui8kit/core` alias.
+
+### Blocks (Location: `src/blocks/`)
+- Represent full page sections or full page views
+- Wrap sections in `<Block component="section">`
+- Single responsibility principle
+- Export from `src/blocks/index.ts`
+
+```tsx
+// ✅ Correct
+export function HeroBlock() {
+  return (
+    <Block component="section" data-class="hero-section">
+      <Stack gap="6" items="center" py="16">
+        <Title fontSize="4xl" fontWeight="bold" data-class="hero-title">
+          Welcome
+        </Title>
+        <Text fontSize="xl" textColor="muted-foreground" data-class="hero-description">
+          Description
+        </Text>
+        <Group gap="4" data-class="hero-actions">
+          <Button size="lg">Get Started</Button>
+          <Button variant="outline" size="lg">Learn More</Button>
+        </Group>
+      </Stack>
+    </Block>
+  );
+}
+```
+
+### Reusable Patterns
+```tsx
+// ✅ Card Pattern — prefer Card from @ui8kit/core
+<Card data-class="card">
+  <Image src="..." aspect="video" rounded="md" fit="cover" data-class="card-image" />
+  <CardHeader>
+    <CardTitle order={4} data-class="card-title">Title</CardTitle>
+    <CardDescription data-class="card-description">Description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Group gap="2" data-class="card-actions">
+      <Button size="sm">Action</Button>
+      <Badge variant="outline">Tag</Badge>
+    </Group>
+  </CardContent>
+</Card>
+
+// ✅ Feature Grid — prefer Card instead of Stack for card-like items
+<Grid grid="cols-3" gap="6" data-class="features-grid">
+  {features.map(feature => (
+    <Card key={feature.id} data-class="feature-card">
+      <Icon lucideIcon={feature.icon} size="lg" />
+      <CardHeader>
+        <CardTitle order={4}>{feature.title}</CardTitle>
+        <CardDescription>{feature.description}</CardDescription>
+      </CardHeader>
+    </Card>
+  ))}
+</Grid>
+```
+
+## Standalone App Structure
+
+### Directory Roles
+
+```
+src/
+├── components/        ← UI primitives & composites (@ui8kit/core alias)
+├── variants/          ← CVA configs (button, badge, card, typography, etc.)
+├── lib/               ← utility-props, utils
+├── blocks/            ← Page sections (HeroBlock) & page views (*PageView)
+├── layouts/           ← MainLayout, AdminLayout
+├── partials/          ← Header, Footer, Sidebar, ThemeToggle, DomainNavButton
+├── routes/            ← Route components (LandingPage, MenuPage, etc.)
+├── providers/         ← theme, AdminAuthContext
+├── data/              ← context.ts (createContext, fixtures)
+└── css/
+
+fixtures/              ← JSON data (landing, menu, recipes, blog, promotions, admin, shared)
+```
+
+### Where to Put New Code — Decision Tree
+
+| Question | Answer | Location |
+|----------|--------|----------|
+| Is it a layout/content primitive? (Button, Card, Stack, Accordion, Sheet) | Yes | `src/components/` |
+| Is it a CVA variant config? | Yes | `src/variants/` |
+| Is it a page section or full page view? | Yes | `src/blocks/` |
+| Is it a reusable fragment (header, footer, nav)? | Yes | `src/partials/` |
+| Is it a page layout wrapper? | Yes | `src/layouts/` |
+| Is it a route that loads a PageView? | Yes | `src/routes/` |
+| Is it app context or data loading? | Yes | `src/data/` |
+| Is it JSON fixture data? | Yes | `fixtures/` |
+
+### Block Types
+
+| Type | Pattern | Examples |
+|------|---------|----------|
+| Block | Reusable section | `HeroBlock`, `SidebarContent`, `DashSidebar` |
+| PageView | Full page composition | `LandingPageView`, `MenuPageView`, `RecipesPageView`, `AdminDashboardPageView` |
+
+**Rule:** Blocks import from `@ui8kit/core` and `@ui8kit/dsl` (If, Var, Loop). No cross-block imports; use partials for shared fragments.
+
+### Cognitive Load — Keep It Simple
+
+1. **Blocks = composition only.** No business logic. Use `Var`, `If`, `Loop` from `@ui8kit/dsl` for data binding.
+2. **Data flow:** `fixtures/*.json` → `context.ts` → routes → PageView.
+3. **Copy-paste = block + its imports.** When copying a block, you get a self-contained file.
+4. **Don't extract "FeatureCard".** Use `Card` from components. Different block types = same Card, different content.
+
+## Common Props Defaults
+
+| Component | Default Props |
+|-----------|---|
+| `Stack` | `flex="col" gap="4" items="start"` |
+| `Group` | `flex="row" gap="4" items="center"` |
+| `Title` | `fontSize="xl" fontWeight="bold"` |
+| `Text` | `fontSize="base" fontWeight="normal"` |
+| `Grid` | `grid="" gap="4"` |
+| `Button` | `variant="default" size="default"` |
+
+## Anti-Patterns to Avoid
+
+### ❌ Using HTML Elements Directly
+```tsx
+// Wrong
+<div className="flex gap-4">
+<h1>Heading</h1>
+<p>Paragraph</p>
+<span>Label</span>
+
+// Correct
+<Group gap="4">
+<Title>Heading</Title>
+<Text>Paragraph</Text>
+<Box data-class="label">Label</Box>
+```
+
+### ❌ Inline Styles
+```tsx
+// Wrong
+<Box style={{ display: "flex", gap: "24px", padding: "16px" }}>
+
+// Correct
+<Stack gap="6" p="4">
+```
+
+### ❌ Hardcoded Colors
+```tsx
+// Wrong
+<Box bg="blue-500" textColor="white">
+<Button className="bg-[#3b82f6]">
+
+// Correct
+<Box bg="primary" textColor="primary-foreground">
+<Button variant="primary">
+```
+
+### ❌ Mixing Utilities
+```tsx
+// Wrong
+<Stack gap="6" className="gap-4">
+<Title className="text-3xl font-bold">
+
+// Correct
+<Stack gap="6">
+<Title fontSize="3xl" fontWeight="bold">
+```
+
+### ❌ Missing data-class
+```tsx
+// Wrong
+<Block component="section">
+<Box>
+<Stack>
+
+// Correct
+<Block component="section" data-class="hero-section">
+<Box data-class="hero-content">
+<Stack data-class="hero-text">
+```
+
+### ❌ Reimplementing Existing Components
+```tsx
+// Wrong — Stack with card-like props when Card exists in src/components/
+<Stack gap="4" p="4" rounded="lg" bg="card" border="" data-class="examples-card">
+  <Text fontSize="sm" fontWeight="semibold">Title</Text>
+  <Group gap="2">...</Group>
+</Stack>
+
+// Correct — use Card from @ui8kit/core
+<Card data-class="examples-card">
+  <CardHeader>
+    <CardTitle order={4}>Title</CardTitle>
+  </CardHeader>
+  <CardContent>...</CardContent>
+</Card>
+```
+
+## Partials & Layouts
+
+### Partials (`src/partials/`)
+
+Reusable fragments used across layouts and blocks. Must have `data-class` on semantic elements.
+
+```tsx
+// Header, Footer, Sidebar, ThemeToggle, DomainNavButton
+// Import in layouts or blocks; no cross-partial imports
+```
+
+### Layouts (`src/layouts/`)
+
+Page wrappers that compose partials and render `children` (route content). Use `MainLayout` for website pages, `AdminLayout` for admin/dashboard.
+
+```tsx
+// MainLayout: header + main + footer
+// AdminLayout: sidebar + main content area
+```
+
+### Fixtures (`fixtures/`)
+
+JSON data for pages. Wire in `src/data/context.ts`. Use `shared/` for site.json, page.json, navigation.json.
+
+```
+fixtures/
+├── shared/           # site.json, page.json, navigation.json
+├── landing.json
+├── menu.json
+├── recipes.json
+├── blog.json
+├── promotions.json
+└── admin.json
+```
+
+## File Organization
+
+### Block / PageView File Structure
+```
+HeroBlock.tsx  or  MenuPageView.tsx
+├── Imports (@ui8kit/core, @ui8kit/dsl)
+├── Component definition
+├── Return JSX (use Var, If, Loop for data)
+└── Export
+```
+
+### Comments
+```tsx
+// Use for block-level documentation
+export function HeroBlock() {
+  // Use for complex logic only
+  // Explain WHY, not WHAT (code is self-documenting)
+  return (
+    <Block component="section" data-class="hero-section">
+      {/* JSX comments for layout clarity */}
+    </Block>
+  );
+}
+```
+
+## Testing & Validation
+
+### Props Validation
+```bash
+bun run validate    # ui8kit-validate — props + DSL rules
+bun run lint:dsl    # ui8kit-lint-dsl — DSL enforcement for src/
+```
+
+### Common Errors
+```
+Error: gap="5" invalid, closest: "4" or "6"
+→ Fix: Use gap="4" or gap="6"
+
+Error: fontSize="huge" invalid
+→ Fix: Use fontSize="4xl" instead
+
+Error: bg="red" invalid, closest: "destructive"
+→ Fix: Use bg="destructive"
+```
+
+## Performance Tips
+
+1. **Use Grid for large lists** instead of nested Stacks
+2. **Memoize large blocks** if they don't need frequent updates
+3. **Extract repeated patterns** into reusable block components
+4. **Lazy load** heavy image blocks
+5. **Use semantic HTML** for SEO (Block, Title, Text, etc.)
+6. **Semantic tags**: `header`, `nav`, `main`, `footer`, `aside`, `section`, `article` via `component` prop
+
+## When in Doubt
+
+1. **New component?** → `src/components/` (primitives) or `src/partials/` (reusable fragments)
+2. **New block/page?** → `src/blocks/`, export in `index.ts`, add route in `src/routes/`
+3. **Card-like UI?** → Use `Card` from `@ui8kit/core`, don't create FeatureCard/EventCard
+4. Check `src/components/` before building layouts
+5. Use `data-class` for ALL semantic elements
+6. Prefer semantic props over className/style
+7. Keep blocks focused: composition only, no business logic
