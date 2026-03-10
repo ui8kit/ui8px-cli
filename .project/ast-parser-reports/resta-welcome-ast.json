@@ -4551,6 +4551,199 @@
       ]
     }
   ],
+  "ui8kitMappings": [
+    {
+      "kind": "primary-cta-button",
+      "sourcePath": "0.1.1.1.3.5",
+      "sourceTagName": "button",
+      "confidence": "high",
+      "extracted": {
+        "label": "Get Started"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Button",
+        "props": {
+          "variant": "primary",
+          "size": "md",
+          "data-class": "button-primary"
+        },
+        "children": [
+          {
+            "type": "text",
+            "value": "Get Started"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "hero-photo-overlay",
+      "sourcePath": "0.1.3",
+      "sourceTagName": "section",
+      "confidence": "high",
+      "extracted": {
+        "title": "Welcome to Our Restaurant",
+        "description": "Experience the finest dining in a cozy and elegant atmosphere.",
+        "primaryCta": "Contact us",
+        "backgroundImage": "url('https://bucket.material-tailwind.com/magic-ai/810ac5dd2014af28236d97af29d3b25a2211a748968ab0aec22e30eabe24f881.jpg')"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Block",
+        "props": {
+          "component": "section",
+          "relative": true,
+          "py": "16",
+          "data-class": "hero-section"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "absolute": true,
+              "inset": "0",
+              "data-class": "hero-overlay"
+            },
+            "children": []
+          },
+          {
+            "type": "component",
+            "component": "Container",
+            "props": {
+              "max": "w-7xl",
+              "data-class": "hero-content"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Stack",
+                "props": {
+                  "gap": "4",
+                  "items": "center",
+                  "data-class": "hero-copy"
+                },
+                "children": [
+                  {
+                    "type": "component",
+                    "component": "Title",
+                    "props": {
+                      "order": 1,
+                      "fontSize": "5xl",
+                      "textAlign": "center",
+                      "textColor": "primary-foreground",
+                      "data-class": "hero-title"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Welcome to Our Restaurant"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "component",
+                    "component": "Text",
+                    "props": {
+                      "fontSize": "lg",
+                      "textAlign": "center",
+                      "textColor": "muted-foreground",
+                      "lineHeight": "relaxed",
+                      "data-class": "hero-description"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Experience the finest dining in a cozy and elegant atmosphere."
+                      }
+                    ]
+                  },
+                  {
+                    "type": "component",
+                    "component": "Group",
+                    "props": {
+                      "gap": "4",
+                      "justify": "center",
+                      "items": "center",
+                      "data-class": "hero-actions"
+                    },
+                    "children": [
+                      {
+                        "type": "component",
+                        "component": "Button",
+                        "props": {
+                          "variant": "primary",
+                          "size": "lg",
+                          "data-class": "hero-cta-primary"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Contact us"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Preserve the background image as a media asset or slot during full UI8Kit conversion."
+        ]
+      }
+    },
+    {
+      "kind": "primary-cta-button",
+      "sourcePath": "0.1.3.3.1.5.1",
+      "sourceTagName": "button",
+      "confidence": "high",
+      "extracted": {
+        "label": "Contact us"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Button",
+        "props": {
+          "variant": "primary",
+          "size": "md",
+          "data-class": "button-primary"
+        },
+        "children": [
+          {
+            "type": "text",
+            "value": "Contact us"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "primary-cta-button",
+      "sourcePath": "0.1.7.1.1.3.5",
+      "sourceTagName": "button",
+      "confidence": "high",
+      "extracted": {
+        "label": "Get Started"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Button",
+        "props": {
+          "variant": "primary",
+          "size": "md",
+          "data-class": "button-primary"
+        },
+        "children": [
+          {
+            "type": "text",
+            "value": "Get Started"
+          }
+        ]
+      }
+    }
+  ],
   "summary": {
     "nodeCount": 97,
     "classCount": 311,
@@ -4562,6 +4755,11 @@
     "normalizedNodeCount": 4,
     "normalizedMatchCount": 4,
     "matchedKinds": {
+      "primary-cta-button": 3,
+      "hero-photo-overlay": 1
+    },
+    "ui8kitMappingCount": 4,
+    "ui8kitMappedKinds": {
       "primary-cta-button": 3,
       "hero-photo-overlay": 1
     }

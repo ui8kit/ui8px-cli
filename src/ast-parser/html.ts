@@ -1,6 +1,7 @@
 import { parse as parseHtml, type HTMLElement, type Node, NodeType } from 'node-html-parser';
 import { classifyClassToken } from './classifier.js';
 import { normalizeAstNodes } from './normalize.js';
+import { buildUi8KitMappings } from './ui8kit-mapper.js';
 import { AstParseReport, ParsedAstNode, ParsedStyleAttribute, ParserContract } from './types.js';
 
 function parseStyleAttribute(
@@ -81,7 +82,7 @@ function convertNode(node: Node, contract: ParserContract, path: string): Parsed
   return parsedNode;
 }
 
-function summarizeNodes(nodes: ParsedAstNode[]): AstParseReport['summary'] {
+function summarizeNodes(nodes: ParsedAstNode[], ui8kitMappings: AstParseReport['ui8kitMappings']): AstParseReport['summary'] {
   let nodeCount = 0;
   let classCount = 0;
   let structuralCount = 0;
@@ -92,6 +93,7 @@ function summarizeNodes(nodes: ParsedAstNode[]): AstParseReport['summary'] {
   let normalizedNodeCount = 0;
   let normalizedMatchCount = 0;
   const matchedKinds: Record<string, number> = {};
+  const ui8kitMappedKinds: Record<string, number> = {};
 
   const visit = (node: ParsedAstNode) => {
     nodeCount += 1;
@@ -119,6 +121,10 @@ function summarizeNodes(nodes: ParsedAstNode[]): AstParseReport['summary'] {
 
   nodes.forEach(visit);
 
+  for (const mapping of ui8kitMappings) {
+    ui8kitMappedKinds[mapping.kind] = (ui8kitMappedKinds[mapping.kind] ?? 0) + 1;
+  }
+
   return {
     nodeCount,
     classCount,
@@ -130,6 +136,8 @@ function summarizeNodes(nodes: ParsedAstNode[]): AstParseReport['summary'] {
     normalizedNodeCount,
     normalizedMatchCount,
     matchedKinds,
+    ui8kitMappingCount: ui8kitMappings.length,
+    ui8kitMappedKinds,
   };
 }
 
@@ -143,12 +151,14 @@ export function buildAstParseReport(sourcePath: string, contractPath: string, ht
     .filter((child): child is ParsedAstNode => child !== null);
 
   normalizeAstNodes(nodes, contract);
+  const ui8kitMappings = buildUi8KitMappings(nodes);
 
   return {
     sourcePath,
     contractPath,
     brandId: contract.brandId,
     nodes,
-    summary: summarizeNodes(nodes),
+    ui8kitMappings,
+    summary: summarizeNodes(nodes, ui8kitMappings),
   };
 }

@@ -64,6 +64,25 @@ export interface Ui8KitCandidate {
   notes?: string[];
 }
 
+export interface Ui8KitAstNode {
+  type: 'component' | 'text';
+  component?: string;
+  props?: Record<string, Ui8KitCandidatePropValue>;
+  children?: Ui8KitAstNode[];
+  value?: string;
+  notes?: string[];
+}
+
+export interface Ui8KitMappingFragment {
+  kind: string;
+  sourcePath: string;
+  sourceTagName?: string;
+  confidence: 'low' | 'medium' | 'high';
+  extracted?: Record<string, Ui8KitCandidatePropValue | null>;
+  ast: Ui8KitAstNode;
+  notes?: string[];
+}
+
 export interface NormalizedNodeMatch {
   kind: string;
   brandId?: string;
@@ -91,6 +110,7 @@ export interface AstParseReport {
   contractPath: string;
   brandId?: string;
   nodes: ParsedAstNode[];
+  ui8kitMappings: Ui8KitMappingFragment[];
   summary: {
     nodeCount: number;
     classCount: number;
@@ -102,6 +122,8 @@ export interface AstParseReport {
     normalizedNodeCount: number;
     normalizedMatchCount: number;
     matchedKinds: Record<string, number>;
+    ui8kitMappingCount: number;
+    ui8kitMappedKinds: Record<string, number>;
   };
 }
 

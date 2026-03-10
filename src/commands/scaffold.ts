@@ -199,5 +199,5 @@ export async function runScaffold(args: ScaffoldCliArgs): Promise<void> {
 }
 
 export function printScaffoldUsage(): string {
-  return `Usage:\n  npx ui8px [OPTION]... [DIRECTORY]\n  npm exec ui8px -- [OPTION]... [DIRECTORY]\n  bunx ui8px [OPTION]... [DIRECTORY]\n\nCreate a new UI8Kit Vite + React app.\n\nOptions:\n  -t, --template NAME   template (default: react)\n  -i, --immediate       install deps and run dev\n  -h, --help            show help\n\nExamples:\n  npx ui8px my-app\n  npx ui8px my-app --template react -i\n  npm exec ui8px -- --template react-resta`;
+  return `Usage:\n  npx brand-os [OPTION]... [DIRECTORY]\n  npm exec brand-os -- [OPTION]... [DIRECTORY]\n  bunx brand-os [OPTION]... [DIRECTORY]\n\nCreate a new UI8Kit Vite + React app.\n\nOptions:\n  -t, --template NAME   template (default: react)\n  -i, --immediate       install deps and run dev\n  -h, --help            show help\n\nExamples:\n  npx brand-os my-app\n  npx brand-os my-app --template react -i\n  npm exec brand-os -- --template react-resta`;
 }

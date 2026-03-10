@@ -151,10 +151,10 @@ export function parseArgs(argv: string[]): CliArgs {
       continue;
     }
 
-    if (arg === '--brand-os') {
+    if (arg === '--schema') {
       const value = argv[i + 1];
       if (!value || value.startsWith('-')) {
-        fail('--brand-os requires a schema path.');
+        fail('--schema requires a schema path.');
       }
       parsed.brandSchema = value;
       parsed.mode = 'brand-os';
@@ -380,7 +380,7 @@ export function parseArgs(argv: string[]): CliArgs {
     }
 
     if (!parsed.brandSchema) {
-      fail('--brand-os is required for brand OS mode.');
+      fail('--schema is required for brand OS mode.');
     }
 
     return {

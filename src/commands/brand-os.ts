@@ -42,10 +42,10 @@ export async function runBrandOs(args: BrandOsCliArgs): Promise<void> {
 export function printBrandOsUsage(): string {
   return [
     'Usage:',
-    '  npx ui8px --brand-os <schema-path> [options]',
+    '  npx brand-os --schema <schema-path> [options]',
     '',
     'Options:',
-    '  --brand-os <path>         brand OS schema path (required)',
+    '  --schema <path>           brand OS schema path (required)',
     '  --prompt-pack <path>      prompt pack JSON path',
     '  --parser-contract <path>  parser contract JSON path',
     '  --fixtures <path>         parser fixture source JSON path',
@@ -54,7 +54,7 @@ export function printBrandOsUsage(): string {
     '  -h, --help                show help',
     '',
     'Examples:',
-    '  npx ui8px --brand-os .project/brand.schema.json',
-    '  npx ui8px --brand-os .project/brand.schema.json --emit-dir .project/brand-generated --verbose',
+    '  npx brand-os --schema .project/brand.schema.json',
+    '  npx brand-os --schema .project/brand.schema.json --emit-dir .project/brand-generated --verbose',
   ].join('\n');
 }

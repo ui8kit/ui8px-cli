@@ -5485,6 +5485,310 @@
       ]
     }
   ],
+  "ui8kitMappings": [
+    {
+      "kind": "primary-cta-button",
+      "sourcePath": "0.2.1.1.3.5",
+      "sourceTagName": "button",
+      "confidence": "high",
+      "extracted": {
+        "label": "Get Started"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Button",
+        "props": {
+          "variant": "primary",
+          "size": "md",
+          "data-class": "button-primary"
+        },
+        "children": [
+          {
+            "type": "text",
+            "value": "Get Started"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "primary-cta-button",
+      "sourcePath": "0.2.3.1.1.3.5",
+      "sourceTagName": "button",
+      "confidence": "high",
+      "extracted": {
+        "label": "Get Started"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Button",
+        "props": {
+          "variant": "primary",
+          "size": "md",
+          "data-class": "button-primary"
+        },
+        "children": [
+          {
+            "type": "text",
+            "value": "Get Started"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "primary-cta-button",
+      "sourcePath": "0.2.5.3.1.5.1",
+      "sourceTagName": "button",
+      "confidence": "high",
+      "extracted": {
+        "label": "Read Testimonials"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Button",
+        "props": {
+          "variant": "primary",
+          "size": "md",
+          "data-class": "button-primary"
+        },
+        "children": [
+          {
+            "type": "text",
+            "value": "Read Testimonials"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "testimonial-card",
+      "sourcePath": "0.2.7.1.7.1",
+      "sourceTagName": "div",
+      "confidence": "high",
+      "extracted": {
+        "author": "Emma Thompson",
+        "role": "Food Critic",
+        "quote": "\"The culinary experience at Rose Restaurant is simply unparalleled. Each dish is a masterpiece, blending traditional flavors with modern techniques. The atmosphere is warm and inviting, making it perfect for both casual dinners and special occasions.\"",
+        "ratingCount": 5
+      },
+      "ast": {
+        "type": "component",
+        "component": "Card",
+        "props": {
+          "data-class": "testimonial-card"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Stack",
+            "props": {
+              "gap": "4",
+              "data-class": "testimonial-content"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Group",
+                "props": {
+                  "gap": "4",
+                  "items": "center",
+                  "data-class": "testimonial-header"
+                },
+                "children": [
+                  {
+                    "type": "component",
+                    "component": "Stack",
+                    "props": {
+                      "gap": "1",
+                      "data-class": "testimonial-meta"
+                    },
+                    "children": [
+                      {
+                        "type": "component",
+                        "component": "Text",
+                        "props": {
+                          "component": "p",
+                          "fontWeight": "semibold",
+                          "data-class": "testimonial-author"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Emma Thompson"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "component",
+                        "component": "Text",
+                        "props": {
+                          "component": "p",
+                          "fontSize": "sm",
+                          "textColor": "muted-foreground",
+                          "data-class": "testimonial-role"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Food Critic"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "p",
+                  "textColor": "muted-foreground",
+                  "lineHeight": "relaxed",
+                  "data-class": "testimonial-quote"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "\"The culinary experience at Rose Restaurant is simply unparalleled. Each dish is a masterpiece, blending traditional flavors with modern techniques. The atmosphere is warm and inviting, making it perfect for both casual dinners and special occasions.\""
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "p",
+                  "fontSize": "sm",
+                  "textColor": "primary",
+                  "data-class": "testimonial-rating"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "5 star rating"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "testimonial-card",
+      "sourcePath": "0.2.7.1.7.3",
+      "sourceTagName": "div",
+      "confidence": "high",
+      "extracted": {
+        "author": "Michael Chen",
+        "role": "Food Blogger",
+        "quote": "\"As someone who's passionate about food, I can confidently say that Rose Restaurant offers one of the most authentic and delightful dining experiences in the city. The attention to detail in every aspect, from the menu to the service, is truly impressive.\"",
+        "ratingCount": 5
+      },
+      "ast": {
+        "type": "component",
+        "component": "Card",
+        "props": {
+          "data-class": "testimonial-card"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Stack",
+            "props": {
+              "gap": "4",
+              "data-class": "testimonial-content"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Group",
+                "props": {
+                  "gap": "4",
+                  "items": "center",
+                  "data-class": "testimonial-header"
+                },
+                "children": [
+                  {
+                    "type": "component",
+                    "component": "Stack",
+                    "props": {
+                      "gap": "1",
+                      "data-class": "testimonial-meta"
+                    },
+                    "children": [
+                      {
+                        "type": "component",
+                        "component": "Text",
+                        "props": {
+                          "component": "p",
+                          "fontWeight": "semibold",
+                          "data-class": "testimonial-author"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Michael Chen"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "component",
+                        "component": "Text",
+                        "props": {
+                          "component": "p",
+                          "fontSize": "sm",
+                          "textColor": "muted-foreground",
+                          "data-class": "testimonial-role"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Food Blogger"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "p",
+                  "textColor": "muted-foreground",
+                  "lineHeight": "relaxed",
+                  "data-class": "testimonial-quote"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "\"As someone who's passionate about food, I can confidently say that Rose Restaurant offers one of the most authentic and delightful dining experiences in the city. The attention to detail in every aspect, from the menu to the service, is truly impressive.\""
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "p",
+                  "fontSize": "sm",
+                  "textColor": "primary",
+                  "data-class": "testimonial-rating"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "5 star rating"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
   "summary": {
     "nodeCount": 108,
     "classCount": 383,
@@ -5496,6 +5800,11 @@
     "normalizedNodeCount": 5,
     "normalizedMatchCount": 5,
     "matchedKinds": {
+      "primary-cta-button": 3,
+      "testimonial-card": 2
+    },
+    "ui8kitMappingCount": 5,
+    "ui8kitMappedKinds": {
       "primary-cta-button": 3,
       "testimonial-card": 2
     }

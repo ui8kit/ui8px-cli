@@ -122,8 +122,10 @@ export async function runAstParser(args: AstParserCliArgs): Promise<number> {
     console.log(`- style attributes: ${report.summary.styleAttributeCount}`);
     console.log(`- normalized nodes: ${report.summary.normalizedNodeCount}`);
     console.log(`- normalized matches: ${report.summary.normalizedMatchCount}`);
+    console.log(`- ui8kit mappings: ${report.summary.ui8kitMappingCount}`);
     if (args.verbose) {
       console.log(`- matched kinds: ${JSON.stringify(report.summary.matchedKinds)}`);
+      console.log(`- ui8kit mapped kinds: ${JSON.stringify(report.summary.ui8kitMappedKinds)}`);
     }
 
     return report.summary.unknownCount > 0 ? 1 : 0;
@@ -149,8 +151,8 @@ export async function runAstParser(args: AstParserCliArgs): Promise<number> {
 export function printAstParserUsage(): string {
   return [
     'Usage:',
-    '  npx ui8px --ast-suite <brand-schema-path> [--ast-suite <brand-schema-path> ...] [--ast-output <path>] [--verbose]',
-    '  npx ui8px --ast-input <html-path> [--ast-contract <contract-path> | --ast-suite <brand-schema-path>] --ast-output <path> [--verbose]',
+    '  npx brand-os --ast-suite <brand-schema-path> [--ast-suite <brand-schema-path> ...] [--ast-output <path>] [--verbose]',
+    '  npx brand-os --ast-input <html-path> [--ast-contract <contract-path> | --ast-suite <brand-schema-path>] --ast-output <path> [--verbose]',
     '',
     'Options:',
     '  --ast-input <path>        parse an HTML file into a classified AST',
@@ -161,7 +163,7 @@ export function printAstParserUsage(): string {
     '  -h, --help                show help',
     '',
     'Examples:',
-    '  npx ui8px --ast-suite ".project/Tech Brand OS/tech-brand-os.schema.json" --ast-suite ".project/RestA Brand OS/resta-brand-os.schema.json" --ast-output .project/ast-suite-report.json',
-    '  npx ui8px --ast-input ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html" --ast-suite ".project/RestA Brand OS/resta-brand-os.schema.json" --ast-output .project/resta-hero-ast.json',
+    '  npx brand-os --ast-suite ".project/Tech Brand OS/tech-brand-os.schema.json" --ast-suite ".project/RestA Brand OS/resta-brand-os.schema.json" --ast-output .project/ast-suite-report.json',
+    '  npx brand-os --ast-input ".project/RestA Brand OS/reference/RoseUI-Welcome-Restaurant.html" --ast-suite ".project/RestA Brand OS/resta-brand-os.schema.json" --ast-output .project/resta-hero-ast.json',
   ].join('\n');
 }

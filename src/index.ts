@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * ui8px — Scaffold a minimal Vite + React app and validate utility class maps.
+ * brand-os — Scaffold apps, validate layout maps, emit Brand OS assets, and parse ASTs.
  *
  * Usage examples:
- *   npx ui8px [OPTION]... [DIRECTORY]
- *   npx ui8px --design grid --input <path> --output <path>
+ *   npx brand-os [OPTION]... [DIRECTORY]
+ *   npx brand-os --design grid --input <path> --output <path>
  */
 
 import { CliArgs, parseArgs } from './cli/parse-args.js';

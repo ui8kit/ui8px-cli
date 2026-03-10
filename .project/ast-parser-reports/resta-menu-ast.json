@@ -4884,6 +4884,1232 @@
       ]
     }
   ],
+  "ui8kitMappings": [
+    {
+      "kind": "primary-cta-button",
+      "sourcePath": "0.1.1.1.3.5",
+      "sourceTagName": "button",
+      "confidence": "high",
+      "extracted": {
+        "label": "Get Started"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Button",
+        "props": {
+          "variant": "primary",
+          "size": "md",
+          "data-class": "button-primary"
+        },
+        "children": [
+          {
+            "type": "text",
+            "value": "Get Started"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Warm salad with veal",
+        "price": "650 ₽",
+        "description": "Baku cuisine, one of the oldest culinary traditions, is renowned for its rich flavors and unique combinations. Our menu showcases the best of this heritage, featuring succulent lamb dishes, fresh seafood, and an array of aromatic herbs and spices that will transport your taste buds to the shores of the Caspian Sea."
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Warm salad with veal"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "650 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Baku cuisine, one of the oldest culinary traditions, is renowned for its rich flavors and unique combinations. Our menu showcases the best of this heritage, featuring succulent lamb dishes, fresh seafood, and an array of aromatic herbs and spices that will transport your taste buds to the shores of the Caspian Sea."
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Warm salad with veal",
+        "price": "650 ₽",
+        "description": "greens/arugula/tomatoes/grilled-veal"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Warm salad with veal"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "650 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "greens/arugula/tomatoes/grilled-veal"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.1",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Warm salad with veal",
+        "price": "650 ₽",
+        "description": "greens/arugula/tomatoes/grilled-veal"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Warm salad with veal"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "650 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "greens/arugula/tomatoes/grilled-veal"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.1.1",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Warm salad with veal",
+        "price": "650 ₽",
+        "description": "greens/arugula/tomatoes/grilled-veal"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Warm salad with veal"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "650 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "greens/arugula/tomatoes/grilled-veal"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.1.1.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.1.3",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Grilled sea bass",
+        "price": "950 ₽",
+        "description": "sea-bass/lemon/herbs/olive-oil"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Grilled sea bass"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "950 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "sea-bass/lemon/herbs/olive-oil"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.1.3.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.1.5",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Lamb kebab",
+        "price": "780 ₽",
+        "description": "lamb/onions/sumac/lavash"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Lamb kebab"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "780 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "lamb/onions/sumac/lavash"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.1.5.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.1.7",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Dolma",
+        "price": "550 ₽",
+        "description": "grape-leaves/rice/minced-meat/yogurt"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Dolma"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "550 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "grape-leaves/rice/minced-meat/yogurt"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.1.7.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.3",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Pomegranate chicken",
+        "price": "720 ₽",
+        "description": "chicken/pomegranate/walnuts/herbs"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Pomegranate chicken"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "720 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "chicken/pomegranate/walnuts/herbs"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.3.1",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Pomegranate chicken",
+        "price": "720 ₽",
+        "description": "chicken/pomegranate/walnuts/herbs"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Pomegranate chicken"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "720 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "chicken/pomegranate/walnuts/herbs"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.3.1.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.3.3",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Piti soup",
+        "price": "580 ₽",
+        "description": "lamb/chickpeas/potatoes/saffron"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Piti soup"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "580 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "lamb/chickpeas/potatoes/saffron"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.3.3.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.3.5",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Sturgeon kebab",
+        "price": "1100 ₽",
+        "description": "sturgeon/lemon/saffron/rice"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Sturgeon kebab"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "1100 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "sturgeon/lemon/saffron/rice"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.3.5.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    },
+    {
+      "kind": "menu-item-row",
+      "sourcePath": "0.1.3.1.1.7.3.7",
+      "sourceTagName": "div",
+      "confidence": "medium",
+      "extracted": {
+        "title": "Qutab with greens",
+        "price": "420 ₽",
+        "description": "thin-dough/greens/sumac/yogurt"
+      },
+      "ast": {
+        "type": "component",
+        "component": "Stack",
+        "props": {
+          "gap": "2",
+          "data-class": "menu-item-row"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Group",
+            "props": {
+              "justify": "between",
+              "items": "center",
+              "gap": "4",
+              "data-class": "menu-item-head"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "h4",
+                  "fontSize": "xl",
+                  "fontWeight": "semibold",
+                  "data-class": "menu-item-title"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Qutab with greens"
+                  }
+                ]
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "props": {
+                  "component": "span",
+                  "fontSize": "sm",
+                  "fontWeight": "semibold",
+                  "textColor": "primary",
+                  "data-class": "menu-item-price"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "420 ₽"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Text",
+            "props": {
+              "component": "p",
+              "textColor": "muted-foreground",
+              "data-class": "menu-item-description"
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "thin-dough/greens/sumac/yogurt"
+              }
+            ]
+          },
+          {
+            "type": "component",
+            "component": "Box",
+            "props": {
+              "border": "t",
+              "data-class": "menu-item-separator"
+            },
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "menu-separator",
+      "sourcePath": "0.1.3.1.1.7.3.7.5",
+      "sourceTagName": "hr",
+      "confidence": "high",
+      "ast": {
+        "type": "component",
+        "component": "Box",
+        "props": {
+          "border": "t",
+          "data-class": "menu-separator"
+        },
+        "children": []
+      }
+    }
+  ],
   "summary": {
     "nodeCount": 110,
     "classCount": 281,
@@ -4895,6 +6121,12 @@
     "normalizedNodeCount": 21,
     "normalizedMatchCount": 21,
     "matchedKinds": {
+      "primary-cta-button": 1,
+      "menu-item-row": 12,
+      "menu-separator": 8
+    },
+    "ui8kitMappingCount": 21,
+    "ui8kitMappedKinds": {
       "primary-cta-button": 1,
       "menu-item-row": 12,
       "menu-separator": 8
