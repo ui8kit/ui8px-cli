@@ -34,6 +34,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json",
+    "brand:emit": "npm run build && node dist/index.js --brand-os .project/tech-brand-os.schema.json --prompt-pack .project/tech-brand-os-prompt-pack.json --parser-contract .project/tech-brand-os-parser-contract.json --fixtures .project/tech-brand-os-parser-fixtures.source.json --emit-dir .project/tech-brand-os-generated",
     "prepublishOnly": "tsc --noEmit -p tsconfig.json && tsc -p tsconfig.build.json",
     "test": "node --test"
   },

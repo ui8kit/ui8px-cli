@@ -1,0 +1,554 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tech-brand-os-parser-contract",
+  "brandId": "tech-brand-os",
+  "description": "Classification and normalization contract for converting parser-friendly Tailwind/HTML into Tech Brand OS system, semantic, and decorative layers.",
+  "purpose": [
+    "Preserve layout intent.",
+    "Map token-backed styling into semantic brand roles.",
+    "Isolate decoration into a separate brand layer instead of polluting the core system.",
+    "Report ambiguity rather than silently guessing."
+  ],
+  "normalizationPipeline": [
+    "tokenize classes",
+    "strip state and breakpoint prefixes for base classification",
+    "match exact approved brand exceptions",
+    "classify remaining classes as structural, semantic, decorative, or unknown",
+    "map structural classes into layout primitives or layout props",
+    "map semantic classes into tokens, variants, or branded wrappers",
+    "lift decorative classes into a dedicated brand layer or named recipe",
+    "emit audit report for unknown, conflicting, or mixed cases"
+  ],
+  "stateVariantPolicy": {
+    "breakpointPrefixes": [
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "2xl"
+    ],
+    "interactionPrefixes": [
+      "hover",
+      "focus",
+      "focus-visible",
+      "active",
+      "disabled",
+      "group-hover",
+      "peer-focus",
+      "dark"
+    ],
+    "rule": "Prefixes do not change the base class category. The parser should classify the unprefixed utility and then preserve the variant wrapper."
+  },
+  "classificationPriority": [
+    "approved-exact-brand-exceptions",
+    "approved-arbitrary-structural",
+    "approved-arbitrary-semantic",
+    "structural",
+    "semantic",
+    "decorative",
+    "unknown"
+  ],
+  "classes": {
+    "structural": {
+      "description": "Classes that define geometry, layout, spacing, sizing, ordering, position, responsive behavior, and media framing.",
+      "responsibilities": [
+        "page skeleton",
+        "container width",
+        "grid and flex layout",
+        "spacing rhythm",
+        "dimension and ratio",
+        "positioning"
+      ],
+      "prefixes": [
+        "container",
+        "block",
+        "inline",
+        "inline-block",
+        "inline-flex",
+        "inline-grid",
+        "hidden",
+        "flex",
+        "grid",
+        "grid-cols-",
+        "grid-rows-",
+        "col-span-",
+        "col-start-",
+        "col-end-",
+        "row-span-",
+        "row-start-",
+        "row-end-",
+        "gap-",
+        "space-x-",
+        "space-y-",
+        "justify-",
+        "items-",
+        "content-",
+        "self-",
+        "place-",
+        "w-",
+        "h-",
+        "min-w-",
+        "min-h-",
+        "max-w-",
+        "max-h-",
+        "p-",
+        "px-",
+        "py-",
+        "pt-",
+        "pr-",
+        "pb-",
+        "pl-",
+        "m-",
+        "mx-",
+        "my-",
+        "mt-",
+        "mr-",
+        "mb-",
+        "ml-",
+        "top-",
+        "right-",
+        "bottom-",
+        "left-",
+        "inset-",
+        "z-",
+        "relative",
+        "absolute",
+        "fixed",
+        "sticky",
+        "overflow-",
+        "object-",
+        "aspect-",
+        "order-"
+      ],
+      "exactUtilities": [
+        "min-h-screen",
+        "w-full",
+        "h-full",
+        "mx-auto",
+        "overflow-hidden",
+        "overflow-x-auto",
+        "overflow-y-auto"
+      ],
+      "approvedArbitraryMatches": [
+        {
+          "class": "aspect-[4/3]",
+          "mapsTo": "media.aspect.editorial-card",
+          "reason": "Approved brand media ratio."
+        },
+        {
+          "class": "h-[400px]",
+          "mapsTo": "hero.height.sm",
+          "reason": "Approved article hero height."
+        },
+        {
+          "class": "h-[500px]",
+          "mapsTo": "hero.height.md",
+          "reason": "Approved article hero height."
+        },
+        {
+          "class": "h-[600px]",
+          "mapsTo": "hero.height.lg",
+          "reason": "Approved article hero height."
+        }
+      ],
+      "examples": [
+        {
+          "class": "max-w-7xl",
+          "why": "Container width."
+        },
+        {
+          "class": "px-4",
+          "why": "Horizontal spacing."
+        },
+        {
+          "class": "md:grid-cols-2",
+          "why": "Responsive layout."
+        },
+        {
+          "class": "aspect-[4/3]",
+          "why": "Media geometry."
+        }
+      ]
+    },
+    "semantic": {
+      "description": "Classes that express token-backed meaning: color roles, typography roles, shape language, depth, approved motion recipes, and named branded utilities.",
+      "responsibilities": [
+        "surface role",
+        "content emphasis",
+        "brand shape",
+        "semantic border and ring behavior",
+        "approved motion recipes",
+        "approved branded utility recipes"
+      ],
+      "prefixes": [
+        "bg-",
+        "text-",
+        "border-",
+        "ring-",
+        "shadow-",
+        "rounded-",
+        "font-",
+        "tracking-",
+        "leading-",
+        "underline",
+        "uppercase",
+        "lowercase",
+        "prose"
+      ],
+      "exactUtilities": [
+        "bg-background",
+        "bg-card",
+        "bg-muted",
+        "bg-primary",
+        "bg-secondary",
+        "text-foreground",
+        "text-muted-foreground",
+        "text-primary",
+        "text-primary-foreground",
+        "text-white",
+        "border-border",
+        "border-input",
+        "font-serif",
+        "font-sans",
+        "font-mono",
+        "rounded-full",
+        "rounded-2xl",
+        "shadow-sm",
+        "shadow-xl",
+        "prose",
+        "prose-lg"
+      ],
+      "customUtilities": [
+        "pill-nav",
+        "card-hover",
+        "floating-button",
+        "tag-financing",
+        "tag-lifestyle",
+        "tag-community",
+        "tag-wellness",
+        "tag-travel",
+        "tag-creativity",
+        "tag-growth",
+        "animate-fade-in",
+        "animate-slide-up",
+        "animate-slide-down",
+        "animate-scale-in",
+        "stagger-1",
+        "stagger-2",
+        "stagger-3",
+        "stagger-4",
+        "stagger-5",
+        "stagger-6"
+      ],
+      "approvedArbitraryMatches": [
+        {
+          "class": "rounded-[2.5rem]",
+          "mapsTo": "radius.shell",
+          "reason": "Core brand shell radius."
+        },
+        {
+          "class": "rounded-[2rem]",
+          "mapsTo": "radius.media",
+          "reason": "Core media frame radius."
+        },
+        {
+          "class": "leading-[1.1]",
+          "mapsTo": "typography.display.compact",
+          "reason": "Brand display leading."
+        },
+        {
+          "class": "bg-[hsl(var(--surface-elevated))]",
+          "mapsTo": "surface.elevated",
+          "reason": "Token-backed surface role."
+        },
+        {
+          "class": "bg-[hsl(var(--cream)/0.9)]",
+          "mapsTo": "surface.highlight.alpha90",
+          "reason": "Token-backed highlight treatment."
+        },
+        {
+          "class": "text-[hsl(var(--cream-foreground))]",
+          "mapsTo": "content.cream-foreground",
+          "reason": "Token-backed foreground role."
+        }
+      ],
+      "examples": [
+        {
+          "class": "bg-card",
+          "why": "Semantic surface token."
+        },
+        {
+          "class": "text-muted-foreground",
+          "why": "Semantic content tone."
+        },
+        {
+          "class": "font-serif",
+          "why": "Brand typography role."
+        },
+        {
+          "class": "rounded-[2.5rem]",
+          "why": "Brand signature radius."
+        },
+        {
+          "class": "pill-nav",
+          "why": "Named brand recipe, not arbitrary decoration."
+        }
+      ]
+    },
+    "decorative": {
+      "description": "Classes that add ornament, special effects, visual atmosphere, or one-off styling that should live in a separate brand or campaign layer unless promoted into a named semantic recipe.",
+      "responsibilities": [
+        "gradient overlays",
+        "visual effects",
+        "ornamental transforms",
+        "background art direction",
+        "one-off flair"
+      ],
+      "prefixes": [
+        "bg-gradient-",
+        "from-",
+        "via-",
+        "to-",
+        "backdrop-",
+        "blur",
+        "opacity-",
+        "mix-blend-",
+        "saturate-",
+        "brightness-",
+        "contrast-",
+        "grayscale",
+        "sepia",
+        "invert",
+        "drop-shadow",
+        "rotate-",
+        "skew-",
+        "translate-",
+        "scale-",
+        "shadow-[",
+        "bg-[url(",
+        "mask-"
+      ],
+      "exactUtilities": [
+        "to-transparent",
+        "backdrop-blur-sm",
+        "backdrop-blur-lg",
+        "hover:scale-110",
+        "hover:scale-105",
+        "group-hover:scale-110"
+      ],
+      "rule": "Decorative classes may be preserved only inside a dedicated brand layer, named recipe utility, or campaign wrapper. Raw decorative classes should not leak into the system layer.",
+      "examples": [
+        {
+          "class": "bg-gradient-to-t",
+          "why": "Decorative overlay treatment."
+        },
+        {
+          "class": "from-black/70",
+          "why": "Decorative overlay stop, not semantic surface."
+        },
+        {
+          "class": "backdrop-blur-sm",
+          "why": "Visual effect rather than core meaning."
+        },
+        {
+          "class": "group-hover:scale-110",
+          "why": "Ornamental hover motion unless wrapped into a named recipe."
+        }
+      ]
+    },
+    "unknown": {
+      "description": "Classes not covered by approved structural, semantic, or decorative logic.",
+      "handling": "Emit a parser warning and include the class in the audit report. Never silently discard unknown classes."
+    }
+  },
+  "brandExceptions": {
+    "semanticRecipeUtilities": {
+      "pill-nav": {
+        "meaning": "Elevated pill navigation shell",
+        "target": "NavShell"
+      },
+      "card-hover": {
+        "meaning": "Approved card hover motion and elevation recipe",
+        "target": "CardHoverRecipe"
+      },
+      "floating-button": {
+        "meaning": "Approved floating circular action recipe",
+        "target": "FloatingAction"
+      }
+    },
+    "semanticTagUtilities": {
+      "tag-financing": "editorialTags.tag-1",
+      "tag-lifestyle": "editorialTags.tag-2",
+      "tag-community": "editorialTags.tag-3",
+      "tag-wellness": "editorialTags.tag-4",
+      "tag-travel": "editorialTags.tag-5",
+      "tag-creativity": "editorialTags.tag-6",
+      "tag-growth": "editorialTags.tag-7"
+    },
+    "semanticMotionUtilities": {
+      "animate-fade-in": "motion.presets.fade-in",
+      "animate-slide-up": "motion.presets.slide-up",
+      "animate-slide-down": "motion.presets.slide-down",
+      "animate-scale-in": "motion.presets.scale-in",
+      "stagger-1": "motion.stagger.1",
+      "stagger-2": "motion.stagger.2",
+      "stagger-3": "motion.stagger.3",
+      "stagger-4": "motion.stagger.4",
+      "stagger-5": "motion.stagger.5",
+      "stagger-6": "motion.stagger.6"
+    }
+  },
+  "nodeHeuristics": {
+    "mixedNodeRule": "A node may contain structural, semantic, and decorative classes at the same time. The parser must split them by class category rather than forcing the node into a single bucket.",
+    "wrapperPromotionRules": [
+      "If a node contains primarily decorative classes plus minimal layout, promote decoration into a wrapper layer.",
+      "If a node repeats with the same structural + semantic pattern on multiple screens, promote it to a named wrapper or block.",
+      "If a node's identity depends on a custom utility like pill-nav, card-hover, or floating-button, map it to the approved semantic recipe instead of exploding it into raw classes."
+    ],
+    "componentInferenceHints": [
+      {
+        "when": "button-like structural + semantic set with interactive states",
+        "prefer": "Button or branded Button wrapper"
+      },
+      {
+        "when": "tag-* utility with pill geometry and short label content",
+        "prefer": "CategoryBadge"
+      },
+      {
+        "when": "prose + heading + paragraph + code rhythm",
+        "prefer": "DocsArticleShell or ArticleBody"
+      },
+      {
+        "when": "card-hover + image overlay + meta chips + title",
+        "prefer": "ArticleCard or signature content card wrapper"
+      }
+    ]
+  },
+  "mappingTargets": {
+    "structural": [
+      "layout primitives",
+      "section wrappers",
+      "container props",
+      "grid/flex props",
+      "spacing props",
+      "responsive layout configuration"
+    ],
+    "semantic": [
+      "design tokens",
+      "component variants",
+      "named wrappers",
+      "brand recipe utilities"
+    ],
+    "decorative": [
+      "brand layer wrapper",
+      "campaign layer CSS",
+      "visual ornament component",
+      "media art direction layer"
+    ]
+  },
+  "examples": [
+    {
+      "input": [
+        "max-w-7xl",
+        "mx-auto",
+        "px-4",
+        "sm:px-6",
+        "lg:px-8",
+        "py-12"
+      ],
+      "classification": {
+        "structural": [
+          "max-w-7xl",
+          "mx-auto",
+          "px-4",
+          "sm:px-6",
+          "lg:px-8",
+          "py-12"
+        ],
+        "semantic": [],
+        "decorative": []
+      },
+      "result": "Container shell"
+    },
+    {
+      "input": [
+        "rounded-[2.5rem]",
+        "bg-card",
+        "p-12",
+        "text-center"
+      ],
+      "classification": {
+        "structural": [
+          "p-12"
+        ],
+        "semantic": [
+          "rounded-[2.5rem]",
+          "bg-card",
+          "text-center"
+        ],
+        "decorative": []
+      },
+      "result": "Branded CTA or hero shell"
+    },
+    {
+      "input": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black/70",
+        "via-black/30",
+        "to-transparent"
+      ],
+      "classification": {
+        "structural": [
+          "absolute",
+          "inset-0"
+        ],
+        "semantic": [],
+        "decorative": [
+          "bg-gradient-to-t",
+          "from-black/70",
+          "via-black/30",
+          "to-transparent"
+        ]
+      },
+      "result": "Brand overlay layer"
+    },
+    {
+      "input": [
+        "pill-nav",
+        "px-4",
+        "sm:px-6",
+        "h-16"
+      ],
+      "classification": {
+        "structural": [
+          "px-4",
+          "sm:px-6",
+          "h-16"
+        ],
+        "semantic": [
+          "pill-nav"
+        ],
+        "decorative": []
+      },
+      "result": "Nav shell recipe"
+    }
+  ],
+  "reporting": {
+    "requiredWarnings": [
+      "unknown-arbitrary-value",
+      "tokenless-color",
+      "decorative-class-in-system-layer",
+      "conflicting-radius-signature",
+      "repeated-raw-pattern-should-be-wrapper"
+    ],
+    "requiredMetrics": [
+      "structural-class-count",
+      "semantic-class-count",
+      "decorative-class-count",
+      "unknown-class-count",
+      "wrapper-promotion-candidates"
+    ]
+  }
+}

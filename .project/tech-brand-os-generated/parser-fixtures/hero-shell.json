@@ -1,0 +1,31 @@
+{
+  "id": "hero-shell",
+  "title": "Hero Shell",
+  "sourceFile": ".project/tech-blog-rounded-main/src/components/HeroSection.tsx",
+  "description": "Outer hero wrapper combining structural placement, brand radius, semantic surface, and reveal motion.",
+  "classes": [
+    "relative",
+    "rounded-[2.5rem]",
+    "overflow-hidden",
+    "bg-muted",
+    "my-12",
+    "animate-fade-in"
+  ],
+  "expected": {
+    "structural": [
+      "relative",
+      "overflow-hidden",
+      "my-12"
+    ],
+    "semantic": [
+      "rounded-[2.5rem]",
+      "bg-muted",
+      "animate-fade-in"
+    ],
+    "decorative": []
+  },
+  "notes": [
+    "This is a good test of mixed-node classification.",
+    "The parser should not force the whole node into one category."
+  ]
+}

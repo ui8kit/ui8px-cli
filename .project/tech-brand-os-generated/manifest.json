@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-03-10T18:41:19.789Z",
+  "outputDir": "E:\\_@Bun\\@ui8kit-8px-cli\\.project\\tech-brand-os-generated",
+  "files": {
+    "themeCss": "theme.css",
+    "tailwindExtend": "tailwind.extend.ts",
+    "promptCount": 5,
+    "prompts": [
+      "prompts/landing.md",
+      "prompts/blog.md",
+      "prompts/cms.md",
+      "prompts/dashboard.md",
+      "prompts/docs.md"
+    ],
+    "fixtureCount": 7,
+    "fixtureIndex": "parser-fixtures/index.json"
+  }
+}

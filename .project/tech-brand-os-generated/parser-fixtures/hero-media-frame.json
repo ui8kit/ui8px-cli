@@ -1,0 +1,30 @@
+{
+  "id": "hero-media-frame",
+  "title": "Hero Media Frame",
+  "sourceFile": ".project/tech-blog-rounded-main/src/components/HeroSection.tsx",
+  "description": "Visual frame around the hero image with approved aspect and media radius.",
+  "classes": [
+    "relative",
+    "aspect-[4/3]",
+    "md:aspect-auto",
+    "rounded-[2rem]",
+    "overflow-hidden",
+    "animate-scale-in"
+  ],
+  "expected": {
+    "structural": [
+      "relative",
+      "aspect-[4/3]",
+      "md:aspect-auto",
+      "overflow-hidden"
+    ],
+    "semantic": [
+      "rounded-[2rem]",
+      "animate-scale-in"
+    ],
+    "decorative": []
+  },
+  "notes": [
+    "Approved arbitrary values remain acceptable when listed in the parser contract."
+  ]
+}

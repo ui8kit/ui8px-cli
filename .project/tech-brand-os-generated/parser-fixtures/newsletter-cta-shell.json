@@ -1,0 +1,32 @@
+{
+  "id": "newsletter-cta-shell",
+  "title": "Newsletter CTA Shell",
+  "sourceFile": ".project/tech-blog-rounded-main/src/pages/Index.tsx",
+  "description": "Large CTA shell used for subscription on the home page.",
+  "classes": [
+    "my-20",
+    "rounded-[2.5rem]",
+    "bg-card",
+    "p-12",
+    "md:p-16",
+    "text-center",
+    "animate-scale-in"
+  ],
+  "expected": {
+    "structural": [
+      "my-20",
+      "p-12",
+      "md:p-16"
+    ],
+    "semantic": [
+      "rounded-[2.5rem]",
+      "bg-card",
+      "text-center",
+      "animate-scale-in"
+    ],
+    "decorative": []
+  },
+  "notes": [
+    "Good example of a named brand shell that should become a reusable wrapper."
+  ]
+}

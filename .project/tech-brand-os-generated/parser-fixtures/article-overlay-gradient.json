@@ -1,0 +1,30 @@
+{
+  "id": "article-overlay-gradient",
+  "title": "Article Overlay Gradient",
+  "sourceFile": ".project/tech-blog-rounded-main/src/components/ArticleCard.tsx",
+  "description": "Image overlay layer that should be isolated into the decorative brand layer.",
+  "classes": [
+    "absolute",
+    "inset-0",
+    "bg-gradient-to-t",
+    "from-black/70",
+    "via-black/30",
+    "to-transparent"
+  ],
+  "expected": {
+    "structural": [
+      "absolute",
+      "inset-0"
+    ],
+    "semantic": [],
+    "decorative": [
+      "bg-gradient-to-t",
+      "from-black/70",
+      "via-black/30",
+      "to-transparent"
+    ]
+  },
+  "notes": [
+    "The parser should preserve the overlay but move it out of the system layer."
+  ]
+}

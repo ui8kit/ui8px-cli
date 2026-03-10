@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0.0",
+  "brandId": "tech-brand-os",
+  "fixtures": [
+    {
+      "id": "index-main-shell",
+      "title": "Index Main Shell",
+      "sourceFile": ".project/tech-blog-rounded-main/src/pages/Index.tsx",
+      "description": "Primary centered page container used by the home page.",
+      "classes": [
+        "max-w-7xl",
+        "mx-auto",
+        "px-4",
+        "sm:px-6",
+        "lg:px-8",
+        "py-8"
+      ],
+      "expected": {
+        "structural": [
+          "max-w-7xl",
+          "mx-auto",
+          "px-4",
+          "sm:px-6",
+          "lg:px-8",
+          "py-8"
+        ],
+        "semantic": [],
+        "decorative": []
+      },
+      "notes": [
+        "Pure layout shell.",
+        "Should normalize into container and spacing props."
+      ]
+    },
+    {
+      "id": "hero-shell",
+      "title": "Hero Shell",
+      "sourceFile": ".project/tech-blog-rounded-main/src/components/HeroSection.tsx",
+      "description": "Outer hero wrapper combining structural placement, brand radius, semantic surface, and reveal motion.",
+      "classes": [
+        "relative",
+        "rounded-[2.5rem]",
+        "overflow-hidden",
+        "bg-muted",
+        "my-12",
+        "animate-fade-in"
+      ],
+      "expected": {
+        "structural": [
+          "relative",
+          "overflow-hidden",
+          "my-12"
+        ],
+        "semantic": [
+          "rounded-[2.5rem]",
+          "bg-muted",
+          "animate-fade-in"
+        ],
+        "decorative": []
+      },
+      "notes": [
+        "This is a good test of mixed-node classification.",
+        "The parser should not force the whole node into one category."
+      ]
+    },
+    {
+      "id": "hero-media-frame",
+      "title": "Hero Media Frame",
+      "sourceFile": ".project/tech-blog-rounded-main/src/components/HeroSection.tsx",
+      "description": "Visual frame around the hero image with approved aspect and media radius.",
+      "classes": [
+        "relative",
+        "aspect-[4/3]",
+        "md:aspect-auto",
+        "rounded-[2rem]",
+        "overflow-hidden",
+        "animate-scale-in"
+      ],
+      "expected": {
+        "structural": [
+          "relative",
+          "aspect-[4/3]",
+          "md:aspect-auto",
+          "overflow-hidden"
+        ],
+        "semantic": [
+          "rounded-[2rem]",
+          "animate-scale-in"
+        ],
+        "decorative": []
+      },
+      "notes": [
+        "Approved arbitrary values remain acceptable when listed in the parser contract."
+      ]
+    },
+    {
+      "id": "article-overlay-gradient",
+      "title": "Article Overlay Gradient",
+      "sourceFile": ".project/tech-blog-rounded-main/src/components/ArticleCard.tsx",
+      "description": "Image overlay layer that should be isolated into the decorative brand layer.",
+      "classes": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black/70",
+        "via-black/30",
+        "to-transparent"
+      ],
+      "expected": {
+        "structural": [
+          "absolute",
+          "inset-0"
+        ],
+        "semantic": [],
+        "decorative": [
+          "bg-gradient-to-t",
+          "from-black/70",
+          "via-black/30",
+          "to-transparent"
+        ]
+      },
+      "notes": [
+        "The parser should preserve the overlay but move it out of the system layer."
+      ]
+    },
+    {
+      "id": "pill-navigation-shell",
+      "title": "Pill Navigation Shell",
+      "sourceFile": ".project/tech-blog-rounded-main/src/components/Header.tsx",
+      "description": "Navigation shell using a named brand utility recipe.",
+      "classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "h-14",
+        "sm:h-16",
+        "pill-nav",
+        "px-4",
+        "sm:px-6"
+      ],
+      "expected": {
+        "structural": [
+          "flex",
+          "items-center",
+          "justify-between",
+          "h-14",
+          "sm:h-16",
+          "px-4",
+          "sm:px-6"
+        ],
+        "semantic": [
+          "pill-nav"
+        ],
+        "decorative": []
+      },
+      "notes": [
+        "Named recipe utilities should map to semantic wrappers rather than expand into raw effect classes."
+      ]
+    },
+    {
+      "id": "floating-action-button",
+      "title": "Floating Action Button",
+      "sourceFile": ".project/tech-blog-rounded-main/src/components/ArticleCard.tsx",
+      "description": "Floating circular action affordance positioned over the article card media.",
+      "classes": [
+        "absolute",
+        "bottom-6",
+        "right-6",
+        "floating-button"
+      ],
+      "expected": {
+        "structural": [
+          "absolute",
+          "bottom-6",
+          "right-6"
+        ],
+        "semantic": [
+          "floating-button"
+        ],
+        "decorative": []
+      },
+      "notes": [
+        "Useful for testing parser handling of mixed positional + recipe classes."
+      ]
+    },
+    {
+      "id": "newsletter-cta-shell",
+      "title": "Newsletter CTA Shell",
+      "sourceFile": ".project/tech-blog-rounded-main/src/pages/Index.tsx",
+      "description": "Large CTA shell used for subscription on the home page.",
+      "classes": [
+        "my-20",
+        "rounded-[2.5rem]",
+        "bg-card",
+        "p-12",
+        "md:p-16",
+        "text-center",
+        "animate-scale-in"
+      ],
+      "expected": {
+        "structural": [
+          "my-20",
+          "p-12",
+          "md:p-16"
+        ],
+        "semantic": [
+          "rounded-[2.5rem]",
+          "bg-card",
+          "text-center",
+          "animate-scale-in"
+        ],
+        "decorative": []
+      },
+      "notes": [
+        "Good example of a named brand shell that should become a reusable wrapper."
+      ]
+    }
+  ]
+}

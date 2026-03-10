@@ -1,0 +1,26 @@
+{
+  "id": "floating-action-button",
+  "title": "Floating Action Button",
+  "sourceFile": ".project/tech-blog-rounded-main/src/components/ArticleCard.tsx",
+  "description": "Floating circular action affordance positioned over the article card media.",
+  "classes": [
+    "absolute",
+    "bottom-6",
+    "right-6",
+    "floating-button"
+  ],
+  "expected": {
+    "structural": [
+      "absolute",
+      "bottom-6",
+      "right-6"
+    ],
+    "semantic": [
+      "floating-button"
+    ],
+    "decorative": []
+  },
+  "notes": [
+    "Useful for testing parser handling of mixed positional + recipe classes."
+  ]
+}

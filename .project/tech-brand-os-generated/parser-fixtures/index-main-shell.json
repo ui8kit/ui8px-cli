@@ -1,0 +1,30 @@
+{
+  "id": "index-main-shell",
+  "title": "Index Main Shell",
+  "sourceFile": ".project/tech-blog-rounded-main/src/pages/Index.tsx",
+  "description": "Primary centered page container used by the home page.",
+  "classes": [
+    "max-w-7xl",
+    "mx-auto",
+    "px-4",
+    "sm:px-6",
+    "lg:px-8",
+    "py-8"
+  ],
+  "expected": {
+    "structural": [
+      "max-w-7xl",
+      "mx-auto",
+      "px-4",
+      "sm:px-6",
+      "lg:px-8",
+      "py-8"
+    ],
+    "semantic": [],
+    "decorative": []
+  },
+  "notes": [
+    "Pure layout shell.",
+    "Should normalize into container and spacing props."
+  ]
+}

@@ -19,7 +19,18 @@ export interface ValidateGridCliArgs {
   verbose: boolean;
 }
 
-export type CliArgs = ScaffoldCliArgs | ValidateGridCliArgs;
+export interface BrandOsCliArgs {
+  mode: 'brand-os';
+  help: boolean;
+  schema: string;
+  promptPack?: string;
+  parserContract?: string;
+  fixtures?: string;
+  emitDir?: string;
+  verbose: boolean;
+}
+
+export type CliArgs = ScaffoldCliArgs | ValidateGridCliArgs | BrandOsCliArgs;
 
 export const VALID_TEMPLATES: readonly CliTemplateName[] = ['react', 'react-resta'];
 export const DEFAULT_TEMPLATE: CliTemplateName = 'react';
@@ -42,13 +53,18 @@ function parsePositiveNumber(value: string, label: string): number {
 export function parseArgs(argv: string[]): CliArgs {
   const parsed: {
     help: boolean;
-    mode: 'scaffold' | 'validate-grid';
+    mode: 'scaffold' | 'validate-grid' | 'brand-os';
     input?: string;
     output?: string;
     design?: string;
     spacingBase: number;
     rootFontSize: number;
     verbose: boolean;
+    brandSchema?: string;
+    promptPack?: string;
+    parserContract?: string;
+    fixtures?: string;
+    emitDir?: string;
     target?: string;
     template: CliTemplateName;
     immediate: boolean;
@@ -73,6 +89,57 @@ export function parseArgs(argv: string[]): CliArgs {
 
     if (arg === '--help' || arg === '-h') {
       parsed.help = true;
+      continue;
+    }
+
+    if (arg === '--brand-os') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--brand-os requires a schema path.');
+      }
+      parsed.brandSchema = value;
+      parsed.mode = 'brand-os';
+      i += 1;
+      continue;
+    }
+
+    if (arg === '--prompt-pack') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--prompt-pack requires a file path.');
+      }
+      parsed.promptPack = value;
+      i += 1;
+      continue;
+    }
+
+    if (arg === '--parser-contract') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--parser-contract requires a file path.');
+      }
+      parsed.parserContract = value;
+      i += 1;
+      continue;
+    }
+
+    if (arg === '--fixtures') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--fixtures requires a file path.');
+      }
+      parsed.fixtures = value;
+      i += 1;
+      continue;
+    }
+
+    if (arg === '--emit-dir') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--emit-dir requires a directory path.');
+      }
+      parsed.emitDir = value;
+      i += 1;
       continue;
     }
 
@@ -133,7 +200,6 @@ export function parseArgs(argv: string[]): CliArgs {
 
     if (arg === '--verbose') {
       parsed.verbose = true;
-      parsed.mode = 'validate-grid';
       continue;
     }
 
@@ -165,6 +231,19 @@ export function parseArgs(argv: string[]): CliArgs {
   }
 
   if (parsed.help) {
+    if (parsed.mode === 'brand-os') {
+      return {
+        mode: 'brand-os',
+        help: true,
+        schema: parsed.brandSchema ?? '',
+        promptPack: parsed.promptPack,
+        parserContract: parsed.parserContract,
+        fixtures: parsed.fixtures,
+        emitDir: parsed.emitDir,
+        verbose: parsed.verbose,
+      };
+    }
+
     return {
       mode: parsed.mode === 'validate-grid' ? 'validate-grid' : 'scaffold',
       help: true,
@@ -178,6 +257,35 @@ export function parseArgs(argv: string[]): CliArgs {
       rootFontSize: parsed.rootFontSize,
       verbose: parsed.verbose,
     } as CliArgs;
+  }
+
+  if (parsed.mode === 'brand-os') {
+    if (parsed.templateSpecified || parsed.immediateSpecified) {
+      fail('Scaffold-only flags --template and --immediate are not allowed in brand OS mode.');
+    }
+
+    if (parsed.design || parsed.input || parsed.output) {
+      fail('Validation flags are not allowed in brand OS mode.');
+    }
+
+    if (positional.length > 0) {
+      fail('Positional directory argument is not supported in brand OS mode.');
+    }
+
+    if (!parsed.brandSchema) {
+      fail('--brand-os is required for brand OS mode.');
+    }
+
+    return {
+      mode: 'brand-os',
+      help: false,
+      schema: parsed.brandSchema,
+      promptPack: parsed.promptPack,
+      parserContract: parsed.parserContract,
+      fixtures: parsed.fixtures,
+      emitDir: parsed.emitDir,
+      verbose: parsed.verbose,
+    };
   }
 
   if (parsed.mode === 'validate-grid') {

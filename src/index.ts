@@ -8,6 +8,7 @@
  */
 
 import { CliArgs, parseArgs } from './cli/parse-args.js';
+import { printBrandOsUsage, runBrandOs } from './commands/brand-os.js';
 import { printScaffoldUsage, runScaffold } from './commands/scaffold.js';
 import { printValidateUsage, runValidateGrid } from './commands/validate-grid.js';
 
@@ -20,6 +21,8 @@ function printUsage(): void {
   console.log(printScaffoldUsage());
   console.log('');
   console.log(printValidateUsage());
+  console.log('');
+  console.log(printBrandOsUsage());
 }
 
 async function main(): Promise<void> {
@@ -38,6 +41,12 @@ async function main(): Promise<void> {
   }
 
   try {
+    if (args.mode === 'brand-os') {
+      await runBrandOs(args);
+      process.exit(0);
+      return;
+    }
+
     if (args.mode === 'validate-grid') {
       const exitCode = await runValidateGrid(args);
       process.exit(exitCode);

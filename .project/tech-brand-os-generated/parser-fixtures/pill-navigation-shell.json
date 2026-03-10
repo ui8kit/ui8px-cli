@@ -1,0 +1,34 @@
+{
+  "id": "pill-navigation-shell",
+  "title": "Pill Navigation Shell",
+  "sourceFile": ".project/tech-blog-rounded-main/src/components/Header.tsx",
+  "description": "Navigation shell using a named brand utility recipe.",
+  "classes": [
+    "flex",
+    "items-center",
+    "justify-between",
+    "h-14",
+    "sm:h-16",
+    "pill-nav",
+    "px-4",
+    "sm:px-6"
+  ],
+  "expected": {
+    "structural": [
+      "flex",
+      "items-center",
+      "justify-between",
+      "h-14",
+      "sm:h-16",
+      "px-4",
+      "sm:px-6"
+    ],
+    "semantic": [
+      "pill-nav"
+    ],
+    "decorative": []
+  },
+  "notes": [
+    "Named recipe utilities should map to semantic wrappers rather than expand into raw effect classes."
+  ]
+}
