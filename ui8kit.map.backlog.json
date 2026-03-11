@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "input": "ui8kit.map.json",
+    "output": "ui8kit.map.backlog.json",
+    "design": "grid",
+    "spacingBase": 4,
+    "rootFontSize": 16,
+    "generatedAt": "2026-03-11T08:38:30.015Z",
+    "classesScanned": 569,
+    "declarationsScanned": 211
+  },
+  "summary": {
+    "classesChecked": 569,
+    "declarationsChecked": 211,
+    "violations": 2
+  },
+  "violations": [
+    {
+      "className": "h-px",
+      "property": "height",
+      "rawValue": "1px",
+      "resolvedPx": 1,
+      "reason": "1px is not aligned to the 8/4px layout policy"
+    },
+    {
+      "className": "w-px",
+      "property": "width",
+      "rawValue": "1px",
+      "resolvedPx": 1,
+      "reason": "1px is not aligned to the 8/4px layout policy"
+    }
+  ]
+}

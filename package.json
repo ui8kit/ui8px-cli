@@ -1,7 +1,7 @@
 {
   "name": "ui8px",
-  "version": "0.1.2",
-  "description": "CLI utility for UI8Kit project scaffolding and 8px-grid map validation",
+  "version": "0.1.5",
+  "description": "CLI utility for validating UI8Kit class maps against an 8 + 4 spacing policy",
   "author": "UI8Kit",
   "license": "MIT",
   "type": "module",
@@ -12,12 +12,8 @@
     "npx",
     "npm",
     "node",
-    "vite",
-    "react",
-    "scaffolding",
-    "template",
     "8px",
-    "design-system",
+    "validator",
     "spacing"
   ],
   "homepage": "https://github.com/ui8kit/ui8px-cli",
@@ -32,16 +28,12 @@
     "ui8px": "./dist/index.js"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "tsc --noEmit -p tsconfig.json && tsc -p tsconfig.build.json",
-    "test": "node --test"
+    "prepublishOnly": "tsc -p tsconfig.build.json"
   },
   "files": [
     "README.md",
-    "dist",
-    "template-react",
-    "template-react-resta"
+    "dist"
   ],
   "engines": {
     "node": ">=18"
