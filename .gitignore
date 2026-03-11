@@ -2,11 +2,9 @@ node_modules
 dist
 *.local
 .DS_Store
-.env
-.manual/
-bun.lockb
-bun.lock
 package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
+bun.lock
+bun.lockb
+.manual/
+.project/
+template-tech-blog

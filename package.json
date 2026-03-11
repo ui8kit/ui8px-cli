@@ -1,18 +1,14 @@
 {
-  "name": "brand-os",
+  "name": "ui8px",
   "version": "0.1.2",
-  "description": "CLI for brand operating systems, template scaffolding, AST parsing, and layout validation",
+  "description": "CLI utility for UI8Kit project scaffolding and 8px-grid map validation",
   "author": "UI8Kit",
   "license": "MIT",
   "type": "module",
   "keywords": [
-    "brand-os",
+    "ui8px",
     "ui8kit",
     "cli",
-    "branding",
-    "design-system",
-    "brand-system",
-    "ast",
     "npx",
     "npm",
     "node",
@@ -21,23 +17,23 @@
     "scaffolding",
     "template",
     "8px",
+    "design-system",
     "spacing"
   ],
-  "homepage": "https://github.com/ui8kit/brand-os",
+  "homepage": "https://github.com/ui8kit/ui8px-cli",
   "bugs": {
-    "url": "https://github.com/ui8kit/brand-os/issues"
+    "url": "https://github.com/ui8kit/ui8px-cli/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ui8kit/brand-os.git"
+    "url": "https://github.com/ui8kit/ui8px-cli.git"
   },
   "bin": {
-    "brand-os": "./dist/index.js"
+    "ui8px": "./dist/index.js"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json",
-    "brand:emit": "npm run build && node dist/index.js --schema \".project/Tech Brand OS/tech-brand-os.schema.json\" --prompt-pack \".project/Tech Brand OS/tech-brand-os-prompt-pack.json\" --parser-contract \".project/Tech Brand OS/tech-brand-os-parser-contract.json\" --fixtures \".project/Tech Brand OS/tech-brand-os-parser-fixtures.source.json\" --emit-dir \".project/Tech Brand OS/tech-brand-os-generated\"",
     "prepublishOnly": "tsc --noEmit -p tsconfig.json && tsc -p tsconfig.build.json",
     "test": "node --test"
   },
@@ -56,8 +52,5 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "typescript": "^5.8.0"
-  },
-  "dependencies": {
-    "node-html-parser": "^7.1.0"
   }
 }
