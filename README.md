@@ -8,6 +8,17 @@ Run without installing:
 npx ui8px@latest lint ./...
 ```
 
+## Documentation
+
+For a full onboarding path, read the docs:
+
+- [101: 8px Grid Design](./docs/101-8px-grid.md)
+- [Why Tailwind](./docs/why-tailwind.md)
+- [CLI API Reference](./docs/cli-api.md)
+- [Policy Files](./docs/policy-files.md)
+- [Examples And Use Cases](./docs/examples-and-use-cases.md)
+- [Testing, CI, And Publishing](./docs/testing-ci-publishing.md)
+
 ## Commands
 
 ```bash
@@ -171,8 +182,6 @@ It checks CSS declaration values in a class map and reports values that do not r
 Before publishing:
 
 ```bash
-npm run check
-npm run build
-npm test
-npm publish --access public
+npm run preflight
+npm publish --access public --provenance
 ```
