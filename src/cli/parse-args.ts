@@ -1,5 +1,22 @@
-export interface ValidateGridCliArgs {
+export interface BaseCliArgs {
   help: boolean;
+}
+
+export interface InitCliArgs extends BaseCliArgs {
+  command: 'init';
+  force: boolean;
+}
+
+export interface LintCliArgs extends BaseCliArgs {
+  command: 'lint';
+  paths: string[];
+  learn: boolean;
+  json: boolean;
+  verbose: boolean;
+}
+
+export interface ValidateGridCliArgs extends BaseCliArgs {
+  command: 'validate-grid';
   design: 'grid';
   input: string;
   output: string;
@@ -8,10 +25,33 @@ export interface ValidateGridCliArgs {
   verbose: boolean;
 }
 
-export type CliArgs = ValidateGridCliArgs;
+export interface ValidatePatternsCliArgs extends BaseCliArgs {
+  command: 'validate-patterns';
+  paths: string[];
+  minCount: number;
+  output?: string;
+  verbose: boolean;
+}
+
+export interface PolicyReviewCliArgs extends BaseCliArgs {
+  command: 'policy-review';
+}
+
+export interface GlobalHelpCliArgs extends BaseCliArgs {
+  command: 'help';
+}
+
+export type CliArgs =
+  | InitCliArgs
+  | LintCliArgs
+  | ValidateGridCliArgs
+  | ValidatePatternsCliArgs
+  | PolicyReviewCliArgs
+  | GlobalHelpCliArgs;
 
 const DEFAULT_SPACING_BASE = 4;
 const DEFAULT_ROOT_FONT_SIZE = 16;
+const DEFAULT_PATTERN_MIN_COUNT = 2;
 
 function fail(message: string): never {
   throw new Error(`Error: ${message}`);
@@ -26,9 +66,155 @@ function parsePositiveNumber(value: string, label: string): number {
 }
 
 export function parseArgs(argv: string[]): CliArgs {
+  if (argv.length === 0 || argv[0] === '--help' || argv[0] === '-h') {
+    return { command: 'help', help: true };
+  }
+
+  if (argv.includes('--design')) {
+    return parseLegacyValidateGridArgs(argv);
+  }
+
+  const [command, subcommand, ...rest] = argv;
+  if (command === 'init') {
+    return parseInitArgs([subcommand, ...rest].filter(Boolean));
+  }
+  if (command === 'lint') {
+    return parseLintArgs([subcommand, ...rest].filter(Boolean));
+  }
+  if (command === 'validate') {
+    if (subcommand === 'grid') {
+      return parseValidateGridArgs(rest);
+    }
+    if (subcommand === 'patterns') {
+      return parseValidatePatternsArgs(rest);
+    }
+    fail(`Unknown validate subcommand: ${subcommand ?? 'undefined'}.`);
+  }
+  if (command === 'policy') {
+    if (subcommand === 'review') {
+      return parsePolicyReviewArgs(rest);
+    }
+    fail(`Unknown policy subcommand: ${subcommand ?? 'undefined'}.`);
+  }
+
+  fail(`Unknown command: ${command}.`);
+}
+
+function parseInitArgs(argv: string[]): InitCliArgs {
+  let force = false;
+  for (const arg of argv) {
+    if (arg === '--help' || arg === '-h') {
+      return { command: 'init', help: true, force };
+    }
+    if (arg === '--force') {
+      force = true;
+      continue;
+    }
+    fail(`Unknown option for init: ${arg}`);
+  }
+  return { command: 'init', help: false, force };
+}
+
+function parseLintArgs(argv: string[]): LintCliArgs {
+  const paths: string[] = [];
+  let learn = false;
+  let json = false;
+  let verbose = false;
+
+  for (const arg of argv) {
+    if (arg === '--help' || arg === '-h') {
+      return { command: 'lint', help: true, paths: [], learn, json, verbose };
+    }
+    if (arg === '--learn') {
+      learn = true;
+      continue;
+    }
+    if (arg === '--json') {
+      json = true;
+      continue;
+    }
+    if (arg === '--verbose') {
+      verbose = true;
+      continue;
+    }
+    if (arg.startsWith('-')) {
+      fail(`Unknown option for lint: ${arg}`);
+    }
+    paths.push(arg);
+  }
+
+  return {
+    command: 'lint',
+    help: false,
+    paths: paths.length ? paths : ['./...'],
+    learn,
+    json,
+    verbose,
+  };
+}
+
+function parseValidatePatternsArgs(argv: string[]): ValidatePatternsCliArgs {
+  const paths: string[] = [];
+  let minCount = DEFAULT_PATTERN_MIN_COUNT;
+  let output: string | undefined;
+  let verbose = false;
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === '--help' || arg === '-h') {
+      return { command: 'validate-patterns', help: true, paths: [], minCount, output, verbose };
+    }
+    if (arg === '--min-count') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--min-count requires a number.');
+      }
+      minCount = parsePositiveNumber(value, '--min-count');
+      i += 1;
+      continue;
+    }
+    if (arg === '--output') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--output requires a file path.');
+      }
+      output = value;
+      i += 1;
+      continue;
+    }
+    if (arg === '--verbose') {
+      verbose = true;
+      continue;
+    }
+    if (arg.startsWith('-')) {
+      fail(`Unknown option for validate patterns: ${arg}`);
+    }
+    paths.push(arg);
+  }
+
+  return {
+    command: 'validate-patterns',
+    help: false,
+    paths: paths.length ? paths : ['./...'],
+    minCount,
+    output,
+    verbose,
+  };
+}
+
+function parsePolicyReviewArgs(argv: string[]): PolicyReviewCliArgs {
+  for (const arg of argv) {
+    if (arg === '--help' || arg === '-h') {
+      return { command: 'policy-review', help: true };
+    }
+    fail(`Unknown option for policy review: ${arg}`);
+  }
+  return { command: 'policy-review', help: false };
+}
+
+function parseValidateGridArgs(argv: string[]): ValidateGridCliArgs {
   const parsed: {
     help: boolean;
-    design?: string;
     input?: string;
     output?: string;
     spacingBase: number;
@@ -43,23 +229,11 @@ export function parseArgs(argv: string[]): CliArgs {
     positional: [],
   };
 
-  const positional = parsed.positional;
-
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
 
     if (arg === '--help' || arg === '-h') {
       parsed.help = true;
-      continue;
-    }
-
-    if (arg === '--design') {
-      const value = argv[i + 1];
-      if (!value || value.startsWith('-')) {
-        fail('--design requires a mode value.');
-      }
-      parsed.design = value;
-      i += 1;
       continue;
     }
 
@@ -109,14 +283,15 @@ export function parseArgs(argv: string[]): CliArgs {
     }
 
     if (arg.startsWith('-')) {
-      fail(`Unknown option: ${arg}`);
+      fail(`Unknown option for validate grid: ${arg}`);
     }
 
-    positional.push(arg);
+    parsed.positional.push(arg);
   }
 
   if (parsed.help) {
     return {
+      command: 'validate-grid',
       help: true,
       design: 'grid',
       input: parsed.input ?? '',
@@ -124,15 +299,11 @@ export function parseArgs(argv: string[]): CliArgs {
       spacingBase: parsed.spacingBase,
       rootFontSize: parsed.rootFontSize,
       verbose: parsed.verbose,
-    } as CliArgs;
+    };
   }
 
-  if (parsed.design !== 'grid') {
-    fail(`Only --design grid is supported. Received --design ${parsed.design ?? 'undefined'}.`);
-  }
-
-  if (positional.length > 0) {
-    fail('Positional arguments are not supported.');
+  if (parsed.positional.length > 0) {
+    fail('Positional arguments are not supported for validate grid.');
   }
 
   if (!parsed.input) {
@@ -144,6 +315,7 @@ export function parseArgs(argv: string[]): CliArgs {
   }
 
   return {
+    command: 'validate-grid',
     help: false,
     design: 'grid',
     input: parsed.input,
@@ -152,4 +324,21 @@ export function parseArgs(argv: string[]): CliArgs {
     rootFontSize: parsed.rootFontSize,
     verbose: parsed.verbose,
   };
+}
+
+function parseLegacyValidateGridArgs(argv: string[]): ValidateGridCliArgs {
+  const withoutDesign: string[] = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === '--design') {
+      const value = argv[i + 1];
+      if (value !== 'grid') {
+        fail(`Only --design grid is supported. Received --design ${value ?? 'undefined'}.`);
+      }
+      i += 1;
+      continue;
+    }
+    withoutDesign.push(arg);
+  }
+  return parseValidateGridArgs(withoutDesign);
 }

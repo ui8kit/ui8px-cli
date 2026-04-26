@@ -1,18 +1,18 @@
 {
   "name": "ui8px",
-  "version": "0.1.5",
-  "description": "CLI utility for validating UI8Kit class maps against an 8 + 4 spacing policy",
+  "version": "0.2.0",
+  "description": "Framework-agnostic CLI for strict 8px utility-class linting, telemetry, and pattern discovery",
   "author": "UI8Kit",
   "license": "MIT",
   "type": "module",
   "keywords": [
     "ui8px",
-    "ui8kit",
     "cli",
     "npx",
     "npm",
     "node",
     "8px",
+    "tailwind",
     "validator",
     "spacing"
   ],
@@ -29,7 +29,9 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "tsc -p tsconfig.build.json"
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test test/ui8px.test.mjs",
+    "prepublishOnly": "npm run check && npm run build && npm test"
   },
   "files": [
     "README.md",
