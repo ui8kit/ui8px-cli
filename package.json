@@ -1,6 +1,6 @@
 {
   "name": "ui8px",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "Framework-agnostic CLI for strict 8px utility-class linting, telemetry, and pattern discovery",
   "author": "UI8Kit",
   "license": "MIT",
@@ -31,7 +31,9 @@
     "build": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --test test/ui8px.test.mjs",
-    "prepublishOnly": "npm run check && npm run build && npm test"
+    "preflight": "bash scripts/preflight.sh",
+    "preflight:publish": "bash scripts/preflight.sh --skip-install",
+    "prepublishOnly": "npm run preflight:publish"
   },
   "files": [
     "README.md",
@@ -41,7 +43,8 @@
     "node": ">=18"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
