@@ -69,6 +69,48 @@ Exit codes:
 - `1`: violations found
 - `2`: invalid command or runtime error
 
+## `validate aria`
+
+```bash
+npx ui8px validate aria ./...
+npx ui8px validate aria internal/site/views --package package.json
+npx ui8px validate aria ./... --manifest web/static/js/manifest.json
+npx ui8px validate aria ./... --json
+```
+
+Scans source files for static `data-ui8kit="..."` hooks and common UI8Kit component calls, then verifies that the required `@ui8kit/aria` pattern is included in the configured bundle.
+
+Default config resolution:
+
+1. `web/static/js/manifest.json`, if it exists, because it describes the actual generated site bundle.
+2. `package.json` `ui8kit.aria`, if no manifest exists.
+
+Options:
+
+- `--package <path>`: package.json path with `ui8kit.aria` config.
+- `--manifest <path>`: generated UI8Kit asset manifest path.
+- `--json`: print the validation result as JSON.
+- `--verbose`: print every diagnostic instead of the first page.
+
+Pattern mapping:
+
+- `data-ui8kit="dialog"` requires `dialog`.
+- `data-ui8kit="sheet"` requires `dialog`.
+- `data-ui8kit="alertdialog"` requires `dialog`.
+- `data-ui8kit="accordion"` requires `accordion`.
+- `data-ui8kit="tabs"` requires `tabs`.
+- `data-ui8kit="combobox"` requires `combobox`.
+- `data-ui8kit="tooltip"` requires `tooltip`.
+- `@ui.Accordion(...)` requires `accordion`.
+- `@ui.Tabs(...)` requires `tabs`.
+- `@ui8layout.Shell(...)`, `@ui.Dialog(...)`, `@ui.Sheet(...)`, and `@ui.AlertDialog(...)` require `dialog`.
+
+Exit codes:
+
+- `0`: all used hooks are covered by the bundle.
+- `1`: at least one required pattern is missing.
+- `2`: invalid command or runtime error.
+
 ## `validate grid`
 
 ```bash
@@ -145,6 +187,7 @@ This command does not edit policy files.
 - `UI8PX003`: utility class is explicitly denied.
 - `UI8PX004`: conflicting utilities inside one class list.
 - `UI8PX005`: unknown `ui-*` semantic class.
+- `UI8PX101`: UI8Kit ARIA markup hook requires a pattern that is missing from the configured bundle.
 
 ## Exit Codes
 

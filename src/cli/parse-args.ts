@@ -34,6 +34,15 @@ export interface ValidatePatternsCliArgs extends BaseCliArgs {
   verbose: boolean;
 }
 
+export interface ValidateAriaCliArgs extends BaseCliArgs {
+  command: 'validate-aria';
+  paths: string[];
+  packagePath?: string;
+  manifestPath?: string;
+  json: boolean;
+  verbose: boolean;
+}
+
 export interface PolicyReviewCliArgs extends BaseCliArgs {
   command: 'policy-review';
 }
@@ -47,6 +56,7 @@ export type CliArgs =
   | LintCliArgs
   | ValidateGridCliArgs
   | ValidatePatternsCliArgs
+  | ValidateAriaCliArgs
   | PolicyReviewCliArgs
   | GlobalHelpCliArgs;
 
@@ -88,6 +98,9 @@ export function parseArgs(argv: string[]): CliArgs {
     }
     if (subcommand === 'patterns') {
       return parseValidatePatternsArgs(rest);
+    }
+    if (subcommand === 'aria') {
+      return parseValidateAriaArgs(rest);
     }
     fail(`Unknown validate subcommand: ${subcommand ?? 'undefined'}.`);
   }
@@ -213,6 +226,61 @@ function parseValidatePatternsArgs(argv: string[]): ValidatePatternsCliArgs {
     paths: paths.length ? paths : ['./...'],
     minCount,
     output,
+    verbose,
+  };
+}
+
+function parseValidateAriaArgs(argv: string[]): ValidateAriaCliArgs {
+  const paths: string[] = [];
+  let packagePath: string | undefined;
+  let manifestPath: string | undefined;
+  let json = false;
+  let verbose = false;
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === '--help' || arg === '-h') {
+      return { command: 'validate-aria', help: true, paths: [], packagePath, manifestPath, json, verbose };
+    }
+    if (arg === '--package') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--package requires a file path.');
+      }
+      packagePath = value;
+      i += 1;
+      continue;
+    }
+    if (arg === '--manifest') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--manifest requires a file path.');
+      }
+      manifestPath = value;
+      i += 1;
+      continue;
+    }
+    if (arg === '--json') {
+      json = true;
+      continue;
+    }
+    if (arg === '--verbose') {
+      verbose = true;
+      continue;
+    }
+    if (arg.startsWith('-')) {
+      fail(`Unknown option for validate aria: ${arg}`);
+    }
+    paths.push(arg);
+  }
+
+  return {
+    command: 'validate-aria',
+    help: false,
+    paths: paths.length ? paths : ['./...'],
+    packagePath,
+    manifestPath,
+    json,
     verbose,
   };
 }

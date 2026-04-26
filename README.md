@@ -26,6 +26,7 @@ npx ui8px init
 npx ui8px init --preset go
 npx ui8px lint ./...
 npx ui8px lint ./... --learn
+npx ui8px validate aria ./...
 npx ui8px validate grid --input class-map.json --output class-map.backlog.json
 npx ui8px validate patterns ./...
 npx ui8px policy review
@@ -173,6 +174,23 @@ Suggested semantic class:
 ```
 
 `ui8px` does not automatically generate `@apply` CSS. It reports candidates so semantic `ui-*` patterns can be reviewed intentionally.
+
+## ARIA Bundle Validation
+
+```bash
+npx ui8px validate aria ./...
+```
+
+This command scans source files for static `data-ui8kit="..."` hooks and common UI8Kit component calls such as `@ui8layout.Shell(...)`, `@ui.Accordion(...)`, and `@ui.Tabs(...)`. It checks that the matching `@ui8kit/aria` pattern is included in the site bundle. It reads the generated `web/static/js/manifest.json` when present, otherwise it falls back to `package.json` `ui8kit.aria`.
+
+Examples:
+
+- `data-ui8kit="dialog"` requires the `dialog` pattern.
+- `data-ui8kit="sheet"` and `data-ui8kit="alertdialog"` also require `dialog`.
+- `data-ui8kit="tabs"` requires `tabs`.
+- `@ui8layout.Shell(...)` requires `dialog` because the shell owns a mobile sheet.
+
+Use `--package <path>` or `--manifest <path>` when the files live outside the current working directory.
 
 ## Grid Map Validation
 

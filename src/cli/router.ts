@@ -3,6 +3,7 @@ import { printGlobalUsage } from './usage.js';
 import { runInit } from '../commands/init.js';
 import { runLint } from '../commands/lint.js';
 import { runPolicyReview } from '../commands/policy-review.js';
+import { runValidateAria } from '../commands/validate-aria.js';
 import { runValidateGrid } from '../commands/validate-grid.js';
 import { runValidatePatterns } from '../commands/validate-patterns.js';
 
@@ -19,6 +20,8 @@ export function runCommand(args: CliArgs): Promise<number> {
       return runValidateGrid(args);
     case 'validate-patterns':
       return runValidatePatterns(args);
+    case 'validate-aria':
+      return runValidateAria(args);
     case 'policy-review':
       return runPolicyReview(args);
     default:

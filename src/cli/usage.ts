@@ -5,6 +5,7 @@ export function printGlobalUsage(): string {
 Commands:
   init                         create .ui8px policy files
   lint [paths...]              validate utility classes in source files
+  validate aria [paths...]     ensure used UI8Kit ARIA hooks are bundled
   validate grid                validate a generated class map against 8/4px CSS values
   validate patterns [paths...] find repeated utility compositions
   policy review                show learned policy proposals
@@ -13,6 +14,7 @@ Examples:
   npx ui8px init
   npx ui8px lint ./...
   npx ui8px lint ./... --learn
+  npx ui8px validate aria ./...
   npx ui8px validate grid --input class-map.json --output class-map.backlog.json
   npx ui8px validate patterns ./...`;
 }
@@ -60,6 +62,18 @@ Options:
   --output <path>       report output path (default: .ui8px/reports/patterns.json)
   --verbose             include source locations in console output
   -h, --help            show help`;
+}
+
+export function printValidateAriaUsage(): string {
+  return `Usage:
+  npx ui8px validate aria [paths...] [options]
+
+Options:
+  --package <path>   package.json path with ui8kit.aria config
+  --manifest <path>  generated manifest.json path from UI8Kit sync-assets
+  --json             print result as JSON
+  --verbose          show all violations
+  -h, --help         show help`;
 }
 
 export function printPolicyReviewUsage(): string {
