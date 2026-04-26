@@ -23,6 +23,7 @@ For a full onboarding path, read the docs:
 
 ```bash
 npx ui8px init
+npx ui8px init --preset go
 npx ui8px lint ./...
 npx ui8px lint ./... --learn
 npx ui8px validate grid --input class-map.json --output class-map.backlog.json
@@ -52,7 +53,7 @@ npx ui8px --design grid --input class-map.json --output class-map.backlog.json
   reports/
 ```
 
-If `.ui8px` is missing, `ui8px lint` uses bundled defaults.
+If `.ui8px` is missing, `ui8px lint` uses bundled defaults. For Go component libraries, use `npx ui8px init --preset go` to make `ui/**`, `components/**`, and `utils/**/*.go` control scope while examples and views remain strict layout scope.
 
 ## 8px Spacing Policy
 
@@ -104,7 +105,19 @@ Supported source types:
 
 - `.templ` and `.html`: static `class="..."` values.
 - `.css`: `@apply ...;` utility lists.
-- `.go`: simple static `templ.Attributes{"class": "..."}` style values.
+- `.go`: static `templ.Attributes{"class": "..."}` style values, `utils.Cn(...)`, `Cn(...)`, mixed literal/dynamic `Cn` calls, and static `return "..."` helper strings.
+
+Go examples:
+
+```go
+return utils.Cn(base, "px-3", props.Class)
+```
+
+```go
+return "h-8 px-3 text-sm"
+```
+
+The extractor reads only static string literals. It does not execute Go code and ignores dynamic arguments.
 
 Example diagnostic:
 

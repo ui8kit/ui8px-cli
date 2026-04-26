@@ -9,7 +9,7 @@ export function runInit(args: InitCliArgs): Promise<number> {
     return Promise.resolve(0);
   }
 
-  const written = initPolicyFiles(process.cwd(), args.force);
+  const written = initPolicyFiles(process.cwd(), args.force, args.preset);
   const root = policyRoot(process.cwd());
   if (!written.length) {
     console.log(`ui8px policy already exists at ${root}`);
@@ -18,6 +18,7 @@ export function runInit(args: InitCliArgs): Promise<number> {
   }
 
   console.log(`Initialized ui8px policy at ${root}`);
+  console.log(`Preset: ${args.preset}`);
   for (const file of written) {
     console.log(`- ${path.relative(process.cwd(), file).replace(/\\/g, '/')}`);
   }

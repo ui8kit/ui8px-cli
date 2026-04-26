@@ -1,6 +1,6 @@
 {
   "name": "ui8px",
-  "version": "0.2.5",
+  "version": "0.2.1",
   "description": "Framework-agnostic CLI for strict 8px utility-class linting, telemetry, and pattern discovery",
   "author": "UI8Kit",
   "license": "MIT",

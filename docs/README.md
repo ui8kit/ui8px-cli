@@ -21,6 +21,7 @@ That means:
 
 - Layout files should use values like `px-2`, `px-4`, `px-6`, `px-8`.
 - Compact control files may use fine tuning like `px-3`, `py-1`, `gap-1`.
+- Go component libraries can opt into `init --preset go` so variant helpers and primitives get control-scope fine tuning while examples stay strict.
 - Raw palette utilities like `bg-red-500` can be denied in favor of semantic tokens like `bg-destructive`.
 - Repeated class sets can be discovered and reviewed before they become `ui-*` semantic patterns.
 

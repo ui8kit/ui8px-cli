@@ -94,3 +94,90 @@ test('validate patterns treats reordered class lists as the same pattern', () =>
   assert.equal(report.patterns.length, 1);
   assert.equal(report.patterns[0].count, 2);
 });
+
+test('go preset allows compact tuning in Go variant helpers', () => {
+  const root = tempProject();
+  const init = runCli(root, ['init', '--preset', 'go']);
+  assert.equal(init.status, 0, init.stderr);
+  writeFile(root, 'utils/variants.go', `
+package utils
+
+func ButtonSizeVariant(size string) string {
+  return "h-8 px-3 text-sm"
+}
+`);
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /Violations: 0/);
+});
+
+test('go extractor reads utils.Cn, Cn, return literals, and mixed dynamic args', () => {
+  const root = tempProject();
+  const init = runCli(root, ['init', '--preset', 'go']);
+  assert.equal(init.status, 0, init.stderr);
+  writeFile(root, 'utils/variants.go', `
+package utils
+
+func ButtonClasses(props Props) string {
+  base := "inline-flex items-center"
+  _ = Cn("h-8 px-3 text-sm")
+  _ = utils.Cn("inline-flex items-center", "px-3 py-2")
+  return utils.Cn(base, "px-3", props.Class)
+}
+
+func BadgeClasses() string {
+  return "h-7 px-3 text-sm"
+}
+`);
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /Violations: 0/);
+});
+
+test('go extractor denies compact tuning in layout examples', () => {
+  const root = tempProject();
+  const init = runCli(root, ['init', '--preset', 'go']);
+  assert.equal(init.status, 0, init.stderr);
+  writeFile(root, 'tests/examples/page.go', `
+package examples
+
+func PageClasses() string {
+  return "px-3 py-4"
+}
+`);
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /UI8PX001/);
+  assert.match(result.stdout, /px-3/);
+});
+
+test('validate patterns includes repeated Go class compositions', () => {
+  const root = tempProject();
+  const init = runCli(root, ['init', '--preset', 'go']);
+  assert.equal(init.status, 0, init.stderr);
+  writeFile(root, 'utils/a.go', `
+package utils
+
+func A() string {
+  return utils.Cn("justify-end px-6 py-4", props.Class)
+}
+`);
+  writeFile(root, 'utils/b.go', `
+package utils
+
+func B() string {
+  return Cn("px-6 py-4 justify-end")
+}
+`);
+
+  const result = runCli(root, ['validate', 'patterns', './...', '--min-count', '2']);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /Repeated patterns: 1/);
+
+  const report = JSON.parse(readFileSync(path.join(root, '.ui8px', 'reports', 'patterns.json'), 'utf8'));
+  assert.equal(report.patterns.length, 1);
+  assert.equal(report.patterns[0].count, 2);
+});

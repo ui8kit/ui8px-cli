@@ -6,8 +6,11 @@ import {
   DEFAULT_GROUPS_POLICY,
   DEFAULT_PATTERNS_POLICY,
   DEFAULT_SCOPES_POLICY,
+  GO_SCOPES_POLICY,
 } from './default-policy.js';
 import { AllowedPolicy, DeniedPolicy, GroupsPolicy, LoadedPolicy, PatternsPolicy, ScopesPolicy } from './types.js';
+
+export type PolicyPreset = 'default' | 'go';
 
 function readJsonFile<T>(filePath: string, fallback: T): T {
   if (!fs.existsSync(filePath)) {
@@ -43,13 +46,20 @@ export function loadPolicy(rootDir = process.cwd()): LoadedPolicy {
   };
 }
 
-export function initPolicyFiles(rootDir = process.cwd(), force = false): string[] {
+function scopesForPreset(preset: PolicyPreset): ScopesPolicy {
+  if (preset === 'go') {
+    return GO_SCOPES_POLICY;
+  }
+  return DEFAULT_SCOPES_POLICY;
+}
+
+export function initPolicyFiles(rootDir = process.cwd(), force = false, preset: PolicyPreset = 'default'): string[] {
   const policyDir = path.join(policyRoot(rootDir), 'policy');
   const written: string[] = [];
   const files: Array<[string, unknown]> = [
     ['allowed.json', DEFAULT_ALLOWED_POLICY],
     ['denied.json', DEFAULT_DENIED_POLICY],
-    ['scopes.json', DEFAULT_SCOPES_POLICY],
+    ['scopes.json', scopesForPreset(preset)],
     ['groups.json', DEFAULT_GROUPS_POLICY],
     ['patterns.json', DEFAULT_PATTERNS_POLICY],
   ];

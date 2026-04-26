@@ -5,6 +5,7 @@ export interface BaseCliArgs {
 export interface InitCliArgs extends BaseCliArgs {
   command: 'init';
   force: boolean;
+  preset: 'default' | 'go';
 }
 
 export interface LintCliArgs extends BaseCliArgs {
@@ -102,17 +103,31 @@ export function parseArgs(argv: string[]): CliArgs {
 
 function parseInitArgs(argv: string[]): InitCliArgs {
   let force = false;
-  for (const arg of argv) {
+  let preset: InitCliArgs['preset'] = 'default';
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
     if (arg === '--help' || arg === '-h') {
-      return { command: 'init', help: true, force };
+      return { command: 'init', help: true, force, preset };
     }
     if (arg === '--force') {
       force = true;
       continue;
     }
+    if (arg === '--preset') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('-')) {
+        fail('--preset requires a value.');
+      }
+      if (value !== 'default' && value !== 'go') {
+        fail(`Unsupported preset: ${value}. Supported presets: default, go.`);
+      }
+      preset = value;
+      i += 1;
+      continue;
+    }
     fail(`Unknown option for init: ${arg}`);
   }
-  return { command: 'init', help: false, force };
+  return { command: 'init', help: false, force, preset };
 }
 
 function parseLintArgs(argv: string[]): LintCliArgs {

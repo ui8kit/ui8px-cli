@@ -176,6 +176,35 @@ export const DEFAULT_SCOPES_POLICY: ScopesPolicy = {
   ],
 };
 
+export const GO_SCOPES_POLICY: ScopesPolicy = {
+  defaultScope: 'layout',
+  scopes: [
+    {
+      name: 'controls',
+      files: [
+        'ui/**',
+        'components/**',
+        'elements/**',
+        'utils/*.go',
+        'utils/**/*.go',
+      ],
+      spacing: 'control',
+    },
+    {
+      name: 'layout',
+      files: [
+        'examples/**',
+        'tests/examples/**',
+        'testdata/**',
+        'internal/site/views/**',
+        '**/views/**',
+        '**/pages/**',
+      ],
+      spacing: 'layout',
+    },
+  ],
+};
+
 export const DEFAULT_GROUPS_POLICY: GroupsPolicy = {
   conflictGroups: {
     display: ['block', 'inline', 'inline-block', 'inline-flex', 'flex', 'grid', 'hidden'],

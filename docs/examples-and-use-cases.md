@@ -196,3 +196,41 @@ Found 1 violations.
 ```
 
 This command is useful when validating compiled or generated CSS maps.
+
+## Case 7: Lint Go Variant Helpers
+
+Initialize a Go-friendly policy:
+
+```bash
+npx ui8px init --preset go
+```
+
+Source:
+
+```go
+package utils
+
+func ButtonSizeVariant(size string) string {
+  return "h-8 px-3 text-sm"
+}
+```
+
+Because `utils/*.go` is in control scope in the Go preset, `px-3` is allowed here. The same class remains denied in layout examples such as `tests/examples/**`.
+
+`ui8px` also reads static utility literals inside `Cn` calls:
+
+```go
+return utils.Cn(base, "px-3", props.Class)
+```
+
+```go
+return Cn("inline-flex items-center", "px-3 py-2")
+```
+
+Dynamic arguments are ignored. The linter only extracts static string literals, so it does not execute Go code or require a Go build.
+
+Pattern discovery includes those Go class lists too:
+
+```bash
+npx ui8px validate patterns ui components utils styles tests/examples
+```

@@ -1,4 +1,4 @@
-export type ClassSourceKind = 'class-attribute' | 'css-apply' | 'go-static';
+export type ClassSourceKind = 'class-attribute' | 'css-apply' | 'go-static' | 'go-cn' | 'go-return';
 
 export interface ClassOccurrence {
   file: string;

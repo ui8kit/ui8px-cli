@@ -2,6 +2,14 @@
 
 `ui8px` stores project-specific rules in `.ui8px/`. If the directory does not exist, the CLI uses bundled defaults. Run `ui8px init` when you want to make the rules explicit and version them with the project.
 
+For Go component libraries, use:
+
+```bash
+npx ui8px init --preset go
+```
+
+The Go preset keeps component and helper folders in control scope, including `ui/**`, `components/**`, and `utils/**/*.go`, while examples and views remain strict layout scope.
+
 ## Directory Layout
 
 ```text
@@ -98,6 +106,28 @@ Maps files to policy scopes.
 ```
 
 Scope matching is file based. That is deliberate: it is more reliable in CI than trying to infer intent from markup.
+
+### Go Preset Example
+
+```json
+{
+  "defaultScope": "layout",
+  "scopes": [
+    {
+      "name": "controls",
+      "files": ["ui/**", "components/**", "elements/**", "utils/*.go", "utils/**/*.go"],
+      "spacing": "control"
+    },
+    {
+      "name": "layout",
+      "files": ["examples/**", "tests/examples/**", "testdata/**", "internal/site/views/**", "**/views/**", "**/pages/**"],
+      "spacing": "layout"
+    }
+  ]
+}
+```
+
+With this preset, `px-3` is allowed in Go variant helpers such as `utils/variants.go`, but still denied in layout examples and page views.
 
 ## `groups.json`
 

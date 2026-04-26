@@ -16,6 +16,7 @@ Prints available commands and exits with code `0`.
 ```bash
 npx ui8px init
 npx ui8px init --force
+npx ui8px init --preset go
 ```
 
 Creates the project-local `.ui8px/` directory:
@@ -35,6 +36,7 @@ Creates the project-local `.ui8px/` directory:
 Options:
 
 - `--force`: overwrite existing policy files.
+- `--preset default|go`: choose the policy preset to write. `go` is designed for Go component libraries that keep compact control helpers in `ui/**`, `components/**`, and `utils/**/*.go`.
 
 ## `lint`
 
@@ -53,7 +55,7 @@ Supported source types:
 - `.templ`: static `class="..."` values
 - `.html`: static `class="..."` values
 - `.css`: `@apply ...;` utility lists
-- `.go`: simple static `templ.Attributes{"class": "..."}` style values
+- `.go`: static `templ.Attributes{"class": "..."}` values, `utils.Cn(...)`, `Cn(...)`, mixed literal/dynamic `Cn` calls, and static `return "..."` helper strings
 
 Options:
 

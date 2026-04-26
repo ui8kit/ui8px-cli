@@ -19,9 +19,10 @@ Examples:
 
 export function printInitUsage(): string {
   return `Usage:
-  npx ui8px init [--force]
+  npx ui8px init [--preset default|go] [--force]
 
 Options:
+  --preset  policy preset to write (default: default)
   --force   overwrite existing .ui8px policy files
   -h, --help show help`;
 }
