@@ -25,6 +25,7 @@ For a full onboarding path, read the docs:
 npx ui8px init
 npx ui8px init --preset go
 npx ui8px lint ./...
+npx ui8px lint ./... --ignore .manual .project
 npx ui8px lint ./... --learn
 npx ui8px validate aria ./...
 npx ui8px validate grid --input class-map.json --output class-map.backlog.json
@@ -55,6 +56,16 @@ npx ui8px --design grid --input class-map.json --output class-map.backlog.json
 ```
 
 If `.ui8px` is missing, `ui8px lint` uses bundled defaults. For Go component libraries, use `npx ui8px init --preset go` to make `ui/**`, `components/**`, and `utils/**/*.go` control scope while examples and views remain strict layout scope.
+
+`ui8px` reads the current working directory's `.gitignore` automatically during file scanning. Use `--ignore` to add extra ignored files or folders for a single run:
+
+```bash
+npx ui8px lint ./... --ignore .manual .project snapshots
+npx ui8px validate patterns ./... --ignore fixtures/reference
+npx ui8px validate aria ./... --ignore .manual
+```
+
+Place scan paths before `--ignore`; every non-option value after `--ignore` is treated as an ignore entry.
 
 ## 8px Spacing Policy
 
@@ -100,6 +111,7 @@ Scopes are file/folder based:
 
 ```bash
 npx ui8px lint ./...
+npx ui8px lint ./... --ignore .manual .project
 ```
 
 Supported source types:
@@ -119,6 +131,8 @@ return "h-8 px-3 text-sm"
 ```
 
 The extractor reads only static string literals. It does not execute Go code and ignores dynamic arguments.
+
+By default, lint scanning skips built-in transient folders (`.git`, `.ui8px`, `node_modules`, `dist`, coverage/cache folders) and entries from the local `.gitignore`.
 
 Example diagnostic:
 

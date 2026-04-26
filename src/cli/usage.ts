@@ -13,6 +13,7 @@ Commands:
 Examples:
   npx ui8px init
   npx ui8px lint ./...
+  npx ui8px lint ./... --ignore .manual .project
   npx ui8px lint ./... --learn
   npx ui8px validate aria ./...
   npx ui8px validate grid --input class-map.json --output class-map.backlog.json
@@ -35,6 +36,8 @@ export function printLintUsage(): string {
 
 Options:
   --learn   append diagnostics to .ui8px/telemetry/observed.jsonl and proposals.json
+  --ignore <paths...>
+            ignore additional files or folders; .gitignore is read automatically
   --json    print diagnostics as JSON
   --verbose print extracted class locations
   -h, --help show help`;
@@ -60,6 +63,7 @@ export function printValidatePatternsUsage(): string {
 Options:
   --min-count <number>  minimum occurrences before reporting a pattern (default: 2)
   --output <path>       report output path (default: .ui8px/reports/patterns.json)
+  --ignore <paths...>   ignore additional files or folders; .gitignore is read automatically
   --verbose             include source locations in console output
   -h, --help            show help`;
 }
@@ -71,6 +75,8 @@ export function printValidateAriaUsage(): string {
 Options:
   --package <path>   package.json path with ui8kit.aria config
   --manifest <path>  generated manifest.json path from UI8Kit sync-assets
+  --ignore <paths...>
+                     ignore additional files or folders; .gitignore is read automatically
   --json             print result as JSON
   --verbose          show all violations
   -h, --help         show help`;

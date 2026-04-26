@@ -15,7 +15,7 @@ export function runLint(args: LintCliArgs): Promise<number> {
 
   const rootDir = process.cwd();
   const policy = loadPolicy(rootDir);
-  const occurrences = extractClasses(args.paths, rootDir);
+  const occurrences = extractClasses(args.paths, rootDir, { ignore: args.ignore });
   const result = lintOccurrences(policy, occurrences);
 
   if (args.json) {

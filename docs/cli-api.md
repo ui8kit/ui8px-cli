@@ -43,6 +43,7 @@ Options:
 ```bash
 npx ui8px lint ./...
 npx ui8px lint src/views src/components
+npx ui8px lint ./... --ignore .manual .project
 npx ui8px lint ./... --learn
 npx ui8px lint ./... --json
 npx ui8px lint ./... --verbose
@@ -60,6 +61,7 @@ Supported source types:
 Options:
 
 - `--learn`: write `.ui8px/telemetry/observed.jsonl` and update `.ui8px/telemetry/proposals.json`.
+- `--ignore <paths...>`: add extra ignored files or folders for this run. The current working directory's `.gitignore` is read automatically.
 - `--json`: print the lint result as JSON.
 - `--verbose`: include diagnostics even when no violations are found.
 
@@ -75,6 +77,7 @@ Exit codes:
 npx ui8px validate aria ./...
 npx ui8px validate aria internal/site/views --package package.json
 npx ui8px validate aria ./... --manifest web/static/js/manifest.json
+npx ui8px validate aria ./... --ignore .manual
 npx ui8px validate aria ./... --json
 ```
 
@@ -89,6 +92,7 @@ Options:
 
 - `--package <path>`: package.json path with `ui8kit.aria` config.
 - `--manifest <path>`: generated UI8Kit asset manifest path.
+- `--ignore <paths...>`: add extra ignored files or folders for this run. The current working directory's `.gitignore` is read automatically.
 - `--json`: print the validation result as JSON.
 - `--verbose`: print every diagnostic instead of the first page.
 
@@ -148,10 +152,13 @@ npx ui8px --design grid --input class-map.json --output class-map.backlog.json
 npx ui8px validate patterns ./...
 npx ui8px validate patterns ./... --min-count 3
 npx ui8px validate patterns ./... --output .ui8px/reports/patterns.json
+npx ui8px validate patterns ./... --ignore .manual .project
 npx ui8px validate patterns ./... --verbose
 ```
 
 Finds repeated utility-class compositions.
+
+Like `lint`, this command reads the current working directory's `.gitignore` automatically and accepts `--ignore <paths...>` for run-specific excludes. Place scan paths before `--ignore`; every non-option value after `--ignore` is treated as an ignore entry.
 
 It:
 

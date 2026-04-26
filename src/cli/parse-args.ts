@@ -11,6 +11,7 @@ export interface InitCliArgs extends BaseCliArgs {
 export interface LintCliArgs extends BaseCliArgs {
   command: 'lint';
   paths: string[];
+  ignore: string[];
   learn: boolean;
   json: boolean;
   verbose: boolean;
@@ -29,6 +30,7 @@ export interface ValidateGridCliArgs extends BaseCliArgs {
 export interface ValidatePatternsCliArgs extends BaseCliArgs {
   command: 'validate-patterns';
   paths: string[];
+  ignore: string[];
   minCount: number;
   output?: string;
   verbose: boolean;
@@ -37,6 +39,7 @@ export interface ValidatePatternsCliArgs extends BaseCliArgs {
 export interface ValidateAriaCliArgs extends BaseCliArgs {
   command: 'validate-aria';
   paths: string[];
+  ignore: string[];
   packagePath?: string;
   manifestPath?: string;
   json: boolean;
@@ -74,6 +77,27 @@ function parsePositiveNumber(value: string, label: string): number {
     fail(`${label} must be a positive number.`);
   }
   return parsed;
+}
+
+function collectIgnoreValues(argv: string[], index: number, target: string[]): number {
+  const inlineValue = argv[index].startsWith('--ignore=') ? argv[index].slice('--ignore='.length) : undefined;
+  if (inlineValue !== undefined) {
+    if (!inlineValue) {
+      fail('--ignore requires at least one path.');
+    }
+    target.push(...inlineValue.split(',').map((value) => value.trim()).filter(Boolean));
+    return index;
+  }
+
+  let next = index + 1;
+  while (next < argv.length && !argv[next].startsWith('-')) {
+    target.push(argv[next]);
+    next += 1;
+  }
+  if (next === index + 1) {
+    fail('--ignore requires at least one path.');
+  }
+  return next - 1;
 }
 
 export function parseArgs(argv: string[]): CliArgs {
@@ -145,13 +169,19 @@ function parseInitArgs(argv: string[]): InitCliArgs {
 
 function parseLintArgs(argv: string[]): LintCliArgs {
   const paths: string[] = [];
+  const ignore: string[] = [];
   let learn = false;
   let json = false;
   let verbose = false;
 
-  for (const arg of argv) {
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
     if (arg === '--help' || arg === '-h') {
-      return { command: 'lint', help: true, paths: [], learn, json, verbose };
+      return { command: 'lint', help: true, paths: [], ignore, learn, json, verbose };
+    }
+    if (arg === '--ignore' || arg.startsWith('--ignore=')) {
+      i = collectIgnoreValues(argv, i, ignore);
+      continue;
     }
     if (arg === '--learn') {
       learn = true;
@@ -175,6 +205,7 @@ function parseLintArgs(argv: string[]): LintCliArgs {
     command: 'lint',
     help: false,
     paths: paths.length ? paths : ['./...'],
+    ignore,
     learn,
     json,
     verbose,
@@ -183,6 +214,7 @@ function parseLintArgs(argv: string[]): LintCliArgs {
 
 function parseValidatePatternsArgs(argv: string[]): ValidatePatternsCliArgs {
   const paths: string[] = [];
+  const ignore: string[] = [];
   let minCount = DEFAULT_PATTERN_MIN_COUNT;
   let output: string | undefined;
   let verbose = false;
@@ -190,7 +222,11 @@ function parseValidatePatternsArgs(argv: string[]): ValidatePatternsCliArgs {
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--help' || arg === '-h') {
-      return { command: 'validate-patterns', help: true, paths: [], minCount, output, verbose };
+      return { command: 'validate-patterns', help: true, paths: [], ignore, minCount, output, verbose };
+    }
+    if (arg === '--ignore' || arg.startsWith('--ignore=')) {
+      i = collectIgnoreValues(argv, i, ignore);
+      continue;
     }
     if (arg === '--min-count') {
       const value = argv[i + 1];
@@ -224,6 +260,7 @@ function parseValidatePatternsArgs(argv: string[]): ValidatePatternsCliArgs {
     command: 'validate-patterns',
     help: false,
     paths: paths.length ? paths : ['./...'],
+    ignore,
     minCount,
     output,
     verbose,
@@ -232,6 +269,7 @@ function parseValidatePatternsArgs(argv: string[]): ValidatePatternsCliArgs {
 
 function parseValidateAriaArgs(argv: string[]): ValidateAriaCliArgs {
   const paths: string[] = [];
+  const ignore: string[] = [];
   let packagePath: string | undefined;
   let manifestPath: string | undefined;
   let json = false;
@@ -240,7 +278,11 @@ function parseValidateAriaArgs(argv: string[]): ValidateAriaCliArgs {
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--help' || arg === '-h') {
-      return { command: 'validate-aria', help: true, paths: [], packagePath, manifestPath, json, verbose };
+      return { command: 'validate-aria', help: true, paths: [], ignore, packagePath, manifestPath, json, verbose };
+    }
+    if (arg === '--ignore' || arg.startsWith('--ignore=')) {
+      i = collectIgnoreValues(argv, i, ignore);
+      continue;
     }
     if (arg === '--package') {
       const value = argv[i + 1];
@@ -278,6 +320,7 @@ function parseValidateAriaArgs(argv: string[]): ValidateAriaCliArgs {
     command: 'validate-aria',
     help: false,
     paths: paths.length ? paths : ['./...'],
+    ignore,
     packagePath,
     manifestPath,
     json,

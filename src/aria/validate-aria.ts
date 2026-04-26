@@ -201,9 +201,9 @@ export function extractAriaUsagesFromFile(file: string): AriaUsage[] {
 export function validateAriaPatterns(
   inputs: string[],
   rootDir = process.cwd(),
-  options: { packagePath?: string; manifestPath?: string } = {},
+  options: { ignore?: string[]; packagePath?: string; manifestPath?: string } = {},
 ): AriaValidationResult {
-  const files = scanFiles(inputs, rootDir).filter((file) => {
+  const files = scanFiles(inputs, rootDir, { ignore: options.ignore }).filter((file) => {
     const ext = path.extname(file);
     return ext === '.templ' || ext === '.html' || ext === '.go';
   });

@@ -63,6 +63,30 @@ test('lint allows 4px fine tuning in control scope', () => {
   assert.match(result.stdout, /Violations: 0/);
 });
 
+test('lint skips files ignored by local .gitignore', () => {
+  const root = tempProject();
+  writeFile(root, '.gitignore', '.manual/\n');
+  writeFile(root, '.manual/reference.html', '<div class="reference-only-class"></div>');
+  writeFile(root, 'src/views/page.templ', '<section class="px-4 py-4 flex"></section>');
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /Checked files: 1/);
+  assert.match(result.stdout, /Violations: 0/);
+});
+
+test('lint accepts extra ignored folders after --ignore', () => {
+  const root = tempProject();
+  writeFile(root, '.manual/reference.html', '<div class="reference-only-class"></div>');
+  writeFile(root, '.project/reference.html', '<div class="project-only-class"></div>');
+  writeFile(root, 'src/views/page.templ', '<section class="px-4 py-4 flex"></section>');
+
+  const result = runCli(root, ['lint', './...', '--ignore', '.manual', '.project']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /Checked files: 1/);
+  assert.match(result.stdout, /Violations: 0/);
+});
+
 test('learn mode writes observed JSONL and proposals', () => {
   const root = tempProject();
   writeFile(root, 'src/views/page.templ', '<section class="px-3 bg-red-500"></section>');

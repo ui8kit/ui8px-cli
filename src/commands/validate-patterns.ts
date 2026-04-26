@@ -13,7 +13,7 @@ export function runValidatePatterns(args: ValidatePatternsCliArgs): Promise<numb
   }
 
   const rootDir = process.cwd();
-  const occurrences = extractClasses(args.paths, rootDir);
+  const occurrences = extractClasses(args.paths, rootDir, { ignore: args.ignore });
   const patterns = detectPatterns(occurrences, args.minCount);
   const output = args.output ?? path.join(policyRoot(rootDir), 'reports', 'patterns.json');
   fs.mkdirSync(path.dirname(output), { recursive: true });

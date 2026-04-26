@@ -14,6 +14,7 @@ export function runValidateAria(args: ValidateAriaCliArgs): Promise<number> {
   }
 
   const result = validateAriaPatterns(args.paths, process.cwd(), {
+    ignore: args.ignore,
     packagePath: args.packagePath,
     manifestPath: args.manifestPath,
   });
