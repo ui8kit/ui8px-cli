@@ -1,4 +1,10 @@
-# ui8px
+![NPM Version](https://img.shields.io/npm/v/ui8px)
+![NPM Type Definitions](https://img.shields.io/npm/types/ui8px)
+![GitHub deployments](https://img.shields.io/github/deployments/ui8kit/ui8px-cli/npm)
+[![Socket Badge](https://badge.socket.dev/npm/package/ui8px/0.2.4)](https://badge.socket.dev/npm/package/ui8px/0.2.4)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
+# UI8px CLI
 
 `ui8px` is a framework-agnostic CLI for keeping utility-class projects aligned to a strict 8px design grid. It is intended for Tailwind-style workflows where classes remain explicit in source code, while a policy layer prevents drift, raw palette usage, accidental 4px layout spacing, and repeated unreviewed patterns.
 
