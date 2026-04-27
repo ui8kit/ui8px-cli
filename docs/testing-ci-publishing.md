@@ -59,6 +59,8 @@ The repository uses two workflows:
 npm publish --access public --provenance
 ```
 
+Both workflows use Node.js 24 so GitHub Actions runs with an npm version that supports current npm Trusted Publishing/OIDC behavior. If publishing fails with a misleading `E404 Not Found - PUT https://registry.npmjs.org/...`, check the printed `npm --version` first and make sure it is `11.5.1` or newer.
+
 ## Trusted Publishing
 
 For provenance publishing, configure npm Trusted Publisher for the package:
@@ -126,6 +128,7 @@ Before publishing:
 
 If `npm publish` fails in CI with an authentication error:
 
+- verify the workflow is using Node.js 24 or npm `11.5.1+`;
 - verify Trusted Publisher is configured for the correct package;
 - verify the workflow filename is `publish.yml`;
 - verify the workflow environment is `npm`;
