@@ -1,6 +1,6 @@
-![NPM Version](https://img.shields.io/npm/v/ui8px)
-![NPM Type Definitions](https://img.shields.io/npm/types/ui8px)
-![GitHub deployments](https://img.shields.io/github/deployments/ui8kit/ui8px-cli/npm)
+[![NPM Version](https://img.shields.io/npm/v/ui8px)](https://www.npmjs.com/package/ui8px)
+[![NPM Type Definitions](https://img.shields.io/npm/types/ui8px)](https://www.npmjs.com/package/ui8px?activeTab=code)
+[![GitHub deployments](https://img.shields.io/github/deployments/ui8kit/ui8px-cli/npm)](https://github.com/ui8kit/ui8px-cli/actions/workflows/publish.yml)
 [![Socket Badge](https://badge.socket.dev/npm/package/ui8px/0.2.4)](https://badge.socket.dev/npm/package/ui8px/0.2.4)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
