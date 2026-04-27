@@ -1,356 +1,232 @@
 # ui8px
 
-`ui8px` validates utility class maps against an `8 + 4` spacing policy.
+`ui8px` is a framework-agnostic CLI for keeping utility-class projects aligned to a strict 8px design grid. It is intended for Tailwind-style workflows where classes remain explicit in source code, while a policy layer prevents drift, raw palette usage, accidental 4px layout spacing, and repeated unreviewed patterns.
 
-Run directly:
-
-```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
-```
-
-You can also run with npm or bun:
+Run without installing:
 
 ```bash
-npm exec ui8px@latest -- --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
-bunx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
+npx ui8px@latest lint ./...
 ```
 
-## Usage
+## Documentation
+
+For a full onboarding path, read the docs:
+
+- [101: 8px Grid Design](./docs/101-8px-grid.md)
+- [Why Tailwind](./docs/why-tailwind.md)
+- [CLI API Reference](./docs/cli-api.md)
+- [Policy Files](./docs/policy-files.md)
+- [Examples And Use Cases](./docs/examples-and-use-cases.md)
+- [Testing, CI, And Publishing](./docs/testing-ci-publishing.md)
+
+## Commands
 
 ```bash
-npx ui8px@latest --design grid --input <input-json> --output <backlog-json> [options]
+npx ui8px init
+npx ui8px init --preset go
+npx ui8px lint ./...
+npx ui8px lint ./... --ignore .manual .project
+npx ui8px lint ./... --learn
+npx ui8px validate aria ./...
+npx ui8px validate grid --input class-map.json --output class-map.backlog.json
+npx ui8px validate patterns ./...
+npx ui8px policy review
 ```
 
-## Options
-
-- `--input <path>` — input class map JSON (required)
-- `--output <path>` — output backlog JSON path (required)
-- `--spacing-base <number>` — multiplier for `var(--spacing)`; default `4`
-- `--root-font-size <number>` — root font size for `rem`; default `16`
-- `--verbose` — print each violation in terminal
-- `--design grid` — required mode flag
-- `-h, --help` — print usage and exit with `0`
-
-## Output examples
-
-### Validation failed (without `--verbose`)
+Legacy class-map validation is still supported:
 
 ```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
+npx ui8px --design grid --input class-map.json --output class-map.backlog.json
 ```
+
+## Project Files
+
+`ui8px init` creates:
 
 ```text
-Input: ui8kit.map.json
-Output: ui8kit.map.backlog.json
-Design: grid
-Spacing base: 4px
-Checked classes: 120
-Checked declarations: 340
-Violations: 2
-Found 2 violations.
-Report saved to: /Users/.../ui8kit.map.backlog.json
+.ui8px/
+  policy/
+    allowed.json
+    denied.json
+    scopes.json
+    groups.json
+    patterns.json
+  telemetry/
+  reports/
 ```
 
-### Validation failed (with `--verbose`)
+If `.ui8px` is missing, `ui8px lint` uses bundled defaults. For Go component libraries, use `npx ui8px init --preset go` to make `ui/**`, `components/**`, and `utils/**/*.go` control scope while examples and views remain strict layout scope.
+
+`ui8px` reads the current working directory's `.gitignore` automatically during file scanning. Use `--ignore` to add extra ignored files or folders for a single run:
 
 ```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json --verbose
+npx ui8px lint ./... --ignore .manual .project snapshots
+npx ui8px validate patterns ./... --ignore fixtures/reference
+npx ui8px validate aria ./... --ignore .manual
 ```
 
-```text
-Input: ui8kit.map.json
-Output: ui8kit.map.backlog.json
-Design: grid
-Spacing base: 4px
-Checked classes: 120
-Checked declarations: 340
-Violations: 2
-Found 2 violations.
-- h-11 | height: calc(var(--spacing) * 11) -> 44px
-- ml-7 | margin-left: 7px -> 7px
-Report saved to: /Users/.../ui8kit.map.backlog.json
-```
+Place scan paths before `--ignore`; every non-option value after `--ignore` is treated as an ignore entry.
 
-### No violations
+## 8px Spacing Policy
 
-```bash
-npx ui8px@latest --design grid --input ui8kit.clean.map.json --output ui8kit.clean.backlog.json
-```
-
-```text
-Input: ui8kit.clean.map.json
-Output: ui8kit.clean.backlog.json
-Design: grid
-Spacing base: 4px
-Checked classes: 56
-Checked declarations: 110
-Violations: 0
-No violations found.
-Report saved to: /Users/.../ui8kit.clean.backlog.json
-```
-
-### Parser errors
-
-```text
-Error: --input is required.
-```
-
-```text
-Error: --output is required.
-```
-
-```text
-Error: Unknown option: --foo
-```
-
-## Exit codes
-
-- `0` — no violations
-- `1` — violations found
-- `2` — invalid usage or runtime error
-
-# ui8px
-
-`ui8px` validates utility class maps against an `8 + 4` spacing policy.
-
-No one-off install is required:
-
-```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
-```
-
-You can also run with npm or bun:
-
-```bash
-npm exec ui8px@latest -- --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
-bunx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
-```
-
-## Usage
-
-```bash
-npx ui8px@latest --design grid --input <input-json> --output <backlog-json> [options]
-```
-
-## Example
-
-```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json --verbose
-```
-
-Terminal output:
-
-```text
-Input: ui8kit.map.json
-Output: ui8kit.map.backlog.json
-Design: grid
-Spacing base: 4px
-Checked classes: 120
-Checked declarations: 340
-Violations: 2
-Found 2 violations.
-- h-11 | height: calc(var(--spacing) * 11) -> 44px
-- ml-7 | margin-left: 7px -> 7px
-Report saved to: /Users/.../ui8kit.map.backlog.json
-```
-
-Example backlog file:
+Layout scope is strict 8px:
 
 ```json
 {
-  "meta": {
-    "input": "ui8kit.map.json",
-    "output": "ui8kit.map.backlog.json",
-    "design": "grid",
-    "spacingBase": 4,
-    "rootFontSize": 16,
-    "generatedAt": "2026-03-11T12:00:00.000Z",
-    "classesScanned": 120,
-    "declarationsScanned": 340
-  },
-  "summary": {
-    "classesChecked": 120,
-    "declarationsChecked": 340,
-    "violations": 2
-  },
-  "violations": [
+  "spacing": {
+    "layout": ["0", "2", "4", "6", "8", "10", "12", "16", "20", "24"],
+    "control": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "10", "12"]
+  }
+}
+```
+
+Examples:
+
+- `px-2` = 8px, allowed in layout.
+- `px-4` = 16px, allowed in layout.
+- `px-3` = 12px, denied in layout as fine tuning.
+- `px-3` is allowed in control scope for buttons, fields, badges, tabs, and other compact primitives.
+
+Scopes are file/folder based:
+
+```json
+{
+  "defaultScope": "layout",
+  "scopes": [
     {
-      "className": "h-11",
-      "property": "height",
-      "rawValue": "calc(var(--spacing) * 11)",
-      "resolvedPx": 44,
-      "reason": "44px is not aligned to the 8/4px layout policy"
+      "name": "controls",
+      "files": ["src/ui/**", "src/components/**", "ui/**", "components/**"],
+      "spacing": "control"
     },
     {
-      "className": "ml-7",
-      "property": "margin-left",
-      "rawValue": "7px",
-      "resolvedPx": 7,
-      "reason": "7px is not aligned to the 8/4px layout policy"
+      "name": "layout",
+      "files": ["src/views/**", "src/pages/**", "examples/**", "internal/site/views/**"],
+      "spacing": "layout"
     }
   ]
 }
 ```
 
-## `--help`
+## Linting
 
 ```bash
-npx ui8px@latest --help
-npx ui8px@latest -h
+npx ui8px lint ./...
+npx ui8px lint ./... --ignore .manual .project
 ```
 
-Shows usage instructions and exits with code `0`.
+Supported source types:
 
-### Example usage output
+- `.templ` and `.html`: static `class="..."` values.
+- `.css`: `@apply ...;` utility lists.
+- `.go`: static `templ.Attributes{"class": "..."}` style values, `utils.Cn(...)`, `Cn(...)`, mixed literal/dynamic `Cn` calls, and static `return "..."` helper strings.
+
+Go examples:
+
+```go
+return utils.Cn(base, "px-3", props.Class)
+```
+
+```go
+return "h-8 px-3 text-sm"
+```
+
+The extractor reads only static string literals. It does not execute Go code and ignores dynamic arguments.
+
+By default, lint scanning skips built-in transient folders (`.git`, `.ui8px`, `node_modules`, `dist`, coverage/cache folders) and entries from the local `.gitignore`.
+
+Example diagnostic:
 
 ```text
-Usage:
-  npx ui8px --design grid --input <path> --output <path> [options]
-
-Options:
-  --design grid          validate mode (required for spacing checks)
-  --input <path>         path to class map JSON
-  --output <path>        backlog output path
-  --spacing-base <number>    spacing base for var(--spacing) (default: 4)
-  --root-font-size <number>  root font size for rem conversion (default: 16)
-  --verbose                  show detailed violations in console
-  -h, --help                show help
+src/views/landing.templ:24:16 UI8PX001 disallowed utility class "px-3"
+Scope: layout
+Reason: px-3 is not allowed in layout scope.
+Suggestion: use px-2 or px-4
 ```
 
-## Parameters
+Rules:
 
-- `--design grid` — required and only supported mode.
-- `--input <path>` — input class map JSON (required).
-- `--output <path>` — output backlog JSON path (required).
-- `--spacing-base <number>` — multiplier for `var(--spacing)` (default `4`).
-- `--root-font-size <number>` — base font size for `rem` values (default `16`).
-- `--verbose` — print detailed violations.
-- `-h, --help` — show usage.
+- `UI8PX001`: disallowed spacing token for current scope.
+- `UI8PX002`: utility class not in allowed policy.
+- `UI8PX003`: utility class is explicitly denied.
+- `UI8PX004`: conflicting utilities inside the same class list.
+- `UI8PX005`: unknown `ui-*` semantic class.
 
-## Argument parsing behaviour
-
-- `--design` must be exactly `grid`.
-- One of the required flags `--input` and `--output` can be omitted only with `--help`.
-- Unknown flags and extra positional arguments are rejected.
-- Missing required values (`--input`, `--output`, `--spacing-base`, `--root-font-size`, `--design`) result in a validation error.
-- `--verbose` is optional and defaults to `false`.
-
-## Examples of parser errors
+## Learn Mode
 
 ```bash
-npx ui8px@latest --design grid --output ui8kit.map.backlog.json
+npx ui8px lint ./... --learn
 ```
 
+Learn mode writes:
+
 ```text
-Error: --input is required.
-Exit code: 2
+.ui8px/telemetry/observed.jsonl
+.ui8px/telemetry/proposals.json
 ```
+
+Plain `lint` does not mutate files. `--learn` records unknown, denied, and disallowed classes so a developer or LLM-assisted workflow can review recurring issues later.
+
+## Pattern Discovery
 
 ```bash
-npx ui8px@latest --design grid --input ui8kit.map.json
+npx ui8px validate patterns ./...
 ```
 
+This command finds repeated class-list compositions. It normalizes class order, removes internal duplicates, resolves simple conflict groups, and writes:
+
 ```text
-Error: --output is required.
-Exit code: 2
+.ui8px/reports/patterns.json
 ```
+
+Example:
+
+```text
+Repeated pattern found 14 times:
+  flex items-center justify-between gap-4 px-6 py-4
+Suggested semantic class:
+  ui-section-header
+```
+
+`ui8px` does not automatically generate `@apply` CSS. It reports candidates so semantic `ui-*` patterns can be reviewed intentionally.
+
+## ARIA Bundle Validation
 
 ```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json --foo
+npx ui8px validate aria ./...
 ```
 
-```text
-Error: Unknown option: --foo
-Exit code: 2
-```
+This command scans source files for static `data-ui8kit="..."` hooks and common UI8Kit component calls such as `@ui8layout.Shell(...)`, `@ui.Accordion(...)`, and `@ui.Tabs(...)`. It checks that the matching `@ui8kit/aria` pattern is included in the site bundle. It reads the generated `web/static/js/manifest.json` when present, otherwise it falls back to `package.json` `ui8kit.aria`.
 
-Error messages are prefixed with `Error:` by the parser and printed by the CLI wrapper before exiting.
+Examples:
 
-## Example with no violations
+- `data-ui8kit="dialog"` requires the `dialog` pattern.
+- `data-ui8kit="sheet"` and `data-ui8kit="alertdialog"` also require `dialog`.
+- `data-ui8kit="tabs"` requires `tabs`.
+- `@ui8layout.Shell(...)` requires `dialog` because the shell owns a mobile sheet.
+
+Use `--package <path>` or `--manifest <path>` when the files live outside the current working directory.
+
+## Grid Map Validation
+
+The existing map validator remains available:
 
 ```bash
-npx ui8px@latest --design grid --input ui8kit.clean.map.json --output ui8kit.clean.backlog.json
+npx ui8px validate grid --input class-map.json --output class-map.backlog.json
 ```
 
-Terminal output:
+It checks CSS declaration values in a class map and reports values that do not resolve to the 8/4px grid.
 
-```text
-Input: ui8kit.clean.map.json
-Output: ui8kit.clean.backlog.json
-Design: grid
-Spacing base: 4px
-Checked classes: 56
-Checked declarations: 110
-Violations: 0
-No violations found.
-Report saved to: /Users/.../ui8kit.clean.backlog.json
-```
+## Exit Codes
 
-Example backlog:
-
-```json
-{
-  "meta": {
-    "input": "ui8kit.clean.map.json",
-    "output": "ui8kit.clean.backlog.json",
-    "design": "grid",
-    "spacingBase": 4,
-    "rootFontSize": 16,
-    "generatedAt": "2026-03-11T12:10:00.000Z",
-    "classesScanned": 56,
-    "declarationsScanned": 110
-  },
-  "summary": {
-    "classesChecked": 56,
-    "declarationsChecked": 110,
-    "violations": 0
-  },
-  "violations": []
-}
-```
-
-## `--verbose` vs standard output
-
-```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json
-```
-
-Standard output:
-
-```text
-Input: ui8kit.map.json
-Output: ui8kit.map.backlog.json
-Design: grid
-Spacing base: 4px
-Checked classes: 120
-Checked declarations: 340
-Violations: 2
-Found 2 violations.
-Report saved to: /Users/.../ui8kit.map.backlog.json
-```
-
-```bash
-npx ui8px@latest --design grid --input ui8kit.map.json --output ui8kit.map.backlog.json --verbose
-```
-
-Verbose output:
-
-```text
-Input: ui8kit.map.json
-Output: ui8kit.map.backlog.json
-Design: grid
-Spacing base: 4px
-Checked classes: 120
-Checked declarations: 340
-Violations: 2
-Found 2 violations.
-- h-11 | height: calc(var(--spacing) * 11) -> 44px
-- ml-7 | margin-left: 7px -> 7px
-Report saved to: /Users/.../ui8kit.map.backlog.json
-```
-
-## Exit codes
-
-- `0` — no violations.
-- `1` — violations found.
+- `0` — no blocking violations.
+- `1` — lint, grid, or pattern violations found.
 - `2` — invalid usage or runtime error.
+
+## Publishing
+
+Before publishing:
+
+```bash
+npm run preflight
+npm publish --access public --provenance
+```

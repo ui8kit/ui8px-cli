@@ -1,21 +1,17 @@
 #!/usr/bin/env node
 /**
- * ui8px — Validate utility class maps against an 8 + 4 spacing policy.
+ * ui8px — Enforce strict 8px utility-class policy.
  *
  * Usage example:
- *   npx ui8px --design grid --input <path> --output <path>
+ *   npx ui8px lint ./...
  */
 
 import { CliArgs, parseArgs } from './cli/parse-args.js';
-import { printValidateUsage, runValidateGrid } from './commands/validate-grid.js';
+import { runCommand } from './cli/router.js';
 
 function fail(message: string, code = 2): never {
   console.error(`\n${message}`);
   process.exit(code);
-}
-
-function printUsage(): void {
-  console.log(printValidateUsage());
 }
 
 async function main(): Promise<void> {
@@ -28,13 +24,8 @@ async function main(): Promise<void> {
     return;
   }
 
-  if (args.help) {
-    printUsage();
-    return;
-  }
-
   try {
-    const exitCode = await runValidateGrid(args);
+    const exitCode = await runCommand(args);
     process.exit(exitCode);
     return;
   } catch (error) {

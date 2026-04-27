@@ -1,11 +1,12 @@
 import { writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { ValidateGridCliArgs } from '../cli/parse-args.js';
+import { printValidateGridUsage } from '../cli/usage.js';
 import { buildBacklog, formatCliSummary } from '../validate-grid/format-output.js';
 import { validateMap } from '../validate-grid/validate-map.js';
 
 function printValidateUsage(): string {
-  return `Usage:\n  npx ui8px --design grid --input <path> --output <path> [options]\n\nOptions:\n  --design grid          validate mode (required for spacing checks)\n  --input <path>         path to class map JSON\n  --output <path>        backlog output path\n  --spacing-base <number>    spacing base for var(--spacing) (default: 4)\n  --root-font-size <number>  root font size for rem conversion (default: 16)\n  --verbose                  show detailed violations in console\n  -h, --help                show help`;
+  return printValidateGridUsage();
 }
 
 export function runValidateGrid(args: ValidateGridCliArgs): Promise<number> {
