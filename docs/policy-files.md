@@ -55,7 +55,7 @@ Defines the spacing scales and base utility allowlist.
 }
 ```
 
-The spacing scale is interpreted by class prefix. For example, if layout allows `"6"`, then layout may use `p-6`, `px-6`, `gap-6`, `h-6`, and other spacing-like prefixes.
+The spacing scale is interpreted by class prefix. For example, if layout allows `"6"`, then layout may use `p-6`, `px-6`, `gap-6`, `h-6`, `inset-x-6`, and other spacing-like prefixes. Tailwind v4 `inset-ring`, `inset-ring-*`, and `inset-shadow-*` are not spacing prefixes; they fall through to the normal utility allowlist.
 
 ## `denied.json`
 

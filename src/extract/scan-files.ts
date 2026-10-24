@@ -28,6 +28,7 @@ interface IgnorePattern {
   directoryOnly: boolean;
   anchored: boolean;
   hasSlash: boolean;
+  negated: boolean;
   regex?: RegExp;
 }
 
@@ -61,13 +62,18 @@ function wildcardToRegExp(pattern: string, anchored: boolean, hasSlash: boolean)
 }
 
 function parseIgnoreLine(line: string): IgnorePattern | undefined {
-  const trimmed = line.trim().replace(/\\/g, '/');
-  if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('!')) {
+  const trimmed = line.trim();
+  if (!trimmed || trimmed.startsWith('#')) {
     return undefined;
   }
-  const directoryOnly = trimmed.endsWith('/');
-  const anchored = trimmed.startsWith('/');
-  const value = trimmed.replace(/^\/+/, '').replace(/\/+$/, '');
+  const negated = trimmed.startsWith('!');
+  const body = (negated ? trimmed.slice(1) : trimmed).trim().replace(/\\/g, '/');
+  if (!body || body.startsWith('#')) {
+    return undefined;
+  }
+  const directoryOnly = body.endsWith('/');
+  const anchored = body.startsWith('/');
+  const value = body.replace(/^\/+/, '').replace(/\/+$/, '');
   if (!value) {
     return undefined;
   }
@@ -77,6 +83,7 @@ function parseIgnoreLine(line: string): IgnorePattern | undefined {
     directoryOnly,
     anchored,
     hasSlash,
+    negated,
     regex: value.includes('*') ? wildcardToRegExp(value, anchored, hasSlash) : undefined,
   };
 }
@@ -113,15 +120,30 @@ function isIgnoredPath(fullPath: string, rootDir: string, isDirectory: boolean, 
   if (!relativePath || relativePath.startsWith('..')) {
     return false;
   }
-  return ignorePatterns.some((pattern) => matchesIgnorePattern(relativePath, isDirectory, pattern));
+  let ignored = false;
+  for (const pattern of ignorePatterns) {
+    if (matchesIgnorePattern(relativePath, isDirectory, pattern)) {
+      ignored = !pattern.negated;
+    }
+  }
+  return ignored;
+}
+
+function hasNegatedPatterns(ignorePatterns: IgnorePattern[]): boolean {
+  return ignorePatterns.some((pattern) => pattern.negated);
 }
 
 function walkDirectory(dir: string, files: string[], rootDir: string, ignorePatterns: IgnorePattern[]): void {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const allowIgnoredChildren = hasNegatedPatterns(ignorePatterns);
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (!IGNORED_DIRECTORIES.has(entry.name) && !isIgnoredPath(fullPath, rootDir, true, ignorePatterns)) {
+      if (IGNORED_DIRECTORIES.has(entry.name)) {
+        continue;
+      }
+      // Walk ignored directories when a later !pattern may re-include a child.
+      if (!isIgnoredPath(fullPath, rootDir, true, ignorePatterns) || allowIgnoredChildren) {
         walkDirectory(fullPath, files, rootDir, ignorePatterns);
       }
       continue;
@@ -139,6 +161,7 @@ function walkDirectory(dir: string, files: string[], rootDir: string, ignorePatt
 export function scanFiles(inputs: string[], rootDir = process.cwd(), options: ScanOptions = {}): string[] {
   const files = new Set<string>();
   const ignorePatterns = compileIgnorePatterns(rootDir, options.ignore);
+  const allowIgnoredChildren = hasNegatedPatterns(ignorePatterns);
   for (const input of inputs.length ? inputs : ['./...']) {
     const { target } = normalizeInputPath(input);
     const absolute = path.resolve(rootDir, target);
@@ -146,15 +169,18 @@ export function scanFiles(inputs: string[], rootDir = process.cwd(), options: Sc
       continue;
     }
     const stat = fs.statSync(absolute);
-    if (isIgnoredPath(absolute, rootDir, stat.isDirectory(), ignorePatterns)) {
-      continue;
-    }
     if (stat.isDirectory()) {
+      if (isIgnoredPath(absolute, rootDir, true, ignorePatterns) && !allowIgnoredChildren) {
+        continue;
+      }
       const collected: string[] = [];
       walkDirectory(absolute, collected, rootDir, ignorePatterns);
       for (const file of collected) {
         files.add(file);
       }
+      continue;
+    }
+    if (isIgnoredPath(absolute, rootDir, false, ignorePatterns)) {
       continue;
     }
     if (stat.isFile() && SUPPORTED_EXTENSIONS.has(path.extname(absolute))) {
@@ -168,7 +194,7 @@ export function extractClassesFromFile(file: string): ClassOccurrence[] {
   const content = fs.readFileSync(file, 'utf8');
   const extension = path.extname(file);
   if (extension === '.templ') {
-    return extractTemplClasses(file, content);
+    return [...extractTemplClasses(file, content), ...extractGoClasses(file, content)];
   }
   if (extension === '.html') {
     return extractHtmlClasses(file, content);
@@ -182,6 +208,23 @@ export function extractClassesFromFile(file: string): ClassOccurrence[] {
   return [];
 }
 
+export interface ExtractedClasses {
+  files: string[];
+  occurrences: ClassOccurrence[];
+}
+
+export function extractClassesFromProject(
+  inputs: string[],
+  rootDir = process.cwd(),
+  options: ScanOptions = {},
+): ExtractedClasses {
+  const files = scanFiles(inputs, rootDir, options);
+  return {
+    files,
+    occurrences: files.flatMap((file) => extractClassesFromFile(file)),
+  };
+}
+
 export function extractClasses(inputs: string[], rootDir = process.cwd(), options: ScanOptions = {}): ClassOccurrence[] {
-  return scanFiles(inputs, rootDir, options).flatMap((file) => extractClassesFromFile(file));
+  return extractClassesFromProject(inputs, rootDir, options).occurrences;
 }

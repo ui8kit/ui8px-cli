@@ -18,7 +18,11 @@ function displayPath(file: string, rootDir: string): string {
   return path.relative(rootDir, file).replace(/\\/g, '/');
 }
 
-export function lintOccurrences(policy: LoadedPolicy, occurrences: ClassOccurrence[]): LintResult {
+export function lintOccurrences(
+  policy: LoadedPolicy,
+  occurrences: ClassOccurrence[],
+  filesChecked?: number,
+): LintResult {
   const diagnostics: LintDiagnostic[] = [];
   const files = new Set<string>();
   let tokensChecked = 0;
@@ -84,7 +88,7 @@ export function lintOccurrences(policy: LoadedPolicy, occurrences: ClassOccurren
   }
 
   return {
-    filesChecked: files.size,
+    filesChecked: filesChecked ?? files.size,
     classListsChecked: occurrences.length,
     tokensChecked,
     diagnostics,

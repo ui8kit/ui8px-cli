@@ -28,9 +28,14 @@ const SPACING_PREFIXES = new Set([
   'right',
   'bottom',
   'left',
+  'inset-x',
+  'inset-y',
   'inset',
   'z',
 ]);
+
+// Tailwind v4 ring/shadow utilities, not positional inset-* spacing.
+const NON_SPACING_INSET_RE = /^inset-(?:ring|shadow)(?:$|[-/])/;
 
 const ALLOWED_MODIFIERS = new Set([
   'hover',
@@ -84,14 +89,24 @@ function hasAllowedModifiers(modifiers: string[]): boolean {
   return modifiers.every((modifier) => ALLOWED_MODIFIERS.has(modifier));
 }
 
-function parseSpacingClass(base: string): { prefix: string; value: string } | undefined {
+export function spacingPrefixFor(base: string): string | undefined {
+  if (NON_SPACING_INSET_RE.test(base)) {
+    return undefined;
+  }
   for (const prefix of [...SPACING_PREFIXES].sort((a, b) => b.length - a.length)) {
-    const marker = `${prefix}-`;
-    if (base.startsWith(marker)) {
-      return { prefix, value: base.slice(marker.length) };
+    if (base.startsWith(`${prefix}-`)) {
+      return prefix;
     }
   }
   return undefined;
+}
+
+function parseSpacingClass(base: string): { prefix: string; value: string } | undefined {
+  const prefix = spacingPrefixFor(base);
+  if (!prefix) {
+    return undefined;
+  }
+  return { prefix, value: base.slice(prefix.length + 1) };
 }
 
 export function checkClassToken(

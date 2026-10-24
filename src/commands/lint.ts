@@ -1,6 +1,6 @@
 import { LintCliArgs } from '../cli/parse-args.js';
 import { printLintUsage } from '../cli/usage.js';
-import { extractClasses } from '../extract/scan-files.js';
+import { extractClassesFromProject } from '../extract/scan-files.js';
 import { formatLintSummary } from '../lint/format-output.js';
 import { lintOccurrences } from '../lint/lint-classes.js';
 import { loadPolicy } from '../policy/load-policy.js';
@@ -15,8 +15,8 @@ export function runLint(args: LintCliArgs): Promise<number> {
 
   const rootDir = process.cwd();
   const policy = loadPolicy(rootDir);
-  const occurrences = extractClasses(args.paths, rootDir, { ignore: args.ignore });
-  const result = lintOccurrences(policy, occurrences);
+  const { files, occurrences } = extractClassesFromProject(args.paths, rootDir, { ignore: args.ignore });
+  const result = lintOccurrences(policy, occurrences, files.length);
 
   if (args.json) {
     console.log(JSON.stringify(result, null, 2));

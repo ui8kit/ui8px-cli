@@ -1,7 +1,12 @@
 import { lineColumnAt, splitClassTokens } from './extract-html.js';
 import { ClassOccurrence } from './types.js';
 
-const GO_CLASS_VALUE_RE = /["']class["']\s*:\s*["']([^"']+)["']/g;
+const GO_CLASS_VALUE_RE = /["']class["']\s*:\s*("(?:\\.|[^"\\])*"|`[^`]*`|'[^']*')/g;
+const CLASS_FIELD_RE = /\bClass\s*:\s*("(?:\\.|[^"\\])*"|`[^`]*`)/g;
+const SIMPLE_STRING_DECL_RE =
+  /\b(?:const|var)\s+[A-Za-z_]\w*(?:\s+string)?\s*=\s*("(?:\\.|[^"\\])*"|`[^`]*`)/g;
+const GROUPED_STRING_DECL_RE = /\b(?:const|var)\s*\(/g;
+const GROUPED_ASSIGN_RE = /\b[A-Za-z_]\w*(?:\s+string)?\s*=\s*("(?:\\.|[^"\\])*"|`[^`]*`)/g;
 const RETURN_LITERAL_RE = /\breturn\s+((?:"(?:\\.|[^"\\])*")|(?:`[^`]*`))/g;
 const UTILITY_HINT_RE =
   /(?:^|\s)(?:[a-z0-9-]+:)*(?:flex|inline-flex|grid|block|hidden|items-|justify-|content-|gap-|p[trblxy]?-|m[trblxy]?-|w-|h-|min-w-|min-h-|max-w-|max-h-|text-|font-|leading-|tracking-|bg-|border|rounded|shadow|object-|aspect-|overflow-|col-span-|row-span-|order-|basis-|grow|shrink|ui-)/;
@@ -77,9 +82,54 @@ function extractStringLiterals(fragment: string): Array<{ raw: string; value: st
   return literals;
 }
 
+function occurrenceFromLiteral(
+  file: string,
+  content: string,
+  index: number,
+  raw: string,
+  kind: ClassOccurrence['kind'],
+  requireHint: boolean,
+): ClassOccurrence | undefined {
+  if (requireHint && !looksLikeUtilityList(raw)) {
+    return undefined;
+  }
+  const tokens = splitClassTokens(raw);
+  if (!tokens.length) {
+    return undefined;
+  }
+  const { line, column } = lineColumnAt(content, index);
+  return { file, line, column, raw, tokens, kind };
+}
+
+function extractByRegex(
+  file: string,
+  content: string,
+  re: RegExp,
+  kind: ClassOccurrence['kind'],
+  requireHint: boolean,
+): ClassOccurrence[] {
+  const occurrences: ClassOccurrence[] = [];
+  let match: RegExpExecArray | null;
+  re.lastIndex = 0;
+  while ((match = re.exec(content)) !== null) {
+    const occurrence = occurrenceFromLiteral(
+      file,
+      content,
+      match.index,
+      unquoteGoString(match[1]),
+      kind,
+      requireHint,
+    );
+    if (occurrence) {
+      occurrences.push(occurrence);
+    }
+  }
+  return occurrences;
+}
+
 function extractCnCalls(file: string, content: string): ClassOccurrence[] {
   const occurrences: ClassOccurrence[] = [];
-  const callRe = /(?:\butils\.)?\bCn\s*\(/g;
+  const callRe = /(?:\butils\.)?\b[Cc]n\s*\(/g;
   let match: RegExpExecArray | null;
   while ((match = callRe.exec(content)) !== null) {
     const before = content[match.index - 1];
@@ -92,78 +142,67 @@ function extractCnCalls(file: string, content: string): ClassOccurrence[] {
       continue;
     }
     const args = content.slice(openIndex + 1, closeIndex);
-    const literalValues = extractStringLiterals(args)
-      .map((literal) => literal.value)
-      .filter(looksLikeUtilityList);
-    if (!literalValues.length) {
-      continue;
+    // Each literal argument is its own class list so mutually exclusive
+    // conditional branches do not produce false UI8PX004 conflicts.
+    for (const literal of extractStringLiterals(args)) {
+      if (!looksLikeUtilityList(literal.value)) {
+        continue;
+      }
+      const occurrence = occurrenceFromLiteral(
+        file,
+        content,
+        openIndex + 1 + literal.index,
+        literal.value,
+        'go-cn',
+        false,
+      );
+      if (occurrence) {
+        occurrences.push(occurrence);
+      }
     }
-    const raw = literalValues.join(' ');
-    const tokens = splitClassTokens(raw);
-    if (!tokens.length) {
-      continue;
-    }
-    const { line, column } = lineColumnAt(content, match.index);
-    occurrences.push({
-      file,
-      line,
-      column,
-      raw,
-      tokens,
-      kind: 'go-cn',
-    });
     callRe.lastIndex = closeIndex + 1;
   }
   return occurrences;
 }
 
-function extractReturnLiterals(file: string, content: string): ClassOccurrence[] {
+function extractGroupedStringDecls(file: string, content: string): ClassOccurrence[] {
   const occurrences: ClassOccurrence[] = [];
+  const callRe = new RegExp(GROUPED_STRING_DECL_RE.source, 'g');
   let match: RegExpExecArray | null;
-  while ((match = RETURN_LITERAL_RE.exec(content)) !== null) {
-    const raw = unquoteGoString(match[1]);
-    if (!looksLikeUtilityList(raw)) {
+  while ((match = callRe.exec(content)) !== null) {
+    const openIndex = content.indexOf('(', match.index);
+    const closeIndex = findMatchingParen(content, openIndex);
+    if (closeIndex === -1) {
       continue;
     }
-    const tokens = splitClassTokens(raw);
-    if (!tokens.length) {
-      continue;
+    const body = content.slice(openIndex + 1, closeIndex);
+    const assignRe = new RegExp(GROUPED_ASSIGN_RE.source, 'g');
+    let assign: RegExpExecArray | null;
+    while ((assign = assignRe.exec(body)) !== null) {
+      const occurrence = occurrenceFromLiteral(
+        file,
+        content,
+        openIndex + 1 + assign.index,
+        unquoteGoString(assign[1]),
+        'go-static',
+        true,
+      );
+      if (occurrence) {
+        occurrences.push(occurrence);
+      }
     }
-    const { line, column } = lineColumnAt(content, match.index);
-    occurrences.push({
-      file,
-      line,
-      column,
-      raw,
-      tokens,
-      kind: 'go-return',
-    });
+    callRe.lastIndex = closeIndex + 1;
   }
   return occurrences;
 }
 
 export function extractGoClasses(file: string, content: string): ClassOccurrence[] {
-  const occurrences: ClassOccurrence[] = [];
-  let match: RegExpExecArray | null;
-  while ((match = GO_CLASS_VALUE_RE.exec(content)) !== null) {
-    const raw = match[1];
-    const tokens = splitClassTokens(raw);
-    if (!tokens.length) {
-      continue;
-    }
-    const { line, column } = lineColumnAt(content, match.index);
-    occurrences.push({
-      file,
-      line,
-      column,
-      raw,
-      tokens,
-      kind: 'go-static',
-    });
-  }
   return [
-    ...occurrences,
+    ...extractByRegex(file, content, GO_CLASS_VALUE_RE, 'go-static', false),
+    ...extractByRegex(file, content, CLASS_FIELD_RE, 'go-static', false),
+    ...extractByRegex(file, content, SIMPLE_STRING_DECL_RE, 'go-static', true),
+    ...extractGroupedStringDecls(file, content),
     ...extractCnCalls(file, content),
-    ...extractReturnLiterals(file, content),
+    ...extractByRegex(file, content, RETURN_LITERAL_RE, 'go-return', true),
   ];
 }

@@ -1,7 +1,7 @@
 [![NPM Version](https://img.shields.io/npm/v/ui8px)](https://www.npmjs.com/package/ui8px)
 [![NPM Type Definitions](https://img.shields.io/npm/types/ui8px)](https://www.npmjs.com/package/ui8px?activeTab=code)
 [![GitHub deployments](https://img.shields.io/github/deployments/ui8kit/ui8px-cli/npm)](https://github.com/ui8kit/ui8px-cli/actions/workflows/publish.yml)
-[![Socket Badge](https://badge.socket.dev/npm/package/ui8px/0.2.4)](https://socket.dev/npm/package/ui8px/overview/0.2.4)
+[![Socket Badge](https://badge.socket.dev/npm/package/ui8px/0.2.5)](https://socket.dev/npm/package/ui8px/overview/0.2.5)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 # UI8px CLI
@@ -63,7 +63,7 @@ npx ui8px --design grid --input class-map.json --output class-map.backlog.json
 
 If `.ui8px` is missing, `ui8px lint` uses bundled defaults. For Go component libraries, use `npx ui8px init --preset go` to make `ui/**`, `components/**`, and `utils/**/*.go` control scope while examples and views remain strict layout scope.
 
-`ui8px` reads the current working directory's `.gitignore` automatically during file scanning. Use `--ignore` to add extra ignored files or folders for a single run:
+`ui8px` reads the current working directory's `.gitignore` automatically during file scanning, including negation lines (`!pattern`) that re-include a previously ignored path. Use `--ignore` to add extra ignored files or folders for a single run:
 
 ```bash
 npx ui8px lint ./... --ignore .manual .project snapshots
@@ -122,21 +122,38 @@ npx ui8px lint ./... --ignore .manual .project
 
 Supported source types:
 
-- `.templ` and `.html`: static `class="..."` values.
+- `.templ` and `.html`: static `class="..."` values. `.templ` files also go through the Go extractor, so `Class: "..."`, `cn(...)` / `Cn(...)`, and `templ.Attributes{"class": "..."}` are recognised.
 - `.css`: `@apply ...;` utility lists.
-- `.go`: static `templ.Attributes{"class": "..."}` style values, `utils.Cn(...)`, `Cn(...)`, mixed literal/dynamic `Cn` calls, and static `return "..."` helper strings.
+- `.go`: static `templ.Attributes{"class": "..."}` style values, struct fields `Class: "..."` (quoted or backtick strings), `utils.Cn(...)` / `utils.cn(...)`, `Cn(...)` / `cn(...)`, mixed literal/dynamic `cn` calls, static `return "..."` helper strings, and `const` / `var` string declarations (including grouped `const ( ... )` / `var ( ... )` blocks) whose values look like utility lists.
 
 Go examples:
 
 ```go
 return utils.Cn(base, "px-3", props.Class)
+return cn("inline-flex items-center", props.Class)
+```
+
+```go
+return CardProps{Class: "h-8 px-3 text-sm"}
+```
+
+```go
+const ButtonBase = "inline-flex items-center"
+var ButtonPad = `px-3 py-1`
+const (
+  ButtonRow = "flex items-center gap-2"
+)
 ```
 
 ```go
 return "h-8 px-3 text-sm"
 ```
 
-The extractor reads only static string literals. It does not execute Go code and ignores dynamic arguments.
+The extractor reads only static string literals. It does not execute Go code and ignores dynamic arguments. Each string literal argument to `cn` / `Cn` is linted as its own class list, so mutually exclusive conditional branches do not report a false UI8PX004 conflict.
+
+`Checked files` is the number of supported source files scanned, including files that contained no class lists.
+
+Tailwind v4 `inset-ring`, `inset-ring-*`, and `inset-shadow-*` are ring/shadow utilities, not positional `inset-*` spacing, so they are not checked against the spacing scale and are not grouped with `inset-0`. Positional `inset-x-*` and `inset-y-*` are treated as their own spacing prefixes.
 
 By default, lint scanning skips built-in transient folders (`.git`, `.ui8px`, `node_modules`, `dist`, coverage/cache folders) and entries from the local `.gitignore`.
 

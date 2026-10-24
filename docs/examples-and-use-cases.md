@@ -217,17 +217,30 @@ func ButtonSizeVariant(size string) string {
 
 Because `utils/*.go` is in control scope in the Go preset, `px-3` is allowed here. The same class remains denied in layout examples such as `tests/examples/**`.
 
-`ui8px` also reads static utility literals inside `Cn` calls:
+`ui8px` also reads static utility literals inside `cn` / `Cn` calls, `Class:` struct fields, and `const` / `var` strings (including grouped blocks):
 
 ```go
 return utils.Cn(base, "px-3", props.Class)
+return cn("inline-flex items-center", props.Class)
+```
+
+```go
+return ButtonProps{Class: "h-8 px-3 text-sm"}
+```
+
+```go
+const ButtonBase = "inline-flex items-center"
+var ButtonPad = `px-3 py-1`
+const (
+  ButtonRow = "flex items-center gap-2"
+)
 ```
 
 ```go
 return Cn("inline-flex items-center", "px-3 py-2")
 ```
 
-Dynamic arguments are ignored. The linter only extracts static string literals, so it does not execute Go code or require a Go build.
+The same Go-side forms are recognised inside `.templ` files. Dynamic arguments are ignored. The linter only extracts static string literals, so it does not execute Go code or require a Go build. Each `cn` / `Cn` string literal is linted on its own, which avoids false conflicts across mutually exclusive branches.
 
 Pattern discovery includes those Go class lists too:
 

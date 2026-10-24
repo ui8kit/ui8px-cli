@@ -333,6 +333,173 @@ test('validate aria accepts full mode', () => {
   assert.equal(result.status, 0, result.stdout + result.stderr);
 });
 
+test('lint does not treat inset-ring as spacing in layout scope', () => {
+  const root = tempProject();
+  writeFile(
+    root,
+    'src/views/page.templ',
+    `
+<div class="rounded-lg inset-ring inset-ring-border"></div>
+<div class="inset-0 inset-x-0 inset-y-0"></div>
+<div class="inset-shadow-sm"></div>
+`,
+  );
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.doesNotMatch(result.stdout, /UI8PX001/);
+  assert.doesNotMatch(result.stdout, /UI8PX004/);
+  assert.match(result.stdout, /UI8PX002/);
+  assert.match(result.stdout, /inset-ring/);
+  assert.match(result.stdout, /inset-shadow-sm/);
+});
+
+test('lint does not treat inset-ring as spacing in control scope', () => {
+  const root = tempProject();
+  const init = runCli(root, ['init']);
+  assert.equal(init.status, 0, init.stderr);
+  const allowedPath = path.join(root, '.ui8px', 'policy', 'allowed.json');
+  const allowed = JSON.parse(readFileSync(allowedPath, 'utf8'));
+  allowed.utilities.push('inset-ring', 'inset-ring-border', 'inset-shadow-sm');
+  writeFile(root, '.ui8px/policy/allowed.json', `${JSON.stringify(allowed, null, 2)}\n`);
+  writeFile(
+    root,
+    'src/ui/button.templ',
+    `
+<button class="rounded-lg inset-ring inset-ring-border inset-0"></button>
+<button class="inset-shadow-sm"></button>
+`,
+  );
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /Violations: 0/);
+  assert.doesNotMatch(result.stdout, /UI8PX001/);
+  assert.doesNotMatch(result.stdout, /UI8PX004/);
+});
+
+test('go extractor reads lowercase cn helpers and splits literal arguments', () => {
+  const root = tempProject();
+  const init = runCli(root, ['init', '--preset', 'go']);
+  assert.equal(init.status, 0, init.stderr);
+  writeFile(
+    root,
+    'tests/examples/page.go',
+    `
+package examples
+
+func Box(wide bool) string {
+  return cn("px-3 py-4")
+}
+
+func Wide(wide bool) string {
+  return utils.cn("px-2 py-4", "px-4 py-4")
+}
+`,
+  );
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stdout, /UI8PX001/);
+  assert.match(result.stdout, /px-3/);
+  assert.doesNotMatch(result.stdout, /UI8PX004/);
+});
+
+test('go extractor reads Class struct fields and const/var utility strings', () => {
+  const root = tempProject();
+  const init = runCli(root, ['init', '--preset', 'go']);
+  assert.equal(init.status, 0, init.stderr);
+  writeFile(
+    root,
+    'tests/examples/card.go',
+    `
+package examples
+
+type CardProps struct {
+  Class string
+}
+
+func Card() CardProps {
+  return CardProps{Class: "px-3 py-4"}
+}
+
+func QuotedCard() CardProps {
+  return CardProps{Class: \`h-8 px-3\`}
+}
+
+const SimpleConst = "flex unknown-simple-const"
+var SimpleVar = \`flex unknown-simple-var\`
+const (
+  GroupedConst = "flex unknown-grouped-const"
+)
+`,
+  );
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stdout, /UI8PX001/);
+  assert.match(result.stdout, /px-3/);
+  assert.match(result.stdout, /unknown-simple-const/);
+  assert.match(result.stdout, /unknown-simple-var/);
+  assert.match(result.stdout, /unknown-grouped-const/);
+});
+
+test('templ extractor reads Go-side Class, cn, and Attributes forms', () => {
+  const root = tempProject();
+  writeFile(
+    root,
+    'src/views/page.templ',
+    `
+package views
+
+templ Button(props Props) {
+  <button class={ cn("inline-flex px-3", props.Class) }>Save</button>
+}
+
+templ Card() {
+  <div { templ.Attributes{"class": "px-3 py-4"}... }></div>
+}
+
+templ Wrapped() {
+  @Button(Props{Class: \`h-8 px-3\`})
+}
+`,
+  );
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stdout, /UI8PX001/);
+  assert.match(result.stdout, /px-3/);
+  const px3Hits = result.stdout.match(/disallowed utility class "px-3"/g) ?? [];
+  assert.equal(px3Hits.length, 3, result.stdout);
+});
+
+test('lint honours gitignore negation lines', () => {
+  const root = tempProject();
+  writeFile(root, '.gitignore', '*_templ.go\n!keep_templ.go\n');
+  writeFile(root, 'ignored_templ.go', 'package ignored\n\nfunc Classes() string { return "flex unknown-ignored-class" }\n');
+  writeFile(root, 'keep_templ.go', 'package keep\n\nfunc Classes() string { return "flex unknown-keep-class" }\n');
+  writeFile(root, 'src/views/page.templ', '<section class="px-4 py-4 flex"></section>');
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stdout, /unknown-keep-class/);
+  assert.doesNotMatch(result.stdout, /unknown-ignored-class/);
+  assert.match(result.stdout, /Checked files: 2/);
+});
+
+test('lint checked files counts scanned files without class lists', () => {
+  const root = tempProject();
+  writeFile(root, 'pkg/a.go', 'package a\n');
+  writeFile(root, 'pkg/b.go', 'package b\n');
+  writeFile(root, 'pkg/c.go', 'package c\n');
+
+  const result = runCli(root, ['lint', './...']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /Checked files: 3/);
+  assert.match(result.stdout, /Checked class lists: 0/);
+});
+
 test('validate aria detects UI8Kit component calls that imply patterns', () => {
   const root = tempProject();
   writeFile(
