@@ -166,13 +166,21 @@ Reason: px-3 is not allowed in layout scope.
 Suggestion: use px-2 or px-4
 ```
 
-Rules:
+### Error codes
 
-- `UI8PX001`: disallowed spacing token for current scope.
-- `UI8PX002`: utility class not in allowed policy.
-- `UI8PX003`: utility class is explicitly denied.
-- `UI8PX004`: conflicting utilities inside the same class list.
-- `UI8PX005`: unknown `ui-*` semantic class.
+| Code | Command | Meaning | Typical fix |
+| --- | --- | --- | --- |
+| `UI8PX001` | `lint` | Spacing or size step off the scope's grid (`px-3`, `h-3`, `size-3`, `space-y-3`, `ms-3`, `p-[13px]` in layout scope) | An even step (`px-2`, `px-4`), or move the class into a control |
+| `UI8PX002` | `lint` | Utility not in the allowed policy (`leading-5`, `text-[13px]`, an unknown modifier) | Use an allowed utility, or add it to `allowed.json` on purpose |
+| `UI8PX003` | `lint` | Utility explicitly denied (`denied.json`), with the reason and a suggestion | Use the suggested utility |
+| `UI8PX004` | `lint` | Two utilities of one conflict group in one class list (`p-2 p-4`, `text-left text-center`) | Keep one |
+| `UI8PX005` | `lint` | Unknown `ui-*` semantic class (not in `patterns.json`) | Register the pattern or use utilities |
+| `GRID` | `validate grid` | A spacing declaration (padding, margin, gap, width, height, inset, …) that does not resolve to the scope's unit: **8px in layout, 4px in control** | Fix the class or the CSS value |
+
+Which codes block is the consumer's choice (a gate file such as `.ui8px/gate.json`); UI8Kit repos block all of `UI8PX001`–`UI8PX005` except `UI8PX004`, plus `GRID`.
+
+Spacing prefixes checked by `UI8PX001`: `p* m* gap* space-x/y size w h min-/max-w/h top right bottom left start end inset* ps pe ms me`.
+`z-*` is a stacking order, not spacing. Modifiers: `hover focus focus-visible active disabled visited dark rtl ltr sm md lg xl 2xl group-hover`.
 
 ## Learn Mode
 
@@ -229,15 +237,44 @@ Examples:
 
 Use `--package <path>` or `--manifest <path>` when the files live outside the current working directory.
 
-## Grid Map Validation
-
-The existing map validator remains available:
+## Grid Validation
 
 ```bash
 npx ui8px validate grid --input class-map.json --output class-map.backlog.json
+npx ui8px validate grid --input dist/app.css --output grid.backlog.json   # a compiled stylesheet
+npx ui8px validate grid --input class-map.json --output b.json --scope control
 ```
 
-It checks CSS declaration values in a class map and reports values that do not resolve to the 8/4px grid.
+It resolves every spacing declaration to px (`calc(var(--spacing) * N)` with `--spacing-base`, `rem` with `--root-font-size`,
+`var(--x, fallback)` from the stylesheet's own custom properties or the fallback) and reports values off the scope's unit:
+
+- **layout scope: multiples of 8px only**;
+- **control scope: multiples of 4px**.
+
+The scope of a class-map entry or a CSS rule is the first scope in `scopes.json` whose `selectors` (regular expressions)
+match the class or the selector, otherwise the default scope; `--scope` forces one. A stylesheet input walks nested rules
+and at-rules (`@media`, `@layer`), so the compiled Tailwind output is checked as the browser gets it, hand-written CSS
+values (`height: var(--h-button, 40px)`) included. Utilities listed in `allowed.json` (hairlines such as `w-px`, `sr-only`)
+are policy decisions and are not re-checked.
+
+## Presets And `extends`
+
+A policy file can extend a bundled preset and keep only its local deltas:
+
+```json
+{ "extends": "ui8kit", "utilities": ["aspect-3/4"] }
+```
+
+`ui8px init --preset ui8kit` writes extends-only files. The `ui8kit` preset is the one UI8Kit policy:
+
+- spacing: layout = even steps `0`–`160` (multiples of 8px), control = `0`–`16` and even steps to `160` (multiples of 4px);
+- utilities: the default allowlist plus hairlines (`gap-px`, `gap-x-px`, `gap-y-px`, `p-px`, `w-px`, `h-px`), fractions
+  `w-1/4`…`w-3/4`, `min-h-screen`, `aspect-4/3`, `aspect-21/9` and the logical `text-start` / `text-end`;
+- denied: raw palette colors and gradients;
+- conflict groups: the defaults, `textAlign` with `text-start` / `text-end`.
+
+Merge rules: `spacing` and `scopes` replace the preset's when given; `utilities` are added (deny one in `denied.json` to
+remove it); denied utilities, conflict groups and patterns merge by key.
 
 ## Exit Codes
 

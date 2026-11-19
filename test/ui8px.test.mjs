@@ -534,3 +534,69 @@ templ Page() {
   assert.match(result.stdout, /UI8Kit component "Shell" requires/);
   assert.match(result.stdout, /missing ARIA pattern "dialog"/);
 });
+
+test('validate grid: layout scope takes multiples of 8px only, control scope multiples of 4px', () => {
+  const root = tempProject();
+  writeFile(root, 'map.json', JSON.stringify({
+    'h-3': 'height: calc(var(--spacing) * 3);',
+    'gap-1': 'gap: calc(var(--spacing) * 1);',
+    'p-2': 'padding: calc(var(--spacing) * 2);',
+  }));
+  const layout = runCli(root, ['validate', 'grid', '--input', 'map.json', '--output', 'b.json']);
+  assert.equal(layout.status, 1);
+  const backlog = JSON.parse(readFileSync(path.join(root, 'b.json'), 'utf8'));
+  assert.deepEqual(backlog.violations.map((v) => v.className).sort(), ['gap-1', 'h-3']);
+  assert.ok(backlog.violations.every((v) => v.scope === 'layout'));
+  const control = runCli(root, ['validate', 'grid', '--input', 'map.json', '--output', 'b.json', '--scope', 'control']);
+  assert.equal(control.status, 0, control.stdout);
+});
+
+test('validate grid reads a compiled stylesheet: nested at-rules, var() with fallbacks, selector scopes, exempt hairlines', () => {
+  const root = tempProject();
+  writeFile(root, '.ui8px/policy/scopes.json', JSON.stringify({
+    extends: 'ui8kit',
+    defaultScope: 'layout',
+    scopes: [
+      { name: 'controls', files: [], selectors: ['\\[data-shape="badge"\\]'], spacing: 'control' },
+      { name: 'layout', files: ['**'], spacing: 'layout' },
+    ],
+  }));
+  writeFile(root, '.ui8px/policy/allowed.json', JSON.stringify({ extends: 'ui8kit' }));
+  writeFile(root, 'out.css', [
+    ':root,:host{--spacing:.25rem;--container-6xl:72rem}',
+    '@layer utilities{.gap-2{gap:calc(var(--spacing)*2)}.max-w-6xl{max-width:var(--container-6xl)}',
+    '.lg\\:py-40{@media (width>=64rem){padding-block:calc(var(--spacing)*40)}}.w-px{width:1px}}',
+    '[data-shape="cta"][data-slot="button"]{height:var(--h-button,40px);width:var(--w-button, 96px)}',
+    '[data-shape="badge"][data-density="compact"]{height:20px;width:56px}',
+    '@media (width>=40rem){.bad{margin-top:12px}}',
+  ].join('\n'));
+  const result = runCli(root, ['validate', 'grid', '--input', 'out.css', '--output', 'b.json']);
+  assert.equal(result.status, 1, result.stdout);
+  const backlog = JSON.parse(readFileSync(path.join(root, 'b.json'), 'utf8'));
+  assert.deepEqual(backlog.violations.map((v) => [v.className, v.resolvedPx, v.scope]), [['.bad', 12, 'layout']]);
+});
+
+test('ui8kit preset: a policy file extends it and keeps only its local deltas', () => {
+  const root = tempProject();
+  writeFile(root, '.ui8px/policy/allowed.json', JSON.stringify({ extends: 'ui8kit', utilities: ['aspect-3/4'] }));
+  writeFile(root, '.ui8px/policy/denied.json', JSON.stringify({ extends: 'ui8kit', utilities: { 'rounded-lg': { reason: 'local', suggest: ['rounded'] } } }));
+  writeFile(root, 'src/views/page.html', '<i class="aspect-3/4 gap-px w-px text-start py-40 rounded-lg"></i>');
+  const result = runCli(root, ['lint', './...', '--json']);
+  const rules = JSON.parse(result.stdout).diagnostics.map((d) => `${d.rule} ${d.className}`);
+  assert.deepEqual(rules, ['UI8PX003 rounded-lg']);
+});
+
+test('init --preset ui8kit writes extends-only policy files', () => {
+  const root = tempProject();
+  const result = runCli(root, ['init', '--preset', 'ui8kit']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(JSON.parse(readFileSync(path.join(root, '.ui8px/policy/allowed.json'), 'utf8')).extends, 'ui8kit');
+});
+
+test('lint grammar: z-* is not spacing, logical and size/space prefixes are spacing, rtl:/ltr: are modifiers', () => {
+  const root = tempProject();
+  writeFile(root, 'src/views/page.html', '<i class="z-50 size-4 space-y-4 ps-4 pe-2 ms-4 me-2 start-0 end-0 inset-s-2 rtl:text-right"></i><i class="ltr:text-left size-3 space-x-3 ms-3"></i>');
+  const result = runCli(root, ['lint', './...', '--json']);
+  const found = JSON.parse(result.stdout).diagnostics.map((d) => `${d.rule} ${d.className}`);
+  assert.deepEqual(found, ['UI8PX001 size-3', 'UI8PX001 space-x-3', 'UI8PX001 ms-3']);
+});

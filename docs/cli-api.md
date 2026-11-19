@@ -193,6 +193,8 @@ This command does not edit policy files.
 
 ## Rule IDs
 
+See the error code table in the README (`UI8PX001`–`UI8PX005`, `GRID`).
+
 - `UI8PX001`: disallowed spacing token for the current scope.
 - `UI8PX002`: utility class not in allowed policy.
 - `UI8PX003`: utility class is explicitly denied.

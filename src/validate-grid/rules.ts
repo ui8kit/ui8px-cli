@@ -35,6 +35,12 @@ export const SPACING_PROPERTIES = new Set([
   'bottom',
   'left',
   'inset',
+  'inset-inline',
+  'inset-block',
+  'inset-inline-start',
+  'inset-inline-end',
+  'inset-block-start',
+  'inset-block-end',
 ]);
 
 export function isSpacingProperty(propertyName: string): boolean {
@@ -45,7 +51,12 @@ function isMultiple(value: number, unit: number, epsilon = 1e-9): boolean {
   return Math.abs(value % unit) < epsilon || Math.abs(value % unit - unit) < epsilon;
 }
 
-export function isAllowedSpacing(valuePx: number): boolean {
+export type GridScope = 'layout' | 'control';
+
+/** the grid unit of a scope: layout spacing is a multiple of 8px, control spacing (inside controls) of 4px */
+export const GRID_UNIT: Record<GridScope, number> = { layout: 8, control: 4 };
+
+export function isAllowedSpacing(valuePx: number, scope: GridScope = 'layout'): boolean {
   if (!Number.isFinite(valuePx)) {
     return false;
   }
@@ -55,5 +66,5 @@ export function isAllowedSpacing(valuePx: number): boolean {
     return true;
   }
 
-  return isMultiple(absolute, 8) || isMultiple(absolute, 4);
+  return isMultiple(absolute, GRID_UNIT[scope]);
 }

@@ -11,7 +11,12 @@ function printValidateUsage(): string {
 
 export function runValidateGrid(args: ValidateGridCliArgs): Promise<number> {
   try {
-    const report = validateMap(args.input, args.spacingBase, args.rootFontSize);
+    const report = validateMap({
+      inputPath: args.input,
+      spacingBase: args.spacingBase,
+      rootFontSize: args.rootFontSize,
+      scope: args.scope,
+    });
 
     const backlog = buildBacklog(
       args.input,

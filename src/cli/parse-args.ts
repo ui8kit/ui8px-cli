@@ -5,7 +5,7 @@ export interface BaseCliArgs {
 export interface InitCliArgs extends BaseCliArgs {
   command: 'init';
   force: boolean;
-  preset: 'default' | 'go';
+  preset: 'default' | 'go' | 'ui8kit';
 }
 
 export interface LintCliArgs extends BaseCliArgs {
@@ -24,6 +24,7 @@ export interface ValidateGridCliArgs extends BaseCliArgs {
   output: string;
   spacingBase: number;
   rootFontSize: number;
+  scope?: 'layout' | 'control';
   verbose: boolean;
 }
 
@@ -155,8 +156,8 @@ function parseInitArgs(argv: string[]): InitCliArgs {
       if (!value || value.startsWith('-')) {
         fail('--preset requires a value.');
       }
-      if (value !== 'default' && value !== 'go') {
-        fail(`Unsupported preset: ${value}. Supported presets: default, go.`);
+      if (value !== 'default' && value !== 'go' && value !== 'ui8kit') {
+        fail(`Unsupported preset: ${value}. Supported presets: default, go, ui8kit.`);
       }
       preset = value;
       i += 1;
@@ -345,6 +346,7 @@ function parseValidateGridArgs(argv: string[]): ValidateGridCliArgs {
     output?: string;
     spacingBase: number;
     rootFontSize: number;
+    scope?: 'layout' | 'control';
     verbose: boolean;
     positional: string[];
   } = {
@@ -403,6 +405,16 @@ function parseValidateGridArgs(argv: string[]): ValidateGridCliArgs {
       continue;
     }
 
+    if (arg === '--scope') {
+      const value = argv[i + 1];
+      if (value !== 'layout' && value !== 'control') {
+        fail('--scope requires layout or control.');
+      }
+      parsed.scope = value;
+      i += 1;
+      continue;
+    }
+
     if (arg === '--verbose') {
       parsed.verbose = true;
       continue;
@@ -424,6 +436,7 @@ function parseValidateGridArgs(argv: string[]): ValidateGridCliArgs {
       output: parsed.output ?? '',
       spacingBase: parsed.spacingBase,
       rootFontSize: parsed.rootFontSize,
+      scope: parsed.scope,
       verbose: parsed.verbose,
     };
   }
@@ -448,6 +461,7 @@ function parseValidateGridArgs(argv: string[]): ValidateGridCliArgs {
     output: parsed.output,
     spacingBase: parsed.spacingBase,
     rootFontSize: parsed.rootFontSize,
+    scope: parsed.scope,
     verbose: parsed.verbose,
   };
 }

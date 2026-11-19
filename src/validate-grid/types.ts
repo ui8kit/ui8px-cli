@@ -3,6 +3,8 @@ export interface ValidateGridViolation {
   property: string;
   rawValue: string;
   resolvedPx: number;
+  /** the scope that decided the unit (layout: 8px, control: 4px) */
+  scope?: string;
   reason: string;
 }
 
@@ -18,6 +20,7 @@ export interface ValidateGridOptions {
   output: string;
   spacingBase: number;
   rootFontSize: number;
+  scope?: 'layout' | 'control';
   verbose: boolean;
 }
 

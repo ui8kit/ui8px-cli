@@ -8,6 +8,8 @@ const SPACING_PREFIXES = new Set([
   'pr',
   'pb',
   'pl',
+  'ps',
+  'pe',
   'm',
   'mx',
   'my',
@@ -15,9 +17,14 @@ const SPACING_PREFIXES = new Set([
   'mr',
   'mb',
   'ml',
+  'ms',
+  'me',
   'gap',
   'gap-x',
   'gap-y',
+  'space-x',
+  'space-y',
+  'size',
   'w',
   'h',
   'min-w',
@@ -28,14 +35,17 @@ const SPACING_PREFIXES = new Set([
   'right',
   'bottom',
   'left',
+  'start',
+  'end',
   'inset-x',
   'inset-y',
+  'inset-s',
+  'inset-e',
   'inset',
-  'z',
 ]);
 
-// Tailwind v4 ring/shadow utilities, not positional inset-* spacing.
-const NON_SPACING_INSET_RE = /^inset-(?:ring|shadow)(?:$|[-/])/;
+// Tailwind v4 ring/shadow utilities (not positional inset-* spacing) and the space-* reverse flags.
+const NON_SPACING_INSET_RE = /^(?:inset-(?:ring|shadow)(?:$|[-/])|space-[xy]-reverse$)/;
 
 const ALLOWED_MODIFIERS = new Set([
   'hover',
@@ -45,6 +55,8 @@ const ALLOWED_MODIFIERS = new Set([
   'disabled',
   'visited',
   'dark',
+  'rtl',
+  'ltr',
   'sm',
   'md',
   'lg',
@@ -59,6 +71,8 @@ const DYNAMIC_PATTERNS = [
   /^order-(?:1|2|3|4|5|6|7|8|9|10|11|12|first|last|none)$/,
   /^basis-(?:0|1\/2|1\/3|2\/3|1\/4|2\/4|3\/4|full|auto)$/,
   /^opacity-(?:0|25|50|75|100)$/,
+  // z-index is a stacking order, not a length: never checked against the spacing scale.
+  /^z-(?:0|10|20|30|40|50|auto)$/,
 ];
 
 export interface ParsedClassToken {

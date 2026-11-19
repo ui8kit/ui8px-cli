@@ -53,7 +53,7 @@ export function formatCliSummary(report: ValidateGridBacklog, verbose: boolean):
 
   if (verbose) {
     for (const item of report.violations) {
-      lines.push(`- ${item.className} | ${item.property}: ${item.rawValue} -> ${item.resolvedPx}px`);
+      lines.push(`- ${item.className} | ${item.property}: ${item.rawValue} -> ${item.resolvedPx}px${item.scope ? ` (${item.scope})` : ''}`);
     }
   }
 

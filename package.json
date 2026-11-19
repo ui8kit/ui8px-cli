@@ -1,7 +1,7 @@
 {
   "name": "ui8px",
-  "version": "0.2.5",
-  "description": "Framework-agnostic CLI for strict 8px utility-class linting, telemetry, and pattern discovery",
+  "version": "0.3.0",
+  "description": "The 8px grid gate for utility classes: lint class lists and compiled CSS against a scope-aware 8px (layout) / 4px (control) policy",
   "author": "UI8Kit",
   "license": "MIT",
   "type": "module",

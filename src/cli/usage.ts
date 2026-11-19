@@ -6,7 +6,7 @@ Commands:
   init                         create .ui8px policy files
   lint [paths...]              validate utility classes in source files
   validate aria [paths...]     ensure used UI8Kit ARIA hooks are bundled
-  validate grid                validate a generated class map against 8/4px CSS values
+  validate grid                validate a class map or stylesheet: 8px in layout, 4px in control scope
   validate patterns [paths...] find repeated utility compositions
   policy review                show learned policy proposals
 
@@ -48,10 +48,11 @@ export function printValidateGridUsage(): string {
   npx ui8px validate grid --input <path> --output <path> [options]
 
 Options:
-  --input <path>             path to class map JSON
+  --input <path>             class map JSON, or a stylesheet (.css, e.g. compiled Tailwind output)
   --output <path>            backlog output path
   --spacing-base <number>    spacing base for var(--spacing) (default: 4)
   --root-font-size <number>  root font size for rem conversion (default: 16)
+  --scope <layout|control>   one scope for every class (default: policy scopes; layout = 8px, control = 4px)
   --verbose                  show detailed violations in console
   -h, --help                 show help`;
 }
