@@ -21,13 +21,16 @@ const range = (from: number, to: number, step: number): string[] => {
 
 export const UI8KIT_HAIRLINES = ['gap-px', 'gap-x-px', 'gap-y-px', 'p-px', 'w-px', 'h-px'];
 
+export const UI8KIT_PHYSICAL_ALIGN = ['text-left', 'text-right'];
+
 export const UI8KIT_ALLOWED_POLICY: AllowedPolicy = {
   spacing: {
     layout: range(0, 160, 2),
     control: [...range(0, 16, 1), ...range(18, 160, 2)],
   },
+  // physical text alignment is denied (logical text-start / text-end follow the writing direction)
   utilities: [
-    ...DEFAULT_ALLOWED_POLICY.utilities,
+    ...DEFAULT_ALLOWED_POLICY.utilities.filter((u) => !UI8KIT_PHYSICAL_ALIGN.includes(u)),
     ...UI8KIT_HAIRLINES,
     'w-1/4',
     'w-1/3',
@@ -52,6 +55,14 @@ export const UI8KIT_DENIED_POLICY: DeniedPolicy = {
     'bg-gradient-to-r': {
       reason: 'Gradients are not part of UI8Kit blocks.',
       suggest: ['bg-muted'],
+    },
+    'text-left': {
+      reason: 'Physical alignment breaks right-to-left pages; use the logical class (follows dir).',
+      suggest: ['text-start'],
+    },
+    'text-right': {
+      reason: 'Physical alignment breaks right-to-left pages; use the logical class (follows dir).',
+      suggest: ['text-end'],
     },
   },
 };

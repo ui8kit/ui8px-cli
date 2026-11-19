@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { ClassOccurrence } from '../extract/types.js';
-import { checkClassToken } from '../policy/class-grammar.js';
+import { checkClassToken, parseClassToken } from '../policy/class-grammar.js';
 import { matchScope } from '../policy/match-scope.js';
 import { spacingSuggestion } from '../policy/suggestions.js';
 import { LoadedPolicy } from '../policy/types.js';
@@ -47,8 +47,13 @@ export function lintOccurrences(
 
     for (const token of occurrence.tokens) {
       tokensChecked += 1;
-      const denied = policy.denied.utilities[token];
+      // a denied utility is denied under any modifier too (md:text-left); the suggestion keeps the modifiers (md:text-start)
+      const parsed = parseClassToken(token);
+      const exact = policy.denied.utilities[token];
+      const byBase = exact ? undefined : policy.denied.utilities[parsed.base];
+      const denied = exact ?? byBase;
       if (denied) {
+        const prefix = byBase && parsed.modifiers.length ? `${parsed.modifiers.join(':')}:` : '';
         diagnostics.push({
           rule: 'UI8PX003',
           file: displayPath(occurrence.file, policy.rootDir),
@@ -58,7 +63,7 @@ export function lintOccurrences(
           message: `denied utility class "${token}"`,
           scope: scope.name,
           reason: denied.reason,
-          suggest: denied.suggest,
+          suggest: denied.suggest?.map((s) => prefix + s),
         });
         continue;
       }
