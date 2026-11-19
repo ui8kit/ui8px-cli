@@ -270,7 +270,9 @@ A policy file can extend a bundled preset and keep only its local deltas:
 - spacing: layout = even steps `0`–`160` (multiples of 8px), control = `0`–`16` and even steps to `160` (multiples of 4px);
 - utilities: the default allowlist plus hairlines (`gap-px`, `gap-x-px`, `gap-y-px`, `p-px`, `w-px`, `h-px`), fractions
   `w-1/4`…`w-3/4`, `min-h-screen`, `aspect-4/3`, `aspect-21/9` and the logical `text-start` / `text-end`
-  (without the physical `text-left` / `text-right`) and `self-start` / `self-center` / `self-end` / `self-stretch`;
+  (without the physical `text-left` / `text-right`) and `self-start` / `self-center` / `self-end` / `self-stretch`, the keyword sizes `size-full` / `max-w-full`, and
+  what the kit primitives draw: `inset-ring` in the semantic colours (`border`, `input`, `ring`, `primary`, `transparent`),
+  `bg-primary/90` / `bg-secondary/80` (hover of the filled variants), `transition-colors`, `list-none`;
 - denied: raw palette colors, gradients, and `text-left` / `text-right` (UI8PX003, suggestion `text-start` / `text-end`:
   physical alignment breaks right-to-left pages). A denied utility is denied under any modifier (`md:text-left`), and the
   suggestion keeps the modifiers (`md:text-start`);

@@ -611,3 +611,12 @@ test('ui8kit preset: text-left / text-right are denied under any modifier, with 
   assert.deepEqual(found.filter((f) => f.startsWith('UI8PX003')), ['UI8PX003 text-left -> text-start', 'UI8PX003 md:text-right -> md:text-end']);
   assert.deepEqual(found.filter((f) => !f.startsWith('UI8PX003') && !f.startsWith('UI8PX004')), []);
 });
+
+test('ui8kit preset: the kit primitives and keyword sizes are allowed, the scale still holds', () => {
+  const root = tempProject();
+  writeFile(root, '.ui8px/policy/allowed.json', JSON.stringify({ extends: 'ui8kit' }));
+  writeFile(root, 'src/views/page.html', '<a class="inline-flex h-8 px-4 inset-ring inset-ring-primary hover:bg-primary/90 transition-colors"></a><ul class="list-none m-0 p-0"><li class="size-full max-w-full"></li></ul><i class="inset-ring-border inset-ring-transparent inset-ring-input inset-ring-ring hover:bg-secondary/80 px-3"></i>');
+  const result = runCli(root, ['lint', './...', '--json']);
+  const found = JSON.parse(result.stdout).diagnostics.filter((d) => d.rule !== 'UI8PX004').map((d) => `${d.rule} ${d.className}`);
+  assert.deepEqual(found, ['UI8PX001 px-3']);
+});

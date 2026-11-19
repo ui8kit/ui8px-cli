@@ -47,6 +47,21 @@ export const UI8KIT_ALLOWED_POLICY: AllowedPolicy = {
     'self-center',
     'self-end',
     'self-stretch',
+    // the full box: keyword sizes, not steps of the spacing scale (w-full / h-full are defaults)
+    'size-full',
+    'max-w-full',
+    // the kit primitives (Button, Badge, Card, lists): the inset ring in semantic colours, the hover of the filled
+    // variants on the token with alpha, a colour transition and an unstyled list
+    'inset-ring',
+    'inset-ring-border',
+    'inset-ring-input',
+    'inset-ring-ring',
+    'inset-ring-primary',
+    'inset-ring-transparent',
+    'bg-primary/90',
+    'bg-secondary/80',
+    'transition-colors',
+    'list-none',
   ],
 };
 
