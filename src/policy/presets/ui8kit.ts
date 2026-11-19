@@ -42,6 +42,11 @@ export const UI8KIT_ALLOWED_POLICY: AllowedPolicy = {
     'aspect-21/9',
     'text-start',
     'text-end',
+    // align-self (logical: start / end follow the writing direction), for a narrow box in a stretching column
+    'self-start',
+    'self-center',
+    'self-end',
+    'self-stretch',
   ],
 };
 

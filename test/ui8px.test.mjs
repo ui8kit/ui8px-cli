@@ -605,8 +605,9 @@ test('ui8kit preset: text-left / text-right are denied under any modifier, with 
   const root = tempProject();
   writeFile(root, '.ui8px/policy/allowed.json', JSON.stringify({ extends: 'ui8kit' }));
   writeFile(root, '.ui8px/policy/denied.json', JSON.stringify({ extends: 'ui8kit' }));
-  writeFile(root, 'src/views/page.html', '<i class="text-left text-start"></i><i class="md:text-right text-center"></i><i class="text-end"></i>');
+  writeFile(root, 'src/views/page.html', '<i class="text-left text-start self-center"></i><i class="md:text-right text-center"></i><i class="text-end"></i>');
   const result = runCli(root, ['lint', './...', '--json']);
   const found = JSON.parse(result.stdout).diagnostics.map((d) => `${d.rule} ${d.className} -> ${(d.suggest ?? []).join(',')}`);
   assert.deepEqual(found.filter((f) => f.startsWith('UI8PX003')), ['UI8PX003 text-left -> text-start', 'UI8PX003 md:text-right -> md:text-end']);
+  assert.deepEqual(found.filter((f) => !f.startsWith('UI8PX003') && !f.startsWith('UI8PX004')), []);
 });
